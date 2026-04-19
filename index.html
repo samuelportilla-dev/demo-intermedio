@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Menú Premium</title>
+    
+    <!-- Fuentes Premium (Editorial Rústico) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <!-- Estilos Premium Rediseñados -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- Favicon / Icono de Pestaña -->
+    <link rel="icon" type="image/png" href="img/logo.png">
+    <link rel="apple-touch-icon" href="img/logo.png">
+    
+    <!-- Theme color para navegadores móviles -->
+    <meta name="theme-color" content="#0f172a">
+</head>
+<body>
+    <!-- Preloader Premium -->
+    <div id="ui-preloader" class="preloader">
+        <div class="preloader-content">
+            <img src="img/logo.png" alt="Logo" class="logo-preloader">
+            <div class="preloader-bar">
+                <div class="preloader-progress"></div>
+            </div>
+            <p class="preloader-text">Preparando el horno...</p>
+        </div>
+    </div>
+
+    <!-- Fondo Animado Premium -->
+    <div class="ambient-background"></div>
+
+    <!-- Cabecera Hero con Animación de Luz -->
+    <header class="header-hero">
+        <h1 id="ui-nombre-restaurante">Cargando...</h1>
+        <div id="ui-estado-restaurante" class="estado-pill"></div>
+        <p id="ui-slogan"></p>
+    </header>
+
+    <!-- Carrusel de Promociones -->
+    <div class="promociones-wrapper" id="ui-promociones"></div>
+
+    <!-- Buscador Inteligente (Sticky) + Botón Categorías -->
+    <div class="contenedor-buscador" id="ui-buscador-sticky">
+        <div class="buscador-wrapper">
+            <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input type="text" id="input-busqueda" placeholder="¿Qué estás buscando?..." oninput="filtrarProductos()">
+            
+            <button class="btn-categorias-trigger" onclick="toggleMiniMenuCategorias(event)">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line>
+                    <line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line>
+                    <line x1="2" y1="14" x2="6" y2="14"></line><line x1="10" y1="8" x2="14" y2="8"></line>
+                    <line x1="18" y1="16" x2="22" y2="16"></line>
+                </svg>
+                <span class="txt-cats">Categorías</span>
+            </button>
+        </div>
+        
+        <div id="mini-menu-categorias" class="mini-menu-cats"></div>
+    </div>
+
+    <!-- Navegación Sticky Pill Glassmorphism -->
+    <nav class="nav-categorias" id="ui-nav-categorias">
+        <!-- Generado dinámicamente -->
+    </nav>
+
+    <!-- Catálogo de Productos Peta-Estilo -->
+    <main class="contenedor-menu" id="ui-contenedor-menu">
+        <!-- Generado dinámicamente -->
+    </main>
+
+    <!-- Botón Flotante Mágico (Píldora) -->
+    <div class="boton-flotante-carrito oculto" id="btn-flotante-carrito" onclick="abrirCarrito()">
+        <div class="texto-carrito-flu flotante-carrito">
+            <span class="txt">Ver pedido actual</span>
+        </div>
+        <div class="resumen-flotante">
+            <span id="ui-total-flotante" class="carrito-precio-total">$0</span>
+            <div class="carrito-cantidad" id="ui-cantidad-flotante">0</div>
+        </div>
+    </div>
+
+    <!-- Overlay Oscuro (Glass) -->
+    <div class="overlay-carrito" id="overlay-carrito" onclick="cerrarCarrito()"></div>
+
+    <!-- Panel Lateral del Carrito Premium -->
+    <aside class="panel-carrito" id="panel-carrito">
+        <div class="carrito-header">
+            <h2>🛒 Tu Pedido</h2>
+            <button class="btn-cerrar-carrito" onclick="cerrarCarrito()">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        
+        <div class="carrito-body" id="ui-carrito-body">
+            <!-- Items del carrito -->
+        </div>
+
+        <div id="ui-sugerencias-carrito" class="sugerencias-carrito"></div>
+
+        <div class="carrito-footer">
+            <textarea id="ui-nota-pedido" class="input-nota" rows="2" placeholder="Agrega una nota (Ej: Sin cebolla, salsas aparte...)"></textarea>
+            
+            <div class="carrito-resumen">
+                <span>Total a Pagar:</span>
+                <span id="ui-total-carrito">$0</span>
+            </div>
+            
+            <button class="btn-whatsapp" onclick="enviarPedidoWP()">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.888-.788-1.489-1.761-1.663-2.06-.173-.299-.018-.461.13-.611.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
+                </svg>
+                Hacer Pedido
+            </button>
+        </div>
+    </aside>
+
+    <!-- Modal Detalle Producto (Pop-up visual) -->
+    <div class="overlay-modal-producto" id="overlay-producto" onclick="cerrarModalProducto(event)">
+        <div class="modal-producto" id="modal-producto" onclick="event.stopPropagation()">
+            <!-- Contenido inyectado por JS -->
+        </div>
+    </div>
+
+    <!-- Footer Premium -->
+    <footer class="footer-premium">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="img/logo.png" alt="Logo" class="footer-logo-img">
+            </div>
+            <p class="footer-slogan">Sabor tradicional, experiencia digital.</p>
+            <div class="footer-tech">
+                <p>Software por:</p>
+                <span class="autor-nombre">Samuel Andres Portilla Ardila</span>
+                <span class="autor-cargo">Técnico en Programación de Software</span>
+            </div>
+            <div class="footer-copyright">
+                &copy; 2026 La Nonna Rústica. Todos los derechos reservados.
+            </div>
+        </div>
+    </footer>
+
+    <script src="data/menu.js?v=2.0"></script>
+    <script src="js/app.js?v=2.0"></script>
+</body>
+</html>
