@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>La Nonna Rústica - Nuestra Historia Verdadera</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/premium.css">
+    
+    <link rel="icon" type="image/png" href="img/logo.png">
+    <meta name="theme-color" content="#c1121f">
+    
+    <style>
+        /* Extreme Internal CSS for Nosotros to avoid breaking global files */
+        .hero-editorial {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--color-secundario);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-editorial-img {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover;
+            opacity: 0.4;
+            mix-blend-mode: multiply;
+            transform: scale(1.1);
+            animation: slowZoom 20s infinite alternate linear;
+        }
+        
+        @keyframes slowZoom {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.15); }
+        }
+
+        .hero-editorial-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            padding: 0 1rem;
+            max-width: 1000px;
+        }
+
+        .editorial-title {
+            font-size: clamp(4rem, 10vw, 8rem);
+            font-family: var(--fuente-titulos);
+            line-height: 0.9;
+            margin-bottom: 2rem;
+            font-weight: 400;
+        }
+        
+        .editorial-subtitle {
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 0.4em;
+            color: var(--color-dorado);
+            display: block;
+            margin-bottom: 2rem;
+        }
+
+        /* Stats Grid */
+        .heritage-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            padding: 8rem 5%;
+            background: var(--color-fondo);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-family: var(--fuente-titulos);
+            font-size: 5rem;
+            color: var(--color-principal);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-item p {
+            color: var(--color-secundario);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+
+        /* Stacked Sticky Layout (Ultra Premium) */
+        .history-stack-container {
+            display: flex;
+            align-items: flex-start;
+            padding: 5rem 5%;
+            background: var(--color-surface);
+            gap: 4rem;
+        }
+
+        .history-text-col {
+            flex: 1;
+            padding-top: 20vh;
+            padding-bottom: 20vh;
+        }
+        
+        .history-img-col {
+            flex: 1;
+            position: sticky;
+            top: 20vh;
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .history-img-wrapper {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transform: translateY(40px) scale(0.95);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--sombra-fuerte);
+        }
+
+        .history-img-wrapper.active-img {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            z-index: 2;
+        }
+        
+        .history-img-col img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .history-node {
+            margin-bottom: 30vh;
+            opacity: 0.3;
+            transition: opacity 0.5s ease;
+            cursor: pointer;
+        }
+
+        .history-node.focus {
+            opacity: 1;
+        }
+
+        .history-node .year {
+            font-size: clamp(3rem, 6vw, 6rem);
+            font-family: var(--fuente-titulos);
+            color: var(--color-principal);
+            display: block;
+            margin-bottom: 1rem;
+            line-height: 1;
+        }
+
+        .history-node h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--color-secundario);
+        }
+
+        .history-node p {
+            font-size: 1.25rem;
+            line-height: 1.8;
+            color: var(--color-texto-claro);
+            max-width: 500px;
+        }
+
+        @media (max-width: 900px) {
+            .history-stack-container {
+                flex-direction: column;
+            }
+            .history-img-col {
+                position: relative;
+                top: 0;
+                width: 100%;
+                height: 40vh;
+                margin-bottom: 2rem;
+            }
+            .history-text-col {
+                padding-top: 0;
+            }
+            .history-node {
+                margin-bottom: 3rem;
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navegación y Preloader iguales al index... -->
+    <nav class="global-nav">
+        <!-- Contenido de nav exacto -->
+        <div class="global-nav-container">
+            <a href="index.html" class="global-nav-logo">
+                <img src="img/logo.png" alt="Logo">
+                La Nonna Rústica
+            </a>
+            <div class="global-nav-links">
+                <a href="index.html">Inicio</a>
+                <a href="menu.html">Menú</a>
+                <a href="nosotros.html" class="active">Nuestra Historia</a>
+                <a href="contacto.html">Contacto</a>
+            </div>
+            <div class="global-nav-actions">
+                <a href="menu.html" class="nav-cart-wrapper">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle>
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                    </svg>
+                    <div id="global-cart-badge" class="nav-cart-badge">0</div>
+                </a>
+                <a href="reservas.html" class="btn-nav-reserva">Reservar Mesa</a>
+            </div>
+        </div>
+    </nav>
+    <nav class="mobile-bottom-nav">
+        <a href="index.html" class="bottom-nav-item"><svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>Inicio</a>
+        <a href="menu.html" class="bottom-nav-item"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></svg>Menú</a>
+        <a href="reservas.html" class="bottom-nav-item"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>Reservas</a>
+        <a href="nosotros.html" class="bottom-nav-item active"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>Nosotros</a>
+    </nav>
+
+    <!-- 10x Editorial Hero -->
+    <header class="hero-editorial">
+        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=1920&auto=format&fit=crop" class="hero-editorial-img" alt="La Nonna Rústica Interior">
+        <div class="hero-editorial-content reveal">
+            <span class="editorial-subtitle">Genuino & Intacto</span>
+            <h1 class="editorial-title">Paciencia.<br>Harina.<br>Fuego.</h1>
+            <p style="font-size: 1.5rem; font-style: italic; max-width: 600px; margin: 0 auto;">No hemos cambiado una sola receta en 90 años. Porque la prisa es el enemigo de lo excepcional.</p>
+        </div>
+    </header>
+
+    <!-- Metricas Heroicas -->
+    <section class="heritage-stats">
+        <div class="stat-item reveal">
+            <h3>72</h3>
+            <p>Horas de Fermentación Lenta</p>
+        </div>
+        <div class="stat-item reveal" style="transition-delay: 0.1s;">
+            <h3>450°C</h3>
+            <p>Fuego Vivo Constante</p>
+        </div>
+        <div class="stat-item reveal" style="transition-delay: 0.2s;">
+            <h3>90s</h3>
+            <p>Tiempo de Cocción Exacto</p>
+        </div>
+        <div class="stat-item reveal" style="transition-delay: 0.3s;">
+            <h3>1</h3>
+            <p>Sola Masa Madre Viva</p>
+        </div>
+    </section>
+
+    <!-- Script Driven Ultra Stack Timeline -->
+    <section class="history-stack-container">
+        <div class="history-text-col">
+            <div class="history-node" data-target="img-1">
+                <span class="year">1924</span>
+                <h3>El Principio del Cultivo</h3>
+                <p>En el corazón de Nápoles, el Bisabuelo Vincenzo comienza a cultivar nuestro <i>Lievito Madre</i>. Esta exactamente misma levadura ha sido alimentada y dividida diariamente por cuatro generaciones. No es levadura comercial; es una entidad que respira y vive bajo nuestro techo.</p>
+            </div>
+            
+            <div class="history-node" data-target="img-2">
+                <span class="year">1960</span>
+                <h3>La Expansión a Colombia</h3>
+                <p>Nuestra familia cruza el Atlántico trayendo consigo no solo recetas, sino un jarrón de terracota protegido térmicamente donde residía nuestro <i>Lievito</i>. Instauramos nuestro primer horno en un pequeño solar que con el tiempo atrajo a miles por su aroma irreplicable a humo de encino.</p>
+            </div>
+
+            <div class="history-node" data-target="img-3">
+                <span class="year">2003</span>
+                <h3>La Evolución Táctica</h3>
+                <p>Construimos desde cero 'Il Mostro', nuestro majestuoso Horno Pavesi con piedra refractaria del Vesubio. Importar los materiales duró 6 meses, y su primer encendido fue curado con una mezcla de maderas frutales para templar la cúpula interior.</p>
+            </div>
+
+            <div class="history-node" data-target="img-4">
+                <span class="year">Hoy</span>
+                <h3>La Auténtica Rústica</h3>
+                <p>Crecimos, pero nuestro manifiesto sigue intacto: Sin cortadores mecánicos, sin químicos que hinchen artificialmente. Solamente fuerza humana, tomates pelados a mano y una obsesión enfermiza por la perfección en la imperfección de la costa ahumada.</p>
+            </div>
+        </div>
+        
+        <div class="history-img-col">
+            <div class="history-img-wrapper active-img" id="img-1">
+                <img src="https://images.unsplash.com/photo-1604068549290-dea0e4a305ca?q=80&w=1000&auto=format&fit=crop" alt="Amasando masa rústica">
+            </div>
+            <div class="history-img-wrapper" id="img-2">
+                <img src="https://images.unsplash.com/photo-1574126154517-d1e0d89ef734?q=80&w=800&auto=format&fit=crop" alt="Tomates y albahaca real">
+            </div>
+            <div class="history-img-wrapper" id="img-3">
+                <img src="https://images.unsplash.com/photo-1594007654729-407eedc4be65?q=80&w=1000&auto=format&fit=crop" alt="Horno encendido">
+            </div>
+            <div class="history-img-wrapper" id="img-4">
+                <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=1000&auto=format&fit=crop" alt="Pizzero en accion">
+            </div>
+        </div>
+    </section>
+
+    <!-- La Filósofia a Ancho Completo -->
+    <div style="width: 100%; height: 60vh; background-image: url('https://images.unsplash.com/photo-1590947132387-155cc02f3212?q=80&w=1920&auto=format&fit=crop'); background-size: cover; background-position: center; background-attachment: fixed; position: relative;" class="reveal">
+        <div style="position: absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(rgba(0, 48, 73,0.3), rgba(0, 48, 73, 0.9)); display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: white; padding: 2rem;">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#F77F00" stroke-width="2" style="margin-bottom: 2rem;"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+            <h2 style="font-size: 3rem; font-family: var(--fuente-titulos); max-width: 800px; line-height: 1.2;">"En Italia, la comida no es una necesidad, es teatro, poesía y religión combinadas."</h2>
+            <a href="menu.html" class="btn-nav-reserva" style="margin-top: 3rem; transform: scale(1.2);">Conoce Nuestro Arte</a>
+        </div>
+    </div>
+
+    <!-- Footer Premium Compartido (Omitted for briefness, identical to index.html using the same html markup) -->
+    <footer class="footer-premium" style="margin-top: 0; padding-top: 6rem;">
+        <div class="footer-content" style="max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; text-align: left;">
+            <div style="flex: 1; min-width: 300px; margin-bottom: 2rem;">
+                <img src="img/logo.png" alt="Logo" class="footer-logo-img" style="margin-left: 0;">
+                <p class="footer-slogan" style="font-family: var(--fuente-titulos); font-size: 1.8rem; margin-bottom: 1rem;">La verdadera esencia de la cocina rústica en tu mesa.</p>
+            </div>
+            
+            <div style="flex: 1; min-width: 250px; margin-bottom: 2rem;">
+                <h3 style="color: var(--color-dorado); margin-bottom: 1.5rem; font-family: var(--fuente-titulos);">Contacto Directo</h3>
+                <p style="margin-bottom: 0.5rem; font-size:1.1rem;">📍 Calle Falsa 123, B. Italia</p>
+                <p style="margin-bottom: 0.5rem; font-size:1.1rem;">📞 Reservas: +57 311 251 8913</p>
+                <p style="margin-bottom: 0.5rem; font-size:1.1rem;">✉️ hola@lanonnarustica.com</p>
+            </div>
+
+            <div style="flex: 1; min-width: 250px; margin-bottom: 2rem;">
+                <h3 style="color: var(--color-dorado); margin-bottom: 1.5rem; font-family: var(--fuente-titulos);">Horario de Fuego</h3>
+                <p style="margin-bottom: 0.5rem; font-size:1.1rem;">Lunes: <span style="opacity:0.6;">Cerrado por fermentación</span></p>
+                <p style="margin-bottom: 0.5rem; font-size:1.1rem;">Martes a Sábado: <span style="font-weight:700;">11:00am - 10:30pm</span></p>
+                <p style="margin-bottom: 0.5rem; font-size:1.1rem;">Domingos: <span style="font-weight:700;">12:00pm - 09:00pm</span></p>
+            </div>
+        </div>
+        <div style="margin-top: 4rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; color: rgba(255,255,255,0.4); text-align: center;">
+            <p>&copy; 2026 La Nonna Rústica Italiana. Arquitectura Digital Brutal de Alta Gama por Samuel Andres Portilla Ardila.</p>
+        </div>
+    </footer>
+
+    <script src="data/menu.js?v=2.0"></script>
+    <script src="js/app.js?v=2.0"></script>
+    <script>
+        // Navbar
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('.global-nav');
+            if (window.scrollY > 50) {
+                nav.style.background = 'rgba(0, 48, 73, 0.98)';
+                nav.style.boxShadow = '0 10px 30px rgba(0,0,0,0.3)';
+            } else {
+                nav.style.background = 'rgba(0, 48, 73, 0.95)';
+                nav.style.boxShadow = '0 4px 30px rgba(0,0,0,0.2)';
+            }
+        });
+
+        // Revelados
+        const observerOptions = { threshold: 0.15, rootMargin: '0px 0px -50px 0px' };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Magia del Scroll Sticky
+        const nodes = document.querySelectorAll('.history-node');
+        const images = document.querySelectorAll('.history-img-wrapper');
+
+        const nodeObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && entry.intersectionRatio > 0.4) {
+                    // Update classes on text
+                    nodes.forEach(n => n.classList.remove('focus'));
+                    entry.target.classList.add('focus');
+
+                    // Switch image
+                    const targetId = entry.target.getAttribute('data-target');
+                    images.forEach(img => {
+                        img.classList.remove('active-img');
+                        if(img.id === targetId) {
+                            img.classList.add('active-img');
+                        }
+                    });
+                }
+            });
+        }, { threshold: 0.5, rootMargin: '-10% 0px -20% 0px' });
+
+        nodes.forEach(node => {
+            nodeObserver.observe(node);
+        });
+        
+    </script>
+</body>
+</html>

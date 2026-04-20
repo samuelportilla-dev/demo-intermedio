@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>La Nonna Rústica - Menú de Temporada</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;800&family=Outfit:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/premium.css">
+    
+    <link rel="icon" type="image/png" href="img/logo.png">
+    <meta name="theme-color" content="#c1121f">
+</head>
+<body style="background-color: var(--color-fondo);">
+    <!-- Preloader -->
+    <div id="ui-preloader" class="preloader">
+        <div class="preloader-content">
+            <img src="img/logo.png" alt="La Nonna Logo" class="logo-preloader">
+            <div class="preloader-bar"><div class="preloader-progress"></div></div>
+            <p class="preloader-text">Encendiendo el horno de leña...</p>
+        </div>
+    </div>
+
+    <div class="ambient-background"></div>
+
+    <!-- Navegación Global (Desktop) -->
+    <nav class="global-nav">
+        <!-- Manteniendo misma clase que index -->
+        <div class="global-nav-container">
+            <a href="index.html" class="global-nav-logo">
+                <img src="img/logo.png" alt="Logo">
+                La Nonna Rústica
+            </a>
+            <div class="global-nav-links">
+                <a href="index.html">Inicio</a>
+                <a href="menu.html" class="active">Menú</a>
+                <a href="nosotros.html">Nuestra Historia</a>
+                <a href="contacto.html">Contacto</a>
+            </div>
+            <div class="global-nav-actions">
+                <a href="#" class="nav-cart-wrapper" id="open-drawer-btn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle>
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                    </svg>
+                    <div id="global-cart-badge" class="nav-cart-badge">0</div>
+                </a>
+                <a href="reservas.html" class="btn-nav-reserva">Reservar Mesa</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Bottom Nav (Mobile) -->
+    <nav class="mobile-bottom-nav">
+        <a href="index.html" class="bottom-nav-item"><svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>Inicio</a>
+        <a href="menu.html" class="bottom-nav-item active"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></svg>Menú</a>
+        <a href="#" class="bottom-nav-item" id="mobile-open-drawer" style="position: relative;">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+            Carrito <div id="mobile-cart-badge" class="nav-cart-badge" style="top: -5px; right: 10px;">0</div>
+        </a>
+        <a href="nosotros.html" class="bottom-nav-item"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>Nosotros</a>
+    </nav>
+
+    <!-- 1. Cinematic Carousel Header -->
+    <header class="cinematic-carousel-header">
+        <div class="carousel-slide active" style="background-image: url('https://images.unsplash.com/photo-1590947132387-155cc02f3212?q=80&w=1920&auto=format&fit=crop');">
+            <div class="carousel-overlay"></div>
+            <div class="carousel-content">
+                <span class="tag">Obra Maestra</span>
+                <h2>La Margherita Auténtica</h2>
+                <p>Nuestra creación insignia horneada a 450°C exactamente durante 90 segundos.</p>
+            </div>
+        </div>
+        <!-- Slides rotate via CSS/JS -->
+    </header>
+
+    <!-- 2 & 3. Menu Layout with ScrollSpy Sidebar & Asymmetric 3D Products -->
+    <div class="premium-menu-container">
+        <!-- ScrollSpy Sidebar -->
+        <aside class="menu-sidebar">
+            <div class="sidebar-sticky">
+                <h3 class="sidebar-title">Nuestro Menú</h3>
+                <nav class="scrollspy-nav" id="dynamic-scrollspy-nav">
+                    <!-- Javascript will inject categories here as anchors -->
+                </nav>
+            </div>
+        </aside>
+
+        <!-- Menu Content -->
+        <main class="menu-products-area">
+            <!-- Sticky Search Bar (Desktop/Tablet) -->
+            <div class="search-sticky-container">
+            <div class="search-box-wrapper">
+                <div class="search-input-group">
+                    <span class="search-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                    </span>
+                    <input type="text" id="menu-search-input" placeholder="Buscar mi pizza, entrada o bebida..." onkeyup="ejecutarBusqueda(this.value)">
+                    <button class="btn-search-cat" id="cat-filter-btn" onclick="toggleMiniMenuCategorias(event)" title="Filtrar por categoría">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                    </button>
+                </div>
+                <!-- Mini Menú de Categorías Dinámico -->
+                <div id="mini-menu-categorias" class="mini-menu-cats"></div>
+            </div>
+        </div>
+            
+            <div id="menu-container">
+                <!-- App.js will inject categories and asymmetric cards here -->
+            </div>
+        </main>
+    </div>
+
+    <!-- 4. El Mega-Drawer Oscuro de Checkout y Cross-Sell -->
+    <div class="mega-drawer-overlay" id="drawer-overlay"></div>
+    <div class="mega-drawer" id="mega-drawer">
+        <div class="drawer-header">
+            <h2>Tu Selección <span id="drawer-count">(0)</span></h2>
+            <button class="close-drawer" id="close-drawer-btn">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+        </div>
+        
+        <div class="drawer-main-content">
+            <!-- Items Area -->
+            <div class="drawer-items-list" id="drawer-cart-items">
+                <!-- Javascript assembles the cart items here -->
+                <div class="empty-drawer">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                    <p>Aún no has seleccionado tus platos.</p>
+                </div>
+            </div>
+
+            <!-- Automated Cross-Sell Engine Zone -->
+            <div class="cross-sell-zone" id="cross-sell-zone" style="display: none;">
+                <h4>Perfecto con tu selección</h4>
+                <div class="cross-sell-item">
+                    <img src="https://images.unsplash.com/photo-1585553616435-2dc0a54e271d?q=80&w=200&auto=format&fit=crop" alt="Vino">
+                    <div class="cs-details">
+                        <h5>Copa de Sangiovese</h5>
+                        <span>Añadir por +$18.000</span>
+                    </div>
+                    <button class="cs-add-btn" onclick="agregarAlCarrito(205)">+</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="drawer-footer">
+            <div class="drawer-total-row">
+                <span>Subtotal</span>
+                <span id="drawer-total" class="drawer-price">$0</span>
+            </div>
+            <button id="drawer-btn-ordenar" class="drawer-checkout-btn">Ordenar a Mesa / Llevar</button>
+        </div>
+    </div>
+
+    <!-- Hidden standard modals -->
+    <div id="modal-producto" class="modal">
+        <div class="modal-content premium-modal">
+            <span class="cerrar-modal" onclick="cerrarModalProducto(event)" style="left: auto; right: 20px;">&times;</span>
+            <div class="modal-body" id="modal-body"></div>
+        </div>
+    </div>
+
+    <div id="modal-orden" class="modal">
+         <div class="modal-content form-orden-layout">
+             <span class="cerrar-modal" id="cerrar-orden">&times;</span>
+             <h2>Completa tu Pedido</h2>
+             <form id="form-pedido">
+                 <input type="text" id="nombre-cliente" placeholder="Tu Nombre Completo" required>
+                 <input type="text" id="direccion-cliente" placeholder="Dirección de Entrega o 'Mesa #'">
+                 <textarea id="notas-pedido" placeholder="Instrucciones especiales para el chef..."></textarea>
+                 <button type="submit" class="btn-block">Enviar a Cocina vía WhatsApp</button>
+             </form>
+         </div>
+    </div>
+
+    <script src="data/menu.js?v=2"></script>
+    <script src="js/app.js?v=2"></script>
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('.global-nav');
+            if (window.scrollY > 50) {
+                nav.style.background = 'rgba(0, 48, 73, 0.98)';
+                nav.style.boxShadow = '0 10px 30px rgba(0,0,0,0.3)';
+            } else {
+                nav.style.background = 'rgba(0, 48, 73, 0.95)';
+                nav.style.boxShadow = '0 4px 30px rgba(0,0,0,0.2)';
+            }
+        });
+
+        /* Styles for dynamic elements */
+        const style = document.createElement('style');
+        style.innerHTML = `
+        .modal-badge-descuento {
+            position: absolute;
+            top: 25px;
+            left: 25px;
+            background: var(--color-principal);
+            color: white;
+            padding: 8px 20px;
+            font-weight: 800;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            z-index: 10;
+        }
+        .mod-item-row {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 10px;
+            border-radius: 12px;
+            transition: background 0.3s;
+            cursor: pointer;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .mod-item-row:hover { background: rgba(255, 255, 255, 0.05); }
+        .mod-item-row.selected { background: rgba(247, 127, 0, 0.1); border-color: var(--color-dorado); }
+        .mod-checkbox {
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border: 2px solid var(--color-dorado);
+            border-radius: 6px;
+            cursor: pointer;
+            position: relative;
+            background: transparent;
+            transition: all 0.2s;
+        }
+        .mod-checkbox:checked { background: var(--color-dorado); }
+        .mod-checkbox:checked::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+        }`;
+        document.head.appendChild(style);
+
+        // Toggle Mega Drawer Logic (UI Layer)
+        const openBtn = document.getElementById('open-drawer-btn');
+        const mobileOpenBtn = document.getElementById('mobile-open-drawer');
+        const closeBtn = document.getElementById('close-drawer-btn');
+        const overlay = document.getElementById('drawer-overlay');
+        const drawer = document.getElementById('mega-drawer');
+
+        function openDrawer(e) {
+            e.preventDefault();
+            drawer.classList.add('open');
+            overlay.classList.add('visible');
+            document.body.style.overflow = 'hidden';
+            if(window.actualizarUiMegaDrawer) window.actualizarUiMegaDrawer();
+        }
+
+        function closeDrawer() {
+            drawer.classList.remove('open');
+            overlay.classList.remove('visible');
+            document.body.style.overflow = 'auto';
+        }
+
+        if(openBtn) openBtn.addEventListener('click', openDrawer);
+        if(mobileOpenBtn) mobileOpenBtn.addEventListener('click', openDrawer);
+        if(closeBtn) closeBtn.addEventListener('click', closeDrawer);
+        if(overlay) overlay.addEventListener('click', closeDrawer);
+
+        // Render categories in ScrollSpy automatically if RESTAURANT_CONFIG exists
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof RESTAURANT_CONFIG !== 'undefined') {
+                const nav = document.getElementById('dynamic-scrollspy-nav');
+                if (nav) {
+                    RESTAURANT_CONFIG.categorias.forEach((cat, index) => {
+                        const link = document.createElement('a');
+                        link.href = "#cat-" + index;
+                        link.className = "scrollspy-link";
+                        // Default first to active
+                        if(index === 0) link.classList.add('active');
+                        link.textContent = cat;
+                        nav.appendChild(link);
+                        
+                        link.addEventListener('click', (e) => {
+                            e.preventDefault();
+                            const target = document.getElementById("cat-" + index);
+                            if(target) {
+                                window.scrollTo({
+                                    top: target.offsetTop - 100, // Offset for sticky navbar
+                                    behavior: 'smooth'
+                                });
+                            }
+                        });
+                    });
+                }
+            }
+        });
+        
+    </script>
+    <script src="data/menu.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

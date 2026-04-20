@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>La Nonna Rústica - Reservas</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/premium.css">
+    
+    <link rel="icon" type="image/png" href="img/logo.png">
+    <meta name="theme-color" content="#2C3D30">
+</head>
+<body>
+    <div class="ambient-background"></div>
+
+    <!-- Navegación Global (Desktop) -->
+    <nav class="global-nav">
+        <div class="global-nav-container">
+            <a href="index.html" class="global-nav-logo">
+                <img src="img/logo.png" alt="Logo">
+                La Nonna Rústica
+            </a>
+            <div class="global-nav-links">
+                <a href="index.html">Inicio</a>
+                <a href="menu.html">Menú</a>
+                <a href="nosotros.html">Nuestra Historia</a>
+                <a href="contacto.html">Contacto</a>
+            </div>
+            <div class="global-nav-actions">
+                <a href="reservas.html" class="btn-nav-reserva">Reservar Mesa</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Bottom Nav (Mobile) -->
+    <nav class="mobile-bottom-nav">
+        <a href="index.html" class="bottom-nav-item">
+            <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+            Inicio
+        </a>
+        <a href="menu.html" class="bottom-nav-item">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+            Menú
+        </a>
+        <a href="reservas.html" class="bottom-nav-item active">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+            Reservas
+        </a>
+        <a href="contacto.html" class="bottom-nav-item">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+            Contacto
+        </a>
+    </nav>
+
+    <main class="split-screen">
+        <div class="split-left">
+            <h1 class="section-title-premium">Asegura tu lugar</h1>
+            <h3 class="section-subtitle-premium">Vive la experiencia inmersiva</h3>
+            <p style="color: var(--color-texto-claro); margin-bottom: 2rem; font-size: 1.1rem; max-width: 500px;">
+                Reserva tu mesa rellenando este formulario. Te confirmaremos disponibilidad casi al instante mediante WhatsApp.
+            </p>
+            
+            <form class="contact-form" onsubmit="enviarReserva(event);" style="max-width: 500px;">
+                <input type="text" id="resNombre" class="input-premium" placeholder="Nombre completo" required>
+                
+                <div style="display:flex; gap: 1rem;">
+                    <input type="date" id="resFecha" class="input-premium" required>
+                    <input type="time" id="resHora" class="input-premium" required>
+                </div>
+                
+                <select id="resPersonas" class="input-premium" required>
+                    <option value="" disabled selected>Número de personas</option>
+                    <option value="1 a 2">1 a 2 Personas</option>
+                    <option value="3 a 4">3 a 4 Personas</option>
+                    <option value="5 a 8">5 a 8 Personas</option>
+                    <option value="Mesa Grande (+8)">Mesa Grande (+8 Personas)</option>
+                </select>
+                
+                <textarea id="resMensaje" class="input-premium" rows="3" placeholder="Petición especial (Celebración, Alergias, etc.)"></textarea>
+                
+                <button type="submit" class="btn-submit-premium">Reservar por WhatsApp</button>
+            </form>
+        </div>
+        <div class="split-right">
+            <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=1200&auto=format&fit=crop" alt="Ambiente de restaurante">
+        </div>
+    </main>
+
+    <!-- Footer Premium Compartido -->
+    <footer class="footer-premium">
+        <div class="footer-content">
+            <div class="footer-logo"><img src="img/logo.png" alt="Logo" class="footer-logo-img"></div>
+            <p class="footer-slogan" style="font-family: var(--fuente-titulos); font-size: 1.5rem; margin-bottom: 2rem;">"La verdadera esencia de la cocina rústica italiana, en tu mesa."</p>
+            <div class="footer-tech">
+                <p>Software Engine Premium by:</p>
+                <span class="autor-nombre" style="font-weight: 800; font-size: 1.2rem;">Samuel Andres Portilla Ardila</span><br>
+                <span class="autor-cargo" style="opacity: 0.7;">Técnico en Programación de Software</span>
+            </div>
+            <div class="footer-copyright" style="margin-top: 3rem; opacity: 0.5;">&copy; 2026 La Nonna Rústica. Todos los derechos reservados.</div>
+        </div>
+    </footer>
+
+    <script src="data/menu.js?v=2.0"></script>
+    <script>
+        function enviarReserva(e) {
+            e.preventDefault();
+            const nombre = document.getElementById("resNombre").value;
+            const fecha = document.getElementById("resFecha").value;
+            const hora = document.getElementById("resHora").value;
+            const personas = document.getElementById("resPersonas").value;
+            const mensaje = document.getElementById("resMensaje").value;
+
+            let textoWP = `Hola La Nonna! Quiero reservar una mesa.\n\n`;
+            textoWP += `*Nombre:* ${nombre}\n`;
+            textoWP += `*Fecha:* ${fecha}\n`;
+            textoWP += `*Hora:* ${hora}\n`;
+            textoWP += `*Para:* ${personas}\n`;
+            if (mensaje) textoWP += `\n*Nota:* ${mensaje}\n`;
+            
+            const num = (RESTAURANT_CONFIG && RESTAURANT_CONFIG.telefonoWP) ? RESTAURANT_CONFIG.telefonoWP : "573112518913";
+            const link = `https://wa.me/${num}?text=${encodeURIComponent(textoWP)}`;
+            window.open(link, '_blank');
+        }
+    </script>
+</body>
+</html>

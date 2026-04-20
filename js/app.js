@@ -26,19 +26,32 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (progress) progress.style.width = "40%";
 
     inicializarTema();
-    renderizarHeader();
-    mostrarSkeletons(); 
     
-    await cargarDatosDesdeSheet(); 
-    if (progress) progress.style.width = "80%";
+    // Only run menu-specific rendering if the menu container exists
+    const menuContainer = document.getElementById("menu-container") || document.getElementById("ui-contenedor-menu");
+    if (menuContainer) {
+        renderizarHeader();
+        mostrarSkeletons(); 
+        
+        await cargarDatosDesdeSheet(); 
+        if (progress) progress.style.width = "80%";
 
-    renderizarPromociones();
-    renderizarCategorias();
-    renderizarProductos();
-    inicializarScrollProgresivo(); 
-    actualizarEstadoRestaurante(); 
-    renderizarMiniMenuCats(); 
-    inicializarObserverLiquid(); 
+        renderizarPromociones();
+        renderizarCategorias();
+        renderizarProductos(); 
+        inicializarObserverLiquid(); 
+        inicializarScrollProgresivo(); 
+        actualizarEstadoRestaurante(); 
+        renderizarMiniMenuCats(); 
+        inicializarObserverLiquid(); 
+    } else {
+        // If it's not the menu page, we just load sheet data silently for the cart logic mostly
+        // or just apply basic theming
+        await cargarDatosDesdeSheet();
+    }
+
+    // Common global initializations
+    actualizarUiCarrito(); // Ensure dynamic cart badge works globally
 
     if (progress) progress.style.width = "100%";
 
@@ -46,7 +59,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     setTimeout(() => {
         const preloader = document.getElementById("ui-preloader");
         if (preloader) preloader.classList.add("preloader-hidden");
-    }, 1500);
+    }, 800); // reduced loader time globally
 });
 
 function inicializarObserverLiquid() {
@@ -75,16 +88,52 @@ function renderizarMiniMenuCats() {
     const contenedor = document.getElementById("mini-menu-categorias");
     if (!contenedor) return;
 
-    let html = `<button class="btn-mini-cat" onclick="seleccionarCategoriaMini('Todos')">✨ Todos</button>`;
+    const metadataCategorias = {
+        "Todos": { desc: "Explora la experiencia completa de nuestro horno.", icon: "img/cat_todos.png" },
+        "Entradas": { desc: "Pequeños bocados con gran alma italiana.", icon: "img/cat_entradas.png" },
+        "Pizzas Clásicas": { desc: "La tradición de La Nonna en cada porción.", icon: "img/cat_pizzas_clasicas.png" },
+        "Pizzas Especiales": { desc: "Creaciones de autor con toques rústicos.", icon: "img/cat_pizzas_especiales.png" },
+        "Pastas Frescas": { desc: "Trigo seleccionado y amasado a mano.", icon: "img/cat_pastas_frescas.png" },
+        "Bebidas": { desc: "Selección refrescante para acompañar.", icon: "img/cat_bebidas.png" },
+        "Postres": { desc: "El final dulce perfecto para tu día.", icon: "img/cat_postres.png" }
+    };
+
+    let html = `
+        <div class="bottom-sheet-handle"></div>
+        <div class="bottom-sheet-header">
+            <h3>Categorías</h3>
+            <p>Selecciona una sección para navegar</p>
+        </div>
+        <div class="bottom-sheet-grid">
+            <button class="btn-mini-cat" onclick="seleccionarCategoriaMini('Todos')">
+                <div class="cat-icon"><img src="${metadataCategorias['Todos'].icon}" alt="Icon"></div>
+                <div class="cat-info">
+                    <span class="cat-name">Todo el Menú</span>
+                    <span class="cat-desc">${metadataCategorias['Todos'].desc}</span>
+                </div>
+            </button>
+    `;
+
     RESTAURANT_CONFIG.categorias.forEach(cat => {
-        html += `<button class="btn-mini-cat" onclick="seleccionarCategoriaMini('${cat}')">${cat}</button>`;
+        const meta = metadataCategorias[cat] || { desc: "Nuestros mejores platillos.", icon: "img/logo.png" };
+        html += `
+            <button class="btn-mini-cat" onclick="seleccionarCategoriaMini('${cat}')">
+                <div class="cat-icon"><img src="${meta.icon}" alt="${cat}"></div>
+                <div class="cat-info">
+                    <span class="cat-name">${cat}</span>
+                    <span class="cat-desc">${meta.desc}</span>
+                </div>
+            </button>
+        `;
     });
+    
+    html += `</div>`;
     contenedor.innerHTML = html;
 
     // Cerrar al hacer clic fuera (con un pequeño delay para evitar conflictos de eventos)
     setTimeout(() => {
         document.addEventListener("click", (e) => {
-            if (!contenedor.contains(e.target)) {
+            if (!contenedor.contains(e.target) && !e.target.closest('#cat-filter-btn')) {
                 contenedor.classList.remove("visible");
             }
         });
@@ -137,6 +186,7 @@ function actualizarEstadoRestaurante() {
 
 function mostrarSkeletons() {
     const contenedor = document.getElementById("ui-contenedor-menu");
+    if (!contenedor) return;
     contenedor.innerHTML = `
         <div class="grilla-productos">
             <div class="card-producto skeleton"></div>
@@ -158,6 +208,7 @@ function inicializarTema() {
 
 function renderizarHeader() {
     const contenedorHeader = document.getElementById("ui-nombre-restaurante");
+    if (!contenedorHeader) return;
     if (RESTAURANT_CONFIG.logo && RESTAURANT_CONFIG.logo !== "") {
         contenedorHeader.innerHTML = `<img src="${RESTAURANT_CONFIG.logo}" alt="${RESTAURANT_CONFIG.nombre}" class="logo-hero">`;
     } else {
@@ -200,6 +251,7 @@ function renderizarPromociones() {
 
 function renderizarCategorias() {
     const contenedor = document.getElementById("ui-nav-categorias");
+    if (!contenedor) return;
     contenedor.innerHTML = "";
     
     const btnTodos = document.createElement("button");
@@ -228,17 +280,26 @@ function filtrarPorCategoria(categoria, botonHtml) {
 let terminoBusqueda = "";
 
 function filtrarProductos() {
-    terminoBusqueda = document.getElementById("input-busqueda").value.toLowerCase().trim();
+    const input = document.getElementById("menu-search-input") || document.getElementById("input-busqueda");
+    terminoBusqueda = input ? input.value.toLowerCase().trim() : "";
     renderizarProductos();
 }
 
+function ejecutarBusqueda(query) {
+    filtrarProductos();
+}
+
 function renderizarProductos() {
-    const contenedor = document.getElementById("ui-contenedor-menu");
+    const contenedor = document.getElementById("menu-container") || document.getElementById("ui-contenedor-menu");
+    if (!contenedor) return;
     contenedor.innerHTML = "";
 
-    const categoriasAMostrar = categoriaActual === "Todos" 
+    // Si hay búsqueda, ignoramos la categoría seleccionada para buscar en todo el menú
+    const categoriasAMostrar = (categoriaActual === "Todos" || (terminoBusqueda && terminoBusqueda.length > 0))
         ? RESTAURANT_CONFIG.categorias 
         : [categoriaActual];
+
+    let algunResultado = false;
 
     categoriasAMostrar.forEach(cat => {
         // Filtrar por categoría y disponibilidad
@@ -246,28 +307,30 @@ function renderizarProductos() {
         
         // Aplicar filtro de búsqueda si existe
         if (terminoBusqueda) {
+            const termNorm = terminoBusqueda.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
             productosCat = productosCat.filter(p => {
-                const nombreNorm = p.nombre.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-                const descNorm = (p.descripcion || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-                const termNorm = terminoBusqueda.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+                const nombreNorm = p.nombre.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+                const descNorm = (p.descripcion || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
                 return nombreNorm.includes(termNorm) || descNorm.includes(termNorm);
             });
         }
 
         if (productosCat.length === 0) return; 
+        algunResultado = true;
 
         const seccion = document.createElement("section");
-        seccion.className = "seccion-categoria";
-        seccion.id = `cat-${cat.replace(/\s+/g, '')}`; // ID para el scroll progresivo
+        seccion.className = "seccion-categoria revelado"; // Forzamos revelado ya que se inyecta dinámicamente
+        const realIndex = RESTAURANT_CONFIG.categorias.indexOf(cat);
+        seccion.id = `cat-${realIndex > -1 ? realIndex : cat.replace(/\s+/g, '')}`; 
         
         // Mostrar título siempre que haya productos
         const h3 = document.createElement("h3");
-        h3.className = "titulo-categoria";
-        h3.innerHTML = `<span style="color: var(--color-principal)">●</span> ${cat}`;
+        h3.className = "menu-categoria-title";
+        h3.innerHTML = `${cat}`;
         seccion.appendChild(h3);
 
         const grilla = document.createElement("div");
-        grilla.className = "grilla-productos";
+        grilla.className = "menu-grid";
 
         productosCat.forEach(prod => {
             const imgSegura = transformarLinkImagen(prod.imagen);
@@ -288,11 +351,11 @@ function renderizarProductos() {
             }
 
             const card = document.createElement("article");
-            card.className = "card-producto";
+            card.className = "card-producto producto-card";
             card.onclick = () => abrirModalProducto(prod.id);
             card.innerHTML = `
-                <div class="card-img-wrapper">
-                    <img src="${imgSegura}" alt="${prod.nombre}" loading="lazy" class="imagen-producto">
+                <div class="card-img-wrapper producto-img-container">
+                    <img src="${imgSegura}" alt="${prod.nombre}" loading="lazy" class="imagen-producto producto-img">
                     ${tieneDescuento ? `<div class="badge-descuento">-${descuentoPct}%</div>` : ""}
                     ${badgeHtml}
                     <div class="precio-tag">
@@ -324,10 +387,13 @@ function renderizarProductos() {
             <div class="busqueda-vacia" style="text-align: center; padding: 4rem 2rem; opacity: 0.6;">
                 <p style="font-size: 3rem;">🔍</p>
                 <h3 style="margin-top: 1rem;">No encontramos nada que coincida con "${terminoBusqueda}"</h3>
-                <p>Prueba con otros términos o categorias</p>
+                <p>Prueba con otros términos o categorías</p>
             </div>
         `;
     }
+    
+    // IMPORTANTE: Reinicializar el observer para los nuevos elementos inyectados
+    if (window.inicializarObserverLiquid) inicializarObserverLiquid();
 }
 
 function agregarDesdeGrilla(id, event) {
@@ -360,9 +426,16 @@ function agregarAlCarrito(id, modsSeleccionados = [], elementoOrigen = null) {
         animarVueloAlCarrito(elementoOrigen);
     }
     
-    const flotante = document.getElementById("btn-flotante-carrito");
-    flotante.classList.add("pop-carrito");
-    setTimeout(() => { flotante.classList.remove("pop-carrito"); }, 300);
+    // Feedback visual en iconos de carrito (Desktop & Mobile)
+    const btnDesktop = document.getElementById("open-drawer-btn");
+    const btnMobile = document.getElementById("mobile-open-drawer");
+    
+    [btnDesktop, btnMobile].forEach(btn => {
+        if (btn) {
+            btn.classList.add("pop-carrito");
+            setTimeout(() => btn.classList.remove("pop-carrito"), 300);
+        }
+    });
 
     actualizarUiCarrito();
 }
@@ -414,14 +487,36 @@ function actualizarUiCarrito() {
     const labelTotal = document.getElementById("ui-total-flotante");
     const labelTotalInterior = document.getElementById("ui-total-carrito");
     
-    labelCant.textContent = cantidadTotal;
-    labelTotal.textContent = formatoDinero(precioTotal);
-    labelTotalInterior.textContent = formatoDinero(precioTotal);
+    // Mega Drawer Updates
+    const drawerCount = document.getElementById("drawer-count");
+    const drawerTotal = document.getElementById("drawer-total");
+    const mobileBadge = document.getElementById("mobile-cart-badge");
 
-    if (cantidadTotal > 0) flotante.classList.remove("oculto");
-    else {
-        flotante.classList.add("oculto");
-        cerrarCarrito(); 
+    if (drawerCount) drawerCount.textContent = `(${cantidadTotal})`;
+    if (drawerTotal) drawerTotal.textContent = formatoDinero(precioTotal);
+    if (mobileBadge) {
+         mobileBadge.textContent = cantidadTotal;
+         mobileBadge.style.display = cantidadTotal > 0 ? "flex" : "none";
+    }
+    
+    if(labelCant) labelCant.textContent = cantidadTotal;
+    if(labelTotal) labelTotal.textContent = formatoDinero(precioTotal);
+    if(labelTotalInterior) labelTotalInterior.textContent = formatoDinero(precioTotal);
+
+    if (flotante) {
+        if (cantidadTotal > 0) flotante.classList.remove("oculto");
+        else {
+            flotante.classList.add("oculto");
+            cerrarCarrito(); 
+        }
+    }
+    
+    // Update global nav badge if exists
+    const navBadge = document.getElementById("global-cart-badge");
+    if (navBadge) {
+        navBadge.textContent = cantidadTotal;
+        if(cantidadTotal > 0) navBadge.style.display = 'flex';
+        else navBadge.style.display = 'none';
     }
 
     renderizarItemsCarrito();
@@ -429,52 +524,55 @@ function actualizarUiCarrito() {
 }
 
 function renderizarItemsCarrito() {
-    const contenedor = document.getElementById("ui-carrito-body");
+    // Apoyamos tanto el carrito clásico como el mega drawer
+    const contenedorClasico = document.getElementById("ui-carrito-body");
+    const contenedorDrawer = document.getElementById("drawer-cart-items");
     
+    let htmlContent = "";
+
     if (Object.keys(carrito).length === 0) {
-        contenedor.innerHTML = `
-            <div class="carrito-vacio">
-                <div class="carrito-vacio-icono">🛒</div>
+        htmlContent = `
+            <div class="empty-drawer">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
                 <p>Tu pedido está vacío</p>
                 <p style="font-size: 0.9rem; margin-top: 5px; opacity: 0.7;">Agrega algunas exquisiteces</p>
             </div>
         `;
-        return;
-    }
+    } else {
+        for (const hash in carrito) {
+            const itemObj = carrito[hash];
+            const prod = obtenerProducto(itemObj.id);
+            const precioUnitario = calcularPrecioItem(itemObj);
+            
+            let htmlMods = "";
+            if (itemObj.modificadores.length > 0) {
+                htmlMods = `<div style="font-size: 0.75rem; color: rgba(255,255,255,0.5); margin-top:2px;">`;
+                itemObj.modificadores.forEach(m => {
+                    htmlMods += `+ ${m.nombre} <br>`;
+                });
+                htmlMods += `</div>`;
+            }
 
-    contenedor.innerHTML = "";
-    
-    for (const hash in carrito) {
-        const itemObj = carrito[hash];
-        const prod = obtenerProducto(itemObj.id);
-        const precioUnitario = calcularPrecioItem(itemObj);
-        
-        let htmlMods = "";
-        if (itemObj.modificadores.length > 0) {
-            htmlMods = `<div class="item-mods-cart" style="font-size: 0.75rem; color: var(--color-texto-claro); margin-top:2px;">`;
-            itemObj.modificadores.forEach(m => {
-                htmlMods += `+ ${m.nombre} <br>`;
-            });
-            htmlMods += `</div>`;
+            htmlContent += `
+                <div class="drawer-item-row">
+                    <img src="${transformarLinkImagen(prod.imagen)}" class="drawer-item-img" alt="${prod.nombre}">
+                    <div class="drawer-item-details">
+                        <h4 style="margin-bottom: 5px;">${prod.nombre}</h4>
+                        ${htmlMods}
+                        <div class="drawer-item-price">${formatoDinero(precioUnitario)} x ${itemObj.cantidad}</div>
+                    </div>
+                    <div class="control-cantidad" style="background: rgba(255,255,255,0.1); border-radius: 10px; height: fit-content; align-self: center;">
+                        <button class="btn-cant" onclick="cambiarCantidad('${hash}', -1)" style="color: white; border-right: 1px solid rgba(255,255,255,0.1)">-</button>
+                        <span style="color: white; min-width: 25px; text-align: center; display: inline-block;">${itemObj.cantidad}</span>
+                        <button class="btn-cant" onclick="cambiarCantidad('${hash}', 1)" style="color: white; border-left: 1px solid rgba(255,255,255,0.1)">+</button>
+                    </div>
+                </div>
+            `;
         }
-
-        const item = document.createElement("div");
-        item.className = "item-carrito";
-        item.innerHTML = `
-            <img src="${transformarLinkImagen(prod.imagen)}" class="item-img-cart" alt="${prod.nombre}">
-            <div class="item-info-cart">
-                <div class="item-nombre-cart">${prod.nombre}</div>
-                ${htmlMods}
-                <div class="item-precio-cart">${formatoDinero(precioUnitario)} x ${itemObj.cantidad}</div>
-            </div>
-            <div class="control-cantidad">
-                <button class="btn-cant" onclick="cambiarCantidad('${hash}', -1)">-</button>
-                <span>${itemObj.cantidad}</span>
-                <button class="btn-cant" onclick="cambiarCantidad('${hash}', 1)">+</button>
-            </div>
-        `;
-        contenedor.appendChild(item);
     }
+
+    if (contenedorClasico) contenedorClasico.innerHTML = htmlContent;
+    if (contenedorDrawer) contenedorDrawer.innerHTML = htmlContent;
 }
 
 // Algoritmo de Venta Cruzada (Sugerencias Inteligentes)
@@ -551,14 +649,44 @@ function renderizarSugerenciasCarrito() {
 
 function abrirCarrito() {
     if(Object.values(carrito).reduce((a, b) => a + b, 0) === 0) return; 
-    document.getElementById("overlay-carrito").classList.add("activo");
+    
+    // Mega Drawer Premium Support
+    const megaDrawer = document.getElementById("mega-drawer");
+    const overlayDrawer = document.getElementById("drawer-overlay");
+    if(megaDrawer && overlayDrawer) {
+        megaDrawer.classList.add("open");
+        overlayDrawer.classList.add("visible");
+        document.body.style.overflow = "hidden";
+        return;
+    }
+
+    // Classic Support fallback
+    const overlay = document.getElementById("overlay-carrito");
+    if(!overlay) {
+        window.location.href = "menu.html";
+        return;
+    }
+    
+    overlay.classList.add("activo");
     document.getElementById("panel-carrito").classList.add("activo");
     document.body.style.overflow = "hidden"; 
 }
 
 function cerrarCarrito() {
-    document.getElementById("overlay-carrito").classList.remove("activo");
-    document.getElementById("panel-carrito").classList.remove("activo");
+    // Mega Drawer Premium
+    const megaDrawer = document.getElementById("mega-drawer");
+    const overlayDrawer = document.getElementById("drawer-overlay");
+    if(megaDrawer && overlayDrawer) {
+        megaDrawer.classList.remove("open");
+        overlayDrawer.classList.remove("visible");
+        document.body.style.overflow = "auto";
+    }
+
+    // Classic
+    const clOverlay = document.getElementById("overlay-carrito");
+    if(clOverlay) clOverlay.classList.remove("activo");
+    const clPanel = document.getElementById("panel-carrito");
+    if(clPanel) clPanel.classList.remove("activo");
     document.body.style.overflow = ""; 
 }
 
@@ -693,35 +821,34 @@ function abrirModalProducto(id) {
     if (!prod) return;
 
     const imgSegura = transformarLinkImagen(prod.imagen);
-    const modal = document.getElementById("modal-producto");
+    const modalContainer = document.getElementById("modal-producto");
+    const modalBody = document.getElementById("modal-body");
     const tieneDescuento = prod.precioOriginal && prod.precioOriginal > prod.precio;
     
     let htmlChecks = "";
     if (prod.modificadores && prod.modificadores.length > 0) {
         htmlChecks = `<div class="modificadores-container">
             <div class="mod-grupo">
-                <h4>Adiciones</h4>`;
+                <h4 style="color: var(--color-dorado); margin-bottom: 1rem;">Personaliza tu plato</h4>`;
         prod.modificadores.forEach((mod, index) => {
             htmlChecks += `
-            <input type="checkbox" id="mod-${index}" class="mod-checkbox" value="${index}" data-nombre="${mod.nombre}" data-precio="${mod.precio}" onchange="recalcularPrecioModal(${prod.precio})">
-            <label for="mod-${index}" class="mod-label">
-                <div class="mod-check-circle"></div>
-                <div class="mod-info">
-                    <span class="mod-nombre">${mod.nombre}</span>
-                    <span class="mod-precio">${mod.precio > 0 ? '+'+formatoDinero(mod.precio) : 'Gratis'}</span>
-                </div>
-            </label>`;
+            <div class="mod-item-row" onclick="const ck = this.querySelector('input'); ck.checked = !ck.checked; ck.dispatchEvent(new Event('change'));">
+                <input type="checkbox" id="mod-${index}" class="mod-checkbox" value="${index}" data-nombre="${mod.nombre}" data-precio="${mod.precio}" onchange="this.parentElement.classList.toggle('selected', this.checked); recalcularPrecioModal(${prod.precio}); event.stopPropagation();">
+                <label for="mod-${index}" style="cursor: pointer; flex-grow: 1; display: flex; justify-content: space-between; pointer-events: none;">
+                    <span>${mod.nombre}</span>
+                    <span style="color: var(--color-dorado); font-weight: bold;">${mod.precio > 0 ? '+'+formatoDinero(mod.precio) : 'Gratis'}</span>
+                </label>
+            </div>`;
         });
         htmlChecks += `</div></div>`;
     }
     
-    modal.innerHTML = `
-        <button class="btn-cerrar-modal-producto" onclick="cerrarModalProducto(event)">✕</button>
-        <div class="modal-producto-img-container">
-            <img src="${imgSegura}" alt="${prod.nombre}" id="img-modal-target" class="modal-producto-img">
-            ${tieneDescuento ? `<div class="modal-badge-descuento">OFERTA</div>` : ''}
-        </div>
-        <div class="modal-producto-content-wrapper">
+    if(modalBody) {
+        modalBody.innerHTML = `
+            <div class="modal-producto-img-container">
+                <img src="${imgSegura}" alt="${prod.nombre}" id="img-modal-target">
+                ${tieneDescuento ? `<div class="modal-badge-descuento">OFERTA</div>` : ''}
+            </div>
             <div class="modal-producto-body">
                 <h3 class="modal-producto-titulo">${prod.nombre}</h3>
                 <p class="modal-producto-desc">${prod.descripcion}</p>
@@ -736,10 +863,10 @@ function abrirModalProducto(id) {
                     Añadir al pedido
                 </button>
             </div>
-        </div>
-    `;
+        `;
+    }
 
-    document.getElementById("overlay-producto").classList.add("activo");
+    if(modalContainer) modalContainer.classList.add("activo");
     document.body.style.overflow = "hidden"; 
 }
 
@@ -751,6 +878,7 @@ function recalcularPrecioModal(precioBase) {
 }
 
 function agregarDesdeModal(id, event) {
+    if (event) event.preventDefault();
     const checks = document.querySelectorAll('.mod-checkbox:checked');
     let modificadores = [];
     checks.forEach(c => {
@@ -760,8 +888,8 @@ function agregarDesdeModal(id, event) {
         });
     });
     
-    const boton = document.getElementById("btn-modal-add");
-    agregarAlCarrito(id, modificadores, boton);
+    // Al pasar true, nos aseguramos de que el sistema reconozca que viene del modal
+    agregarAlCarrito(id, modificadores, document.getElementById("btn-modal-add"));
     cerrarModalProducto(event);
 }
 
@@ -783,7 +911,14 @@ function animarVueloAlCarrito(elementoOrigen) {
 
     if (!imgElement) return;
 
-    const btnCart = document.getElementById("btn-flotante-carrito");
+    // En el nuevo layout, el destino puede ser el botón de la navbar o el de mobile
+    let btnCart = document.getElementById("open-drawer-btn");
+    
+    // Si estamos en mobile, el destino es el item del medio del bottom nav
+    if (window.innerWidth < 1024) {
+        btnCart = document.getElementById("mobile-open-drawer");
+    }
+
     if (!btnCart) return;
 
     const rectImg = imgElement.getBoundingClientRect();
@@ -820,11 +955,38 @@ function animarVueloAlCarrito(elementoOrigen) {
 
 function cerrarModalProducto(event) {
     if (event) event.stopPropagation();
-    document.getElementById("overlay-producto").classList.remove("activo");
-    if (!document.getElementById("overlay-carrito").classList.contains("activo")) {
+    const modalContainer = document.getElementById("modal-producto");
+    if(modalContainer) modalContainer.classList.remove("activo");
+
+    const overlayDrawer = document.getElementById("drawer-overlay");
+    if (!overlayDrawer || !overlayDrawer.classList.contains("visible")) {
         document.body.style.overflow = "";
     }
 }
+
+function abrirModalOrden() {
+    const modal = document.getElementById("modal-orden");
+    if(modal) modal.classList.add("activo");
+}
+
+function cerrarModalOrden() {
+    const modal = document.getElementById("modal-orden");
+    if(modal) modal.classList.remove("activo");
+    document.body.style.overflow = "";
+}
+
+// Add global listener to close modals
+document.addEventListener("DOMContentLoaded", () => {
+    const closeButtons = document.querySelectorAll('.cerrar-modal');
+    closeButtons.forEach(btn => {
+        btn.onclick = () => {
+            const modal = btn.closest('.modal');
+            if(modal) modal.classList.remove('activo');
+            document.body.style.overflow = "";
+        };
+    });
+});
+
 
 // ==========================================
 // SCROLL PROGRESIVO: RESALTADO SIDEBAR
@@ -859,3 +1021,18 @@ function inicializarScrollProgresivo() {
 
     sections.forEach(section => observer.observe(section));
 }
+
+// Ensure the drawer checkout button is wired for the Mega Drawer
+document.addEventListener('DOMContentLoaded', () => {
+    const drawerBtnOrdenar = document.getElementById('drawer-btn-ordenar');
+    if (drawerBtnOrdenar) {
+        drawerBtnOrdenar.addEventListener('click', () => {
+            if(Object.keys(carrito).length > 0){
+                cerrarCarrito();
+                abrirModalOrden();
+            } else {
+                alert("Agrega productos al carrito primero.");
+            }
+        });
+    }
+});
