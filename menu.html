@@ -11,6 +11,7 @@
     
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/premium.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <link rel="icon" type="image/png" href="img/logo.png">
     <meta name="theme-color" content="#c1121f">
@@ -161,7 +162,6 @@
     <!-- Hidden standard modals -->
     <div id="modal-producto" class="modal">
         <div class="modal-content premium-modal">
-            <span class="cerrar-modal" onclick="cerrarModalProducto(event)" style="left: auto; right: 20px;">&times;</span>
             <div class="modal-body" id="modal-body"></div>
         </div>
     </div>
@@ -178,6 +178,33 @@
              </form>
          </div>
     </div>
+
+    <!-- Footer Premium Compartido -->
+    <footer class="footer-premium" style="margin-top: 5rem;">
+        <div class="footer-content" style="max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; text-align: left;">
+            <div style="flex: 1; min-width: 300px; margin-bottom: 2rem;">
+                <img src="img/logo.png" alt="Logo" class="footer-logo-img" style="margin-left: 0;">
+                <p class="footer-slogan" style="font-family: var(--fuente-titulos); font-size: 1.8rem; margin-bottom: 1rem;">La verdadera esencia de la cocina rústica en tu mesa.</p>
+            </div>
+            
+            <div style="flex: 1; min-width: 250px; margin-bottom: 2rem;">
+                <h3 style="color: var(--color-dorado); margin-bottom: 1.5rem; font-family: var(--fuente-titulos);">Contacto Directo</h3>
+                <p style="margin-bottom: 0.5rem; font-size:1.1rem;">📍 Av. 0 #12-55, Barrio Caobos, Cúcuta</p>
+                <p style="margin-bottom: 0.5rem; font-size:1.1rem;">📞 Reservas: +57 311 251 8913</p>
+                <p style="margin-bottom: 0.5rem; font-size:1.1rem;">✉️ gerencia@lanonnarustica.com</p>
+            </div>
+
+            <div style="flex: 1; min-width: 250px; margin-bottom: 2rem;">
+                <h3 style="color: var(--color-dorado); margin-bottom: 1.5rem; font-family: var(--fuente-titulos);">Horario de Fuego</h3>
+                <p style="margin-bottom: 0.5rem; font-size:1.1rem;">Lunes: <span style="opacity:0.6;">Cerrado por fermentación</span></p>
+                <p style="margin-bottom: 0.5rem; font-size:1.1rem;">Martes a Sábado: <span style="font-weight:700;">11:00am - 10:30pm</span></p>
+                <p style="margin-bottom: 0.5rem; font-size:1.1rem;">Domingos: <span style="font-weight:700;">12:00pm - 09:00pm</span></p>
+            </div>
+        </div>
+        <div style="margin-top: 4rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; color: rgba(255,255,255,0.4); text-align: center;">
+            <p>&copy; 2026 La Nonna Rústica Italiana. Arquitectura Digital Brutal de Alta Gama por Samuel Andres Portilla Ardila.</p>
+        </div>
+    </footer>
 
     <script src="data/menu.js?v=2"></script>
     <script src="js/app.js?v=2"></script>
@@ -197,18 +224,39 @@
         /* Styles for dynamic elements */
         const style = document.createElement('style');
         style.innerHTML = `
+        .price-final {
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: var(--color-principal);
+        }
+
+        /* Ajuste Detalle Oferta / Badge */
         .modal-badge-descuento {
             position: absolute;
-            top: 25px;
-            left: 25px;
-            background: var(--color-principal);
-            color: white;
-            padding: 8px 20px;
-            font-weight: 800;
-            border-radius: 30px;
-            font-size: 0.9rem;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            top: 20px;
+            left: 20px;
+            background: #FFD700 !important; /* Dorado Premium */
+            color: #000 !important;
+            padding: 6px 15px !important;
+            border-radius: 50px !important;
+            font-weight: 800 !important;
+            font-size: 0.75rem !important;
+            letter-spacing: 1px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
             z-index: 10;
+            text-transform: uppercase;
+        }
+
+        /* Eliminar espacios vacíos si no hay modificadores */
+        .modal-producto-scroll-area {
+            flex: 0 1 auto !important; /* Ahora solo crece si es necesario */
+            overflow-y: auto;
+            padding: 0.5rem 2rem 1.5rem 2rem;
+            background: white;
+        }
+
+        .modal-producto-body {
+            padding-bottom: 0.5rem;
         }
         .mod-item-row {
             margin-bottom: 15px;
@@ -303,7 +351,5 @@
         });
         
     </script>
-    <script src="data/menu.js"></script>
-    <script src="js/app.js"></script>
 </body>
 </html>

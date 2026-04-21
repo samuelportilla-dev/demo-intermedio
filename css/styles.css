@@ -660,11 +660,11 @@ body {
     }
     
     .modal-producto-content-wrapper { display: flex; flex-direction: column; flex-grow: 1; overflow-y: auto; }
-    .modal-producto-body { padding: 1.5rem; flex-grow: 1; }
+    .modal-producto-body { padding: 1.1rem; flex-grow: 1; }
     .modal-producto-titulo { font-size: 1.6rem; font-family: var(--fuente-titulos); margin-bottom: 0.8rem; color: var(--color-secundario); }
     .modal-producto-desc { font-size: 0.95rem; color: var(--color-texto-claro); line-height: 1.5; margin-bottom: 1.5rem; }
     
-    .modal-producto-footer { padding: 1.2rem 1.5rem; border-top: 1px solid rgba(0,0,0,0.05); display: flex; justify-content: space-between; align-items: center; }
+    .modal-producto-footer { padding: 1rem 1.5rem; border-top: 1px solid rgba(0,0,0,0.05); display: flex; justify-content: space-between; align-items: center; }
     
     .contenedor-precio-modal {
         display: flex;
@@ -684,11 +684,11 @@ body {
 
     /* --- Modificadores (Complementos) --- */
     .modificadores-container {
-        margin-top: 1.5rem;
+        margin-top: 0.8rem;
         display: flex;
         flex-direction: column;
-        gap: 1.2rem;
-        margin-bottom: 1.5rem;
+        gap: 0.6rem;
+        margin-bottom: 1rem;
     }
 
     .mod-grupo {
@@ -834,11 +834,11 @@ body {
 
         .boton-flotante-carrito { left: auto; right: 40px; bottom: 40px; transform: none; width: 320px; }
         
-        .modal-producto { max-width: 900px; flex-direction: row; height: 600px; }
-        .modal-producto-img-container { width: 50%; height: 100%; }
-        .modal-producto-content-wrapper { width: 50%; }
-        .modal-producto-body { padding: 2.5rem; }
-        .modal-precio { font-size: 1.8rem; }
+        #modal-producto .modal-content { max-width: 580px; flex-direction: row; height: auto; max-height: 85vh; border-radius: 32px; }
+        .modal-producto-img-container { width: 40%; height: auto; }
+        .modal-producto-content-wrapper { width: 60%; }
+        .modal-producto-body { padding: 1.1rem 1.8rem; }
+        .modal-precio { font-size: 1.5rem; }
     }
 
     @media (min-width: 1400px) {

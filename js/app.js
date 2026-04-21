@@ -690,9 +690,20 @@ function cerrarCarrito() {
     document.body.style.overflow = ""; 
 }
 
-function enviarPedidoWP() {
-    let textoPedido = RESTAURANT_CONFIG.mensajeWP || "Hola! Quiero hacer el siguiente pedido:\n";
-    textoPedido += "------------------------\n";
+function enviarPedidoWP(event) {
+    if (event) event.preventDefault();
+
+    // Capturar datos del formulario si existen
+    const nombre = document.getElementById("nombre-cliente")?.value.trim() || "";
+    const direccion = document.getElementById("direccion-cliente")?.value.trim() || "";
+    const nota = (document.getElementById("notas-pedido") || document.getElementById("ui-nota-pedido"))?.value.trim() || "";
+
+    let textoPedido = RESTAURANT_CONFIG.mensajeWP || "¡Hola! Quiero hacer el siguiente pedido:\n";
+    
+    if (nombre) textoPedido += `\n👤 *Cliente:* ${nombre}`;
+    if (direccion) textoPedido += `\n📍 *Ubicación/Mesa:* ${direccion}`;
+    
+    textoPedido += "\n\n------------------------\n";
     
     let totalPrecio = 0;
     for (const hash in carrito) {
@@ -702,8 +713,8 @@ function enviarPedidoWP() {
         const subtotal = precioUnitario * itemObj.cantidad;
         totalPrecio += subtotal;
         
-        textoPedido += `▪ ${itemObj.cantidad}x ${prod.nombre} - ${formatoDinero(subtotal)}\n`;
-        if (itemObj.modificadores.length > 0) {
+        textoPedido += `▪ ${itemObj.cantidad}x *${prod.nombre}* - ${formatoDinero(subtotal)}\n`;
+        if (itemObj.modificadores && itemObj.modificadores.length > 0) {
             itemObj.modificadores.forEach(m => {
                 textoPedido += `   + ${m.nombre}\n`;
             });
@@ -711,13 +722,20 @@ function enviarPedidoWP() {
     }
     
     textoPedido += "------------------------\n";
-    textoPedido += `*TOTAL:* ${formatoDinero(totalPrecio)}\n`;
+    textoPedido += `\n💰 *TOTAL:* *${formatoDinero(totalPrecio)}*\n`;
     
-    const nota = document.getElementById("ui-nota-pedido").value.trim();
-    if (nota !== "") textoPedido += `\n*Nota:* ${nota}`;
+    if (nota !== "") textoPedido += `\n📝 *Nota:* ${nota}`;
 
-    const link = `https://wa.me/${RESTAURANT_CONFIG.telefonoWP}?text=${encodeURIComponent(textoPedido)}`;
+    // WhatsApp Redirect
+    const telefono = RESTAURANT_CONFIG.telefonoWP || "573112518913";
+    const link = `https://wa.me/${telefono}?text=${encodeURIComponent(textoPedido)}`;
+    
     window.open(link, '_blank');
+    
+    // Opcional: Limpiar carrito tras pedido (depende de la experiencia deseada)
+    // carrito = {};
+    // actualizarUiCarrito();
+    // cerrarModalOrden();
 }
 
 // ==========================================
@@ -829,15 +847,18 @@ function abrirModalProducto(id) {
     if (prod.modificadores && prod.modificadores.length > 0) {
         htmlChecks = `<div class="modificadores-container">
             <div class="mod-grupo">
-                <h4 style="color: var(--color-dorado); margin-bottom: 1rem;">Personaliza tu plato</h4>`;
+                <h4 style="color: var(--color-dorado); margin-bottom: 0.5rem;">Personaliza tu plato</h4>`;
         prod.modificadores.forEach((mod, index) => {
             htmlChecks += `
             <div class="mod-item-row" onclick="const ck = this.querySelector('input'); ck.checked = !ck.checked; ck.dispatchEvent(new Event('change'));">
-                <input type="checkbox" id="mod-${index}" class="mod-checkbox" value="${index}" data-nombre="${mod.nombre}" data-precio="${mod.precio}" onchange="this.parentElement.classList.toggle('selected', this.checked); recalcularPrecioModal(${prod.precio}); event.stopPropagation();">
-                <label for="mod-${index}" style="cursor: pointer; flex-grow: 1; display: flex; justify-content: space-between; pointer-events: none;">
-                    <span>${mod.nombre}</span>
-                    <span style="color: var(--color-dorado); font-weight: bold;">${mod.precio > 0 ? '+'+formatoDinero(mod.precio) : 'Gratis'}</span>
-                </label>
+                <input type="checkbox" id="mod-${index}" class="mod-checkbox-input" value="${index}" data-nombre="${mod.nombre}" data-precio="${mod.precio}" onchange="this.parentElement.classList.toggle('selected', this.checked); recalcularPrecioModal(${prod.precio}); event.stopPropagation();">
+                <div class="mod-selector-circle">
+                    <i class="fas fa-check"></i>
+                </div>
+                <div class="mod-info-premium">
+                    <span class="mod-name-text">${mod.nombre}</span>
+                    <span class="mod-price-tag">${mod.precio > 0 ? '+'+formatoDinero(mod.precio) : 'Gratis'}</span>
+                </div>
             </div>`;
         });
         htmlChecks += `</div></div>`;
@@ -848,19 +869,28 @@ function abrirModalProducto(id) {
             <div class="modal-producto-img-container">
                 <img src="${imgSegura}" alt="${prod.nombre}" id="img-modal-target">
                 ${tieneDescuento ? `<div class="modal-badge-descuento">OFERTA</div>` : ''}
+                <button class="btn-cerrar-modal-premium" onclick="cerrarModalProducto(event)">
+                    <i class="fas fa-times"></i>
+                </button>
             </div>
-            <div class="modal-producto-body">
-                <h3 class="modal-producto-titulo">${prod.nombre}</h3>
-                <p class="modal-producto-desc">${prod.descripcion}</p>
-                ${htmlChecks}
-            </div>
-            <div class="modal-producto-footer">
-                <div class="contenedor-precio-modal">
-                    ${tieneDescuento ? `<span class="modal-precio-old">${formatoDinero(prod.precioOriginal)}</span>` : ''}
-                    <div class="modal-precio" id="ui-modal-precio-dinamico">${formatoDinero(prod.precio)}</div>
+            <div class="modal-producto-scroll-area">
+                <div class="modal-producto-body">
+                    <h3 class="modal-producto-titulo">${prod.nombre}</h3>
+                    <p class="modal-producto-desc">${prod.descripcion}</p>
+                    ${htmlChecks}
                 </div>
-                <button class="btn-agregar-modal" id="btn-modal-add" onclick="agregarDesdeModal('${prod.id}', event)">
-                    Añadir al pedido
+            </div>
+            <div class="modal-producto-footer-premium">
+                <div class="modal-total-section">
+                    <span class="total-label">Total a pagar</span>
+                    <div class="modal-price-display">
+                        ${tieneDescuento ? `<span class="price-strikethrough">${formatoDinero(prod.precioOriginal)}</span>` : ''}
+                        <span id="ui-modal-precio-dinamico" class="price-final">${formatoDinero(prod.precio)}</span>
+                    </div>
+                </div>
+                <button class="btn-confirmar-pedido" id="btn-modal-add" onclick="agregarDesdeModal('${prod.id}', event)">
+                    <span class="btn-text">¡Lo quiero!</span>
+                    <i class="fas fa-shopping-basket"></i>
                 </button>
             </div>
         `;
@@ -871,7 +901,7 @@ function abrirModalProducto(id) {
 }
 
 function recalcularPrecioModal(precioBase) {
-    const checks = document.querySelectorAll('.mod-checkbox:checked');
+    const checks = document.querySelectorAll('.mod-checkbox-input:checked');
     let totalCálculo = precioBase;
     checks.forEach(c => totalCálculo += parseFloat(c.dataset.precio));
     document.getElementById("ui-modal-precio-dinamico").textContent = formatoDinero(totalCálculo);
@@ -879,7 +909,7 @@ function recalcularPrecioModal(precioBase) {
 
 function agregarDesdeModal(id, event) {
     if (event) event.preventDefault();
-    const checks = document.querySelectorAll('.mod-checkbox:checked');
+    const checks = document.querySelectorAll('.mod-checkbox-input:checked');
     let modificadores = [];
     checks.forEach(c => {
         modificadores.push({
@@ -1022,8 +1052,9 @@ function inicializarScrollProgresivo() {
     sections.forEach(section => observer.observe(section));
 }
 
-// Ensure the drawer checkout button is wired for the Mega Drawer
+// Ensure the drawer checkout button and form are wired correctly
 document.addEventListener('DOMContentLoaded', () => {
+    // 1. Botón del Mega Drawer que abre el modal de datos
     const drawerBtnOrdenar = document.getElementById('drawer-btn-ordenar');
     if (drawerBtnOrdenar) {
         drawerBtnOrdenar.addEventListener('click', () => {
@@ -1031,8 +1062,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 cerrarCarrito();
                 abrirModalOrden();
             } else {
-                alert("Agrega productos al carrito primero.");
+                alert("Agrega algunos productos deliciosos al carrito primero.");
             }
         });
+    }
+
+    // 2. Manejo del envío del formulario final
+    const formPedido = document.getElementById('form-pedido');
+    if (formPedido) {
+        formPedido.addEventListener('submit', enviarPedidoWP);
     }
 });
