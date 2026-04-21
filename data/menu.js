@@ -3,7 +3,7 @@
 const RESTAURANT_CONFIG = {
     // === DATOS DEL RESTAURANTE ===
     id: "lanonna", // ID Único para sincronizar con Google Sheets (SaaS)
-    nombre: "La Nonna Rústica",
+    nombre: "LA NONNA RÚSTICA",
     slogan: "La verdadera esencia de la cocina rústica italiana, en tu mesa.",
     logo: "img/logo.png", 
     googleSheetUrl: "https://docs.google.com/spreadsheets/d/1-zMzrxFpWAkU2u0eqFW1LnlG_a0a3VCze5EWchjkQQ0/export?format=csv", // Link configurado correctamente

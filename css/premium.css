@@ -1709,7 +1709,7 @@
     }
     .search-sticky-container { 
         position: sticky;
-        top: 75px; /* Ajustado para no chocar con header mobile */
+        top: 105px; /* Mayor separación del encabezado global en móvil */
         z-index: 150;
         margin: 0 !important; /* Eliminamos margen negativo que causa el scroll lateral */
         padding: 0.5rem 1rem;
