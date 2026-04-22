@@ -5,7 +5,7 @@
 
 let carrito = {}; 
 let categoriaActual = "Todos"; 
-
+let ultimoIdAgregado = null; // Para animaciones de impacto
 function transformarLinkImagen(url) {
     if (!url) return '';
     if (url.includes('drive.google.com')) {
@@ -553,8 +553,14 @@ function renderizarItemsCarrito() {
                 htmlMods += `</div>`;
             }
 
+            const isNew = ultimoIdAgregado === hash;
+            if (isNew) {
+                // Resetear después de usarlo para que no se anime siempre
+                setTimeout(() => { ultimoIdAgregado = null; }, 1000);
+            }
+
             htmlContent += `
-                <div class="drawer-item-row">
+                <div class="drawer-item-row ${isNew ? 'new-added' : ''}">
                     <img src="${transformarLinkImagen(prod.imagen)}" class="drawer-item-img" alt="${prod.nombre}">
                     <div class="drawer-item-details">
                         <h4 style="margin-bottom: 5px;">${prod.nombre}</h4>
@@ -577,7 +583,7 @@ function renderizarItemsCarrito() {
 
 // Algoritmo de Venta Cruzada (Sugerencias Inteligentes)
 function renderizarSugerenciasCarrito() {
-    const contenedor = document.getElementById("ui-sugerencias-carrito");
+    const contenedor = document.getElementById("cross-sell-zone");
     if (!contenedor) return;
 
     if (Object.keys(carrito).length === 0) {
@@ -644,16 +650,81 @@ function renderizarSugerenciasCarrito() {
 
 
     contenedor.innerHTML = `
-        <div class="sugerencia-titulo">${tituloMsg}</div>
-        <div class="sugerencia-item" onclick="agregarAlCarrito('${sugerencia.id}', [], this)">
-            <img src="${transformarLinkImagen(sugerencia.imagen)}" class="sugerencia-img" alt="${sugerencia.nombre}">
-            <div class="sugerencia-info">
-                <div class="sugerencia-nombre">${sugerencia.nombre}</div>
-                <div class="sugerencia-precio">+ ${formatoDinero(sugerencia.precio)}</div>
+        <div class="cs-header">
+            <i class="fas fa-magic"></i> <span>${tituloMsg.replace(/[^\w\s¿?]/g, '').trim().toUpperCase()}</span>
+        </div>
+        <div class="cross-sell-item" onclick="ejecutarSugerencia('${sugerencia.id}', this)">
+            <img src="${transformarLinkImagen(sugerencia.imagen)}" class="cs-img" alt="${sugerencia.nombre}">
+            <div class="cs-details">
+                <div class="cs-name">${sugerencia.nombre}</div>
+                <div class="cs-price">Añadir por +${formatoDinero(sugerencia.precio)}</div>
             </div>
-            <button class="btn-sugerencia-add" onclick="event.stopPropagation(); agregarAlCarrito('${sugerencia.id}', [], this)">+</button>
+            <button class="cs-add-btn" onclick="event.stopPropagation(); ejecutarSugerencia('${sugerencia.id}', this.parentElement)">
+                <i class="fas fa-plus"></i>
+            </button>
         </div>
     `;
+}
+
+function ejecutarSugerencia(id, elemento) {
+    const zone = document.getElementById("cross-sell-zone");
+    const btn = elemento.querySelector('.cs-add-btn') || elemento.closest('.cross-sell-item')?.querySelector('.cs-add-btn');
+    const itemsList = document.getElementById("drawer-cart-items");
+    
+    if (zone) zone.classList.add("added");
+    if (btn) {
+        btn.innerHTML = '<i class="fas fa-check"></i>';
+        btn.style.background = '#2ecc71';
+        btn.style.animation = 'none';
+    }
+    
+    // 1. Esperar a que la tarjeta termine de encogerse (0.6s en CSS) para lanzar el punto
+    setTimeout(() => {
+        const rectCard = elemento.getBoundingClientRect();
+        const particle = document.createElement("div");
+        particle.className = "impact-particle";
+        // El punto sale de donde estaba el centro de la tarjeta
+        particle.style.top = (rectCard.top + rectCard.height / 2) + "px";
+        particle.style.left = (rectCard.left + rectCard.width / 2) + "px";
+        document.body.appendChild(particle);
+
+        // 2. Animar el punto hacia la ubicación del último producto
+        setTimeout(() => {
+            const lastItem = itemsList.querySelector('.drawer-item-row:last-child');
+            let destX, destY;
+
+            if (lastItem) {
+                const rectLast = lastItem.getBoundingClientRect();
+                destX = rectLast.left + rectLast.width / 2;
+                destY = rectLast.bottom + (rectLast.height / 3.5); 
+            } else {
+                const rectList = itemsList.getBoundingClientRect();
+                destX = rectList.left + rectList.width / 2;
+                destY = rectList.top + 20;
+            }
+            
+            particle.style.transition = "all 0.8s cubic-bezier(0.16, 1, 0.3, 1)";
+            particle.style.transform = `translate(${destX - (rectCard.left + rectCard.width / 2)}px, ${destY - (rectCard.top + rectCard.height / 2)}px) scale(0.3)`;
+            particle.style.opacity = "0.2";
+
+            // 3. Impacto e inserción
+            setTimeout(() => {
+                particle.remove();
+                if (itemsList) itemsList.classList.add("impacted");
+                
+                ultimoIdAgregado = id; 
+                agregarAlCarrito(id, [], null);
+
+                setTimeout(() => {
+                    if (itemsList) itemsList.classList.remove("impacted");
+                    if (zone) {
+                        zone.classList.remove("added");
+                        renderizarSugerenciasCarrito(); 
+                    }
+                }, 400);
+            }, 640);
+        }, 50); // Pequeño delay para que el navegador procese el render de la partícula
+    }, 480); // 480ms (20% más rápido que 600ms)
 }
 
 function abrirCarrito() {
