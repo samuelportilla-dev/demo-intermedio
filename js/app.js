@@ -581,57 +581,68 @@ function renderizarSugerenciasCarrito() {
     if (!contenedor) return;
 
     if (Object.keys(carrito).length === 0) {
-        contenedor.innerHTML = "";
+        contenedor.style.setProperty('display', 'none', 'important');
         return;
     }
 
-    let tieneComida = false;
-    let tieneBebida = false;
-    let tienePostre = false;
+    let tieneComida = false, tieneBebida = false, tienePostre = false, tieneEntrada = false;
 
-    // Analizamos el carrito actual
     for (const hash in carrito) {
         const prod = obtenerProducto(carrito[hash].id);
         if (!prod) continue;
-        if (prod.categoria === "Bebidas") tieneBebida = true;
-        else if (prod.categoria === "Postres") tienePostre = true;
+        const cat = prod.categoria;
+        if (cat === "Bebidas") tieneBebida = true;
+        else if (cat === "Postres") tienePostre = true;
+        else if (cat === "Entradas") tieneEntrada = true;
         else tieneComida = true;
     }
 
-    let catSugerida = "";
-    let tituloMsg = "";
+    let catSugerida = "", tituloMsg = "";
 
-    // Lógicas de sugerencias ("Si compró X pero no Y, sugerir Y")
     if (tieneComida && !tieneBebida) {
         catSugerida = "Bebidas";
-        tituloMsg = "🥤 ¿No olvides tu bebida?";
+        tituloMsg = "🥤 ¿Acompañamos con una bebida?";
+    } else if (tieneComida && !tieneEntrada) {
+        catSugerida = "Entradas";
+        tituloMsg = "🍕 ¿Algo para picar mientras tanto?";
     } else if (tieneComida && !tienePostre) {
         catSugerida = "Postres";
-        tituloMsg = "🍰 ¿Un postrecito para el final?";
+        tituloMsg = "🍰 No te vayas sin el postre";
+    } else if (tieneEntrada && !tieneComida) {
+        catSugerida = "Pizzas Clásicas";
+        tituloMsg = "🍕 ¿Cuál será tu plato fuerte?";
     } else if (tieneBebida && !tieneComida) {
         catSugerida = "Entradas";
-        tituloMsg = "🍕 ¿Acompañamos con algo para picar?";
-    } else if (tienePostre && !tieneComida) {
+        tituloMsg = "🍕 ¿Acompañamos con una entrada?";
+    } else if (tienePostre && !tieneBebida) {
         catSugerida = "Bebidas";
         tituloMsg = "☕ ¿Un acompañante para tu postre?";
+    } else {
+        // Fallback: Sugerir bebidas si todo lo demás está pero no hay bebidas
+        if (!tieneBebida) {
+            catSugerida = "Bebidas";
+            tituloMsg = "🥤 ¡No olvides la hidratación!";
+        }
     }
 
     if (!catSugerida) {
-        contenedor.innerHTML = ""; // No hay sugerencia, carrito "perfecto"
+        contenedor.style.display = "none";
         return;
     }
 
-    // Buscar todos los productos disponibles de la categoría sugerida
     const productosSugeribles = RESTAURANT_CONFIG.productos.filter(p => p.categoria === catSugerida && p.disponible);
     if (productosSugeribles.length === 0) {
-        contenedor.innerHTML = "";
+        contenedor.style.display = "none";
         return;
     }
 
-    // Tomar uno ALEATORIO de la categoría sugerida
     const sugerencia = productosSugeribles[Math.floor(Math.random() * productosSugeribles.length)];
 
-    // Renderizar
+    contenedor.style.display = "block";
+    contenedor.style.opacity = "1";
+    contenedor.style.visibility = "visible";
+
+
     contenedor.innerHTML = `
         <div class="sugerencia-titulo">${tituloMsg}</div>
         <div class="sugerencia-item" onclick="agregarAlCarrito('${sugerencia.id}', [], this)">
@@ -640,9 +651,7 @@ function renderizarSugerenciasCarrito() {
                 <div class="sugerencia-nombre">${sugerencia.nombre}</div>
                 <div class="sugerencia-precio">+ ${formatoDinero(sugerencia.precio)}</div>
             </div>
-            <button class="btn-sugerencia-add" onclick="event.stopPropagation(); agregarAlCarrito('${sugerencia.id}', [], this)">
-                 +
-            </button>
+            <button class="btn-sugerencia-add" onclick="event.stopPropagation(); agregarAlCarrito('${sugerencia.id}', [], this)">+</button>
         </div>
     `;
 }
