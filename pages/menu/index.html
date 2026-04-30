@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Menú — Oldwest Rústica</title>
+    <meta name="description" content="Descubre el menú móvil de Oldwest Rústica. La mejor hamburguesa artesanal de Cúcuta en la palma de tu mano.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;800&family=Outfit:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="stylesheet" href="../../css/premium.css">
+    <link rel="stylesheet" href="../../css/fx-effects.css">
+    <link rel="stylesheet" href="../../css/fx-extras.css">
+    <link rel="stylesheet" href="./menu-ultra.css?v=3.1">
+    <link rel="stylesheet" href="../../css/cursor.css">
+
+    <style>
+        /* Force Modal Styles (In case of cache/conflict) */
+        .premium-modal-content {
+            background: #0f0d0c !important;
+            border: 1px solid rgba(255,255,255,0.1) !important;
+            max-height: 85vh !important;
+            overflow-y: auto !important;
+            padding: 2rem !important;
+            margin: 20px auto !important;
+        }
+        #modal-orden.modal {
+            display: none !important;
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            background: rgba(0,0,0,0.9) !important;
+            backdrop-filter: blur(15px) !important;
+            z-index: 10000 !important;
+            overflow-y: auto !important;
+            -webkit-overflow-scrolling: touch;
+        }
+        #modal-orden.modal.activo {
+            display: block !important; /* Changed from flex to block to allow natural scrolling */
+        }
+        @media (max-width: 768px) {
+            .premium-modal-content {
+                width: 95% !important;
+                padding: 1.5rem !important;
+                margin: 10px auto !important;
+            }
+        }
+        .premium-modal-title {
+            color: #f5f0e8 !important;
+            font-family: 'Cinzel', serif !important;
+        }
+        .premium-modal-subtitle {
+            color: #c1121f !important;
+            font-family: 'Playfair Display', serif !important;
+        }
+        .premium-input {
+            background: rgba(255,255,255,0.05) !important;
+            border: 1px solid rgba(255,255,255,0.1) !important;
+            color: white !important;
+            border-radius: 12px !important;
+        }
+        .propina-premium-chip.activa {
+            background: #c1121f !important;
+            border-color: #c1121f !important;
+        }
+        .premium-submit-btn {
+            background: #c1121f !important;
+            border: none !important;
+            color: white !important;
+        }
+    </style>
+
+    <link rel="icon" type="image/png" href="../../img/logo.png">
+    <meta name="theme-color" content="#0a0908">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+</head>
+<body class="page-menu-ultra">
+
+    <!-- Global Nav (Desktop) -->
+    <nav class="global-nav">
+        <div class="global-nav-container">
+            <a href="../../index.html" class="global-nav-logo">
+                <img src="../../img/logo.png" alt="Logo">
+                Oldwest RÚSTICA
+            </a>
+            <div class="global-nav-links">
+                <a href="../../index.html">Inicio</a>
+                <a href="./" class="active">Menú</a>
+                <a href="../nosotros/">Nuestra Historia</a>
+                <a href="../contacto/">Contacto</a>
+            </div>
+            <div class="global-nav-actions">
+                <a href="../reservas/" class="btn-nav-reserva">Reservar</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Bottom Nav Mobile -->
+    <nav class="mobile-bottom-nav">
+        <a href="../../index.html" class="bottom-nav-item"><svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg><span>Inicio</span></a>
+        <a href="./" class="bottom-nav-item active"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></svg><span>Carta</span></a>
+        <a href="../reservas/" class="bottom-nav-item"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg><span>Reservar</span></a>
+        <a href="../nosotros/" class="bottom-nav-item"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg><span>Nosotros</span></a>
+    </nav>
+
+
+
+
+
+    <!-- ===================== PROMOTIONS SLIDER ===================== -->
+    <div class="mn-promo-container" id="mn-promo-container">
+        <!-- Dynamic Promos -->
+    </div>
+
+    <!-- ===================== SMART SEARCH BAR ===================== -->
+    <div class="mn-search-sticky">
+        <div class="mn-search-container">
+            <div class="mn-search-wrapper">
+                <svg class="mn-search-icon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <input type="text" id="mn-smart-search" placeholder="Busca tu hamburguesa, pasta o bebida favorita..." autocomplete="off">
+                
+                <button id="cat-filter-btn" class="cat-search-btn" data-cursor-label="Categorías">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                </button>
+
+                <button id="mn-search-clear" style="display:none;">&times;</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================== MAIN MENU LAYOUT ===================== -->
+    <div class="mn-layout-container">
+        <!-- ===================== ASIDE (DESKTOP) / NAV (MOBILE) ===================== -->
+        <aside class="mn-aside-layout">
+            <nav class="mn-mobile-nav" id="mn-top-pills">
+                <div class="mn-nav-scroll" id="mn-nav-scroll">
+                    <!-- Dynamic Pills -->
+                </div>
+            </nav>
+
+            <!-- ===================== SPECIAL OF THE DAY (SIDEBAR WIDGET) ===================== -->
+            <div id="ui-especial-dia-container"></div>
+        </aside>
+
+        <!-- ===================== MAIN MENU CONTENT ===================== -->
+        <main class="mn-main" id="mn-main">
+            <!-- Dynamic Sections & Cards -->
+        </main>
+    </div>
+
+        <!-- ===================== MAIN MENU CONTENT ===================== -->
+        <main class="mn-main" id="mn-main">
+            <!-- Dynamic Sections & Cards -->
+        </main>
+    </div>
+
+    <!-- ===================== CATEGORIES BOTTOM SHEET (EDITORIAL WHITE) ===================== -->
+    <div class="mn-bottom-sheet" id="categories-sheet">
+        <div class="mn-sheet-overlay" id="sheet-overlay"></div>
+        <div class="mn-sheet-content editorial-theme">
+            <div class="mn-sheet-handle"></div>
+            <div class="mn-sheet-header">
+                <h3 class="sheet-title">CATEGORÍAS</h3>
+                <p class="sheet-subtitle">Selecciona una sección para navegar</p>
+            </div>
+            <div class="mn-sheet-list" id="mini-menu-cats">
+                <!-- Dynamic Category Items with Images -->
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================== FLOATING CART ===================== -->
+    <div class="mn-floating-cart" id="mn-floating-cart" style="display: none;" data-cursor-label="Carrito">
+        <div class="mn-cart-badge" id="f-cart-count">0</div>
+        <span class="mn-cart-label">Ver mi orden</span>
+        <span class="mn-cart-total" id="f-cart-total" style="margin-left: 8px;">$0</span>
+    </div>
+
+    <!-- ===================== BOTTOM SHEET MODAL ===================== -->
+    <div class="mn-modal" id="mn-modal">
+        <div class="mn-modal-overlay" onclick="window.closeSheet()"></div>
+        <div class="mn-modal-sheet" id="mn-modal-sheet">
+            <!-- Dynamic content (BottomSheet style) -->
+        </div>
+    </div>
+
+    <!-- Mega Drawer (Checkout) -->
+    <div class="mega-drawer-overlay" id="drawer-overlay"></div>
+    <div class="mega-drawer" id="mega-drawer">
+        <div class="drawer-header">
+            <h2 style="font-family: 'Cinzel', serif; font-weight: 800;">Tu Orden <span id="drawer-count">(0)</span></h2>
+            <button class="close-drawer" id="close-drawer-btn" onclick="document.body.style.overflow='auto'">&times;</button>
+        </div>
+        <div class="drawer-main-content">
+            <div id="drawer-savings-badge" style="display:none; background: rgba(193,18,31,0.1); color: #c1121f; padding: 0.8rem; border-radius: 10px; margin: 10px 1.5rem; font-weight: 700; font-size: 0.9rem; text-align: center; border: 1px dashed #c1121f;"></div>
+            <div class="drawer-items-list" id="drawer-cart-items"></div>
+            <div class="cross-sell-zone" id="cross-sell-zone"></div>
+        </div>
+        <div class="drawer-footer">
+            <div class="drawer-total-row">
+                <span style="font-family: 'Outfit', sans-serif; opacity: 0.5; letter-spacing: 2px;">Subtotal</span>
+                <span id="drawer-total" style="font-family: 'Cinzel', serif; font-size: 2rem; font-weight: 800;">$0</span>
+            </div>
+            <button id="drawer-btn-ordenar" class="drawer-checkout-btn" style="background: #c1121f; border-radius: 12px; font-weight: 700;">Confirmar Pedido</button>
+        </div>
+    </div>
+
+    <!-- Modal Orden (WhatsApp) - Versión Brutalmente Premium -->
+    <div id="modal-orden" class="modal">
+         <div class="premium-modal-content">
+             <div class="premium-close-modal" id="cerrar-orden">&times;</div>
+             
+             <div class="premium-modal-header">
+                 <h2 class="premium-modal-title">Finalizar Pedido</h2>
+                 <p class="premium-modal-subtitle">Estás a un paso de la experiencia Oldwest</p>
+             </div>
+
+             <form id="form-pedido">
+                 <div class="premium-form-group">
+                     <input type="text" id="nombre-cliente" class="premium-input" placeholder="Tu nombre para la orden" required>
+                 </div>
+
+                 <div class="premium-form-group">
+                     <input type="text" id="direccion-cliente" class="premium-input" placeholder="Dirección de entrega o Mesa #">
+                 </div>
+
+                 <div class="premium-form-group">
+                     <textarea id="notas-pedido" class="premium-input premium-textarea" placeholder="¿Alguna instrucción especial para el chef?"></textarea>
+                 </div>
+
+                  <div class="propina-section">
+                     <span class="propina-premium-label">¿Deseas incluir propina?</span>
+                     <div class="propina-premium-grid">
+                         <button type="button" class="propina-premium-chip" data-valor="0" onclick="seleccionarPropina(0, this)">No, gracias</button>
+                         <button type="button" class="propina-premium-chip" data-valor="10" onclick="seleccionarPropina(10, this)">10%</button>
+                         <button type="button" class="propina-premium-chip activa" data-valor="15" onclick="seleccionarPropina(15, this)">15% (Sugerido)</button>
+                         <button type="button" class="propina-premium-chip" data-valor="20" onclick="seleccionarPropina(20, this)">20%</button>
+                     </div>
+                     <input type="hidden" id="propina-seleccionada" value="15">
+                 </div>
+
+                 <!-- Payment Method Section -->
+                 <div class="payment-section">
+                     <span class="propina-premium-label">Método de Pago</span>
+                     <div class="payment-methods-grid">
+                         <div class="payment-method-card active" onclick="selectPaymentMethod('card', this)">
+                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
+                             <span>Tarjeta</span>
+                         </div>
+                         <div class="payment-method-card" onclick="selectPaymentMethod('cash', this)">
+                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2"></rect><circle cx="12" cy="12" r="2"></circle><path d="M6 12h.01M18 12h.01"></path></svg>
+                             <span>En Persona</span>
+                         </div>
+                     </div>
+                     <input type="hidden" id="metodo-pago" value="card">
+
+                     <!-- Card Details (Demo Only) -->
+                     <div id="card-details-form" class="card-details-container">
+                         <div class="premium-form-group">
+                             <input type="text" id="card-number" class="premium-input" placeholder="Número de Tarjeta (Demo)" maxlength="19">
+                         </div>
+                         <div class="card-row">
+                             <div class="premium-form-group">
+                                 <input type="text" id="card-expiry" class="premium-input" placeholder="MM/AA" maxlength="5">
+                             </div>
+                             <div class="premium-form-group">
+                                 <input type="text" id="card-cvv" class="premium-input" placeholder="CVV" maxlength="3">
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+
+                 <button type="submit" class="premium-submit-btn">
+                     Finalizar Pedido <i class="fas fa-check-circle"></i>
+                 </button>
+             </form>
+         </div>
+     </div>
+
+     <!-- Modal de Estado de Pago (Simulación Tarjeta) -->
+     <div id="modal-status" class="modal">
+         <div class="premium-modal-content status-modal-content">
+             <div id="status-loading" class="status-step">
+                 <div class="premium-loader"></div>
+                 <h3 class="premium-modal-title">Procesando Pago</h3>
+                 <p class="premium-modal-subtitle">Verificando con tu entidad bancaria...</p>
+             </div>
+             <div id="status-success" class="status-step" style="display: none;">
+                 <div class="success-icon-wrapper">
+                    <svg viewBox="0 0 52 52" class="checkmark-svg">
+                        <circle cx="26" cy="26" r="25" fill="none" class="checkmark-circle"/>
+                        <path fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" class="checkmark-check"/>
+                    </svg>
+                 </div>
+                 <h3 class="premium-modal-title">¡Pago Comprobado!</h3>
+                 <p class="premium-modal-subtitle">Tu pedido ha sido procesado con éxito.</p>
+                 <div class="success-details">
+                     <p>Listo, ¡todo está en orden!</p>
+                     <p>Tu pedido llegará en breves momentos. <br> ¡Gracias por preferir Oldwest!</p>
+                 </div>
+                 <div class="status-actions-grid">
+                     <button class="premium-submit-btn btn-secondary" onclick="descargarComprobante()">
+                         Descargar Comprobante <i class="fas fa-file-download"></i>
+                     </button>
+                     <button class="premium-submit-btn" onclick="finalizarTodo()">
+                         Volver al Menú <i class="fas fa-home"></i>
+                     </button>
+                 </div>
+             </div>
+         </div>
+     </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="../../data/menu.js?v=2.2"></script>
+    <script src="../../js/app.js?v=2.2"></script>
+    <script src="../../js/fx-transitions.js"></script>
+    <script src="../../js/fx-cursor.js"></script>
+    <script src="../../js/fx-tilt.js"></script>
+    <script src="../../js/fx-whatsapp.js"></script>
+    <script src="./menu-ultra.js"></script>
+    <script>
+        // Global Drawer Sync
+        const closeBtn = document.getElementById('close-drawer-btn');
+        const overlay = document.getElementById('drawer-overlay');
+        const drawer = document.getElementById('mega-drawer');
+
+        function openDrawer(e) {
+            if(e) e.preventDefault();
+            drawer.classList.add('open');
+            overlay.classList.add('visible');
+            document.body.style.overflow = 'hidden';
+            
+            // Ocultar WhatsApp al abrir la orden
+            const waWidget = document.getElementById('wa-chat-widget');
+            if(waWidget) waWidget.classList.add('mn-floating-hidden');
+            
+            if(window.actualizarUiMegaDrawer) window.actualizarUiMegaDrawer();
+        }
+        function closeDrawer() {
+            drawer.classList.remove('open');
+            overlay.classList.remove('visible');
+            document.body.style.overflow = '';
+            
+            // Mostrar WhatsApp al cerrar la orden
+            const waWidget = document.getElementById('wa-chat-widget');
+            if(waWidget) waWidget.classList.remove('mn-floating-hidden');
+        }
+        window.openDrawer = openDrawer;
+        if(closeBtn) closeBtn.addEventListener('click', closeDrawer);
+        if(overlay) overlay.addEventListener('click', closeDrawer);
+    </script>
+</body>
+</html>

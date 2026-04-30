@@ -22,22 +22,22 @@ function formatoDinero(valor) {
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
-    const progress = document.querySelector(".preloader-progress");
-    if (progress) progress.style.width = "40%";
-
     inicializarTema();
     
+    // Feature 08: Recuperador de Carrito
+    recuperarCarrito();
+    
     // Only run menu-specific rendering if the menu container exists
-    const menuContainer = document.getElementById("menu-container") || document.getElementById("ui-contenedor-menu");
+    const menuContainer = document.getElementById("menu-container") || document.getElementById("ui-contenedor-menu") || document.getElementById("mn-main");
     if (menuContainer) {
         renderizarHeader();
         mostrarSkeletons(); 
         
-        await cargarDatosDesdeSheet(); 
-        if (progress) progress.style.width = "80%";
-
+        // await cargarDatosDesdeSheet(); 
+        
         renderizarPromociones();
         renderizarCategorias();
+        renderizarEspecialDia(); // Feature 17
         renderizarProductos(); 
         inicializarObserverLiquid(); 
         inicializarScrollProgresivo(); 
@@ -47,20 +47,34 @@ document.addEventListener("DOMContentLoaded", async () => {
     } else {
         // If it's not the menu page, we just load sheet data silently for the cart logic mostly
         // or just apply basic theming
-        await cargarDatosDesdeSheet();
+        // await cargarDatosDesdeSheet();
     }
 
     // Common global initializations
     actualizarUiCarrito(); // Ensure dynamic cart badge works globally
-
-    if (progress) progress.style.width = "100%";
-
-    // Delay de gracia para que se note la animación premium
-    setTimeout(() => {
-        const preloader = document.getElementById("ui-preloader");
-        if (preloader) preloader.classList.add("preloader-hidden");
-    }, 800); // reduced loader time globally
 });
+
+// Feature 08: Recuperador de Carrito Logic
+function recuperarCarrito() {
+    const saved = localStorage.getItem("oldwest_cart_v2");
+    if (!saved) return;
+
+    try {
+        const { data, timestamp } = JSON.parse(saved);
+        const ahora = Date.now();
+        const dosHoras = 2 * 60 * 60 * 1000;
+
+        if (ahora - timestamp < dosHoras) {
+            carrito = data;
+            console.log("🛒 Carrito recuperado de la sesión anterior.");
+            // Opcional: Podríamos mostrar un toast discreto aquí
+        } else {
+            localStorage.removeItem("oldwest_cart_v2");
+        }
+    } catch (e) {
+        console.error("Error recuperando carrito:", e);
+    }
+}
 
 function inicializarObserverLiquid() {
     const observer = new IntersectionObserver((entries) => {
@@ -88,14 +102,19 @@ function renderizarMiniMenuCats() {
     const contenedor = document.getElementById("mini-menu-categorias");
     if (!contenedor) return;
 
+    const isSubPage = window.location.pathname.includes('/pages/');
+    const isLegal = window.location.pathname.includes('/legal/');
+    let imgPrefix = "";
+    if (isLegal) imgPrefix = "../../../";
+    else if (isSubPage) imgPrefix = "../../";
+
     const metadataCategorias = {
-        "Todos": { desc: "Explora la experiencia completa de nuestro horno.", icon: "img/cat_todos.png" },
-        "Entradas": { desc: "Pequeños bocados con gran alma italiana.", icon: "img/cat_entradas.png" },
-        "Pizzas Clásicas": { desc: "La tradición de La Nonna en cada porción.", icon: "img/cat_pizzas_clasicas.png" },
-        "Pizzas Especiales": { desc: "Creaciones de autor con toques rústicos.", icon: "img/cat_pizzas_especiales.png" },
-        "Pastas Frescas": { desc: "Trigo seleccionado y amasado a mano.", icon: "img/cat_pastas_frescas.png" },
-        "Bebidas": { desc: "Selección refrescante para acompañar.", icon: "img/cat_bebidas.png" },
-        "Postres": { desc: "El final dulce perfecto para tu día.", icon: "img/cat_postres.png" }
+        "Todos": { desc: "Explora la experiencia completa de nuestro grill.", icon: imgPrefix + "img/banner.webp" },
+        "Hamburguesas (Oferta Exclusiva)": { desc: "El mejor blend de carne con pan artesanal.", icon: imgPrefix + "img/SMASH BURGER.webp" },
+        "Cortes Premium": { desc: "Los cortes de res y cerdo más jugosos.", icon: imgPrefix + "img/TOMAHAWK ANGUS BEEF.webp" },
+        "Aves y BBQ": { desc: "Pollo y alitas marinadas al estilo Texas.", icon: imgPrefix + "img/TEXAS CHICKEN.webp" },
+        "Para Compartir": { desc: "Combos generosos para disfrutar en grupo.", icon: imgPrefix + "img/Picada Wild West.png" },
+        "Bebidas": { desc: "Selección refrescante para acompañar.", icon: imgPrefix + "img/Bebidas/LIMONADA NATURAL.avif" }
     };
 
     let html = `
@@ -115,7 +134,7 @@ function renderizarMiniMenuCats() {
     `;
 
     RESTAURANT_CONFIG.categorias.forEach(cat => {
-        const meta = metadataCategorias[cat] || { desc: "Nuestros mejores platillos.", icon: "img/logo.png" };
+        const meta = metadataCategorias[cat] || { desc: "Nuestros mejores platillos.", icon: imgPrefix + "img/logo.png" };
         html += `
             <button class="btn-mini-cat" onclick="seleccionarCategoriaMini('${cat}')">
                 <div class="cat-icon"><img src="${meta.icon}" alt="${cat}"></div>
@@ -150,7 +169,7 @@ function seleccionarCategoriaMini(cat) {
     document.getElementById("mini-menu-categorias").classList.remove("visible");
     
     // Scroll suave hasta el catálogo
-    const catálogo = document.getElementById("ui-contenedor-menu");
+    const catálogo = document.getElementById("mn-grid-dinamico") || document.getElementById("menu-container") || document.getElementById("ui-contenedor-menu") || document.getElementById("mn-main");
     if (catálogo) {
         const rect = catálogo.getBoundingClientRect();
         const pos = rect.top + window.scrollY - 100;
@@ -185,7 +204,7 @@ function actualizarEstadoRestaurante() {
 }
 
 function mostrarSkeletons() {
-    const contenedor = document.getElementById("ui-contenedor-menu");
+    const contenedor = document.getElementById("mn-grid-dinamico") || document.getElementById("menu-container") || document.getElementById("ui-contenedor-menu") || document.getElementById("mn-main");
     if (!contenedor) return;
     contenedor.innerHTML = `
         <div class="grilla-productos">
@@ -290,7 +309,7 @@ function ejecutarBusqueda(query) {
 }
 
 function renderizarProductos() {
-    const contenedor = document.getElementById("menu-container") || document.getElementById("ui-contenedor-menu");
+    const contenedor = document.getElementById("mn-grid-dinamico") || document.getElementById("menu-container") || document.getElementById("ui-contenedor-menu") || document.getElementById("mn-main");
     if (!contenedor) return;
     contenedor.innerHTML = "";
 
@@ -476,11 +495,44 @@ function actualizarUiCarrito() {
     let cantidadTotal = 0;
     let precioTotal = 0;
     
+    // --- LÓGICA DE PRECIO Y DESCUENTOS (2x1) ---
+    let itemsPara2x1 = [];
+    let otrosPrecios = 0;
+
     for (const hash in carrito) {
         const item = carrito[hash];
+        const prod = obtenerProducto(item.id);
         cantidadTotal += item.cantidad;
-        precioTotal += (calcularPrecioItem(item) * item.cantidad);
+        
+        const precioUnitario = calcularPrecioItem(item);
+
+        // Si es Hamburguesa, entra en la bolsa del 2x1
+        if (prod.categoria && prod.categoria.includes("Hamburguesas")) {
+            for (let i = 0; i < item.cantidad; i++) {
+                itemsPara2x1.push(precioUnitario);
+            }
+        } else {
+            otrosPrecios += (precioUnitario * item.cantidad);
+        }
     }
+
+    // Calcular 2x1: Ordenamos de mayor a menor para cobrar las caras y regalar las baratas
+    itemsPara2x1.sort((a, b) => b - a);
+    let total2x1 = 0;
+    let ahorro2x1 = 0;
+    itemsPara2x1.forEach((precio, index) => {
+        if (index % 2 === 0) total2x1 += precio; 
+        else ahorro2x1 += precio; // Este es el ahorro
+    });
+
+    precioTotal = otrosPrecios + total2x1;
+    window.ultimoAhorro = ahorro2x1; // Guardar para UI
+
+    // Feature 08: Guardar en LocalStorage
+    localStorage.setItem("oldwest_cart_v2", JSON.stringify({
+        data: carrito,
+        timestamp: Date.now()
+    }));
 
     const flotante = document.getElementById("btn-flotante-carrito");
     const labelCant = document.getElementById("ui-cantidad-flotante");
@@ -494,6 +546,18 @@ function actualizarUiCarrito() {
 
     if (drawerCount) drawerCount.textContent = `(${cantidadTotal})`;
     if (drawerTotal) drawerTotal.textContent = formatoDinero(precioTotal);
+    
+    // Inyectar ahorro en el drawer si existe
+    const savingsContainer = document.getElementById("drawer-savings-badge");
+    if (savingsContainer) {
+        if (ahorro2x1 > 0) {
+            savingsContainer.innerHTML = `<i class="fas fa-gift"></i> ¡Ahorraste ${formatoDinero(ahorro2x1)} con el 2x1!`;
+            savingsContainer.style.display = "block";
+        } else {
+            savingsContainer.style.display = "none";
+        }
+    }
+
     if (mobileBadge) {
          mobileBadge.textContent = cantidadTotal;
          mobileBadge.style.display = cantidadTotal > 0 ? "flex" : "none";
@@ -510,15 +574,24 @@ function actualizarUiCarrito() {
             cerrarCarrito(); 
         }
     }
-    
-    // Update global nav badge if exists
-    const navBadge = document.getElementById("global-cart-badge");
-    if (navBadge) {
-        navBadge.textContent = cantidadTotal;
-        if(cantidadTotal > 0) navBadge.style.display = 'flex';
-        else navBadge.style.display = 'none';
-    }
 
+    // Soporte para Menu Ultra (mn-floating-cart)
+    const mnFloat = document.getElementById("mn-floating-cart");
+    if (mnFloat) {
+        if (cantidadTotal > 0) {
+            mnFloat.classList.add("visible");
+            mnFloat.style.display = "flex"; 
+            
+            const fCount = document.getElementById("f-cart-count");
+            const fTotal = document.getElementById("f-cart-total");
+            if (fCount) fCount.textContent = cantidadTotal;
+            if (fTotal) fTotal.textContent = formatoDinero(precioTotal);
+        } else {
+            mnFloat.classList.remove("visible");
+            mnFloat.style.display = "none"; 
+        }
+    }
+    
     renderizarItemsCarrito();
     renderizarSugerenciasCarrito();
 }
@@ -591,15 +664,14 @@ function renderizarSugerenciasCarrito() {
         return;
     }
 
-    let tieneComida = false, tieneBebida = false, tienePostre = false, tieneEntrada = false;
+    let tieneComida = false, tieneBebida = false, tieneCompartir = false;
 
     for (const hash in carrito) {
         const prod = obtenerProducto(carrito[hash].id);
         if (!prod) continue;
         const cat = prod.categoria;
         if (cat === "Bebidas") tieneBebida = true;
-        else if (cat === "Postres") tienePostre = true;
-        else if (cat === "Entradas") tieneEntrada = true;
+        else if (cat === "Para Compartir") tieneCompartir = true;
         else tieneComida = true;
     }
 
@@ -608,23 +680,16 @@ function renderizarSugerenciasCarrito() {
     if (tieneComida && !tieneBebida) {
         catSugerida = "Bebidas";
         tituloMsg = "🥤 ¿Acompañamos con una bebida?";
-    } else if (tieneComida && !tieneEntrada) {
-        catSugerida = "Entradas";
-        tituloMsg = "🍕 ¿Algo para picar mientras tanto?";
-    } else if (tieneComida && !tienePostre) {
-        catSugerida = "Postres";
-        tituloMsg = "🍰 No te vayas sin el postre";
-    } else if (tieneEntrada && !tieneComida) {
-        catSugerida = "Pizzas Clásicas";
-        tituloMsg = "🍕 ¿Cuál será tu plato fuerte?";
+    } else if (tieneComida && !tieneCompartir) {
+        catSugerida = "Para Compartir";
+        tituloMsg = "🍟 ¿Algo para picar mientras tanto?";
+    } else if (tieneCompartir && !tieneComida) {
+        catSugerida = "Hamburguesas (Oferta Exclusiva)";
+        tituloMsg = "🍔 ¿Cuál será tu plato fuerte?";
     } else if (tieneBebida && !tieneComida) {
-        catSugerida = "Entradas";
-        tituloMsg = "🍕 ¿Acompañamos con una entrada?";
-    } else if (tienePostre && !tieneBebida) {
-        catSugerida = "Bebidas";
-        tituloMsg = "☕ ¿Un acompañante para tu postre?";
+        catSugerida = "Hamburguesas (Oferta Exclusiva)";
+        tituloMsg = "🍔 ¿Acompañamos con una buena hamburguesa?";
     } else {
-        // Fallback: Sugerir bebidas si todo lo demás está pero no hay bebidas
         if (!tieneBebida) {
             catSugerida = "Bebidas";
             tituloMsg = "🥤 ¡No olvides la hidratación!";
@@ -743,7 +808,12 @@ function abrirCarrito() {
     // Classic Support fallback
     const overlay = document.getElementById("overlay-carrito");
     if(!overlay) {
-        window.location.href = "menu.html";
+        const isSubPage = window.location.pathname.includes('/pages/');
+        const isLegal = window.location.pathname.includes('/legal/');
+        let target = "pages/menu/";
+        if (isLegal) target = "../../menu/";
+        else if (isSubPage) target = "../menu/";
+        window.location.href = target;
         return;
     }
     
@@ -770,8 +840,76 @@ function cerrarCarrito() {
     document.body.style.overflow = ""; 
 }
 
+function selectPaymentMethod(method, element) {
+    const hiddenInput = document.getElementById("metodo-pago");
+    if (!hiddenInput) return;
+
+    hiddenInput.value = method;
+
+    // Resetear cards
+    document.querySelectorAll(".payment-method-card").forEach(card => {
+        card.classList.remove("active");
+    });
+
+    // Activar el seleccionado
+    element.classList.add("active");
+
+    // Mostrar/Ocultar detalles de tarjeta
+    const cardForm = document.getElementById("card-details-form");
+    if (cardForm) {
+        cardForm.style.display = method === 'card' ? 'flex' : 'none';
+    }
+}
+
+// Formateo dinámico de inputs de tarjeta
+document.addEventListener('input', (e) => {
+    if (e.target.id === 'card-number') {
+        let v = e.target.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+        let matches = v.match(/\d{4,16}/g);
+        let match = matches && matches[0] || '';
+        let parts = [];
+        for (let i=0, len=match.length; i<len; i+=4) {
+            parts.push(match.substring(i, i+4));
+        }
+        if (parts.length) {
+            e.target.value = parts.join(' ');
+        } else {
+            e.target.value = v;
+        }
+    }
+    if (e.target.id === 'card-expiry') {
+        let v = e.target.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+        if (v.length > 2) {
+            e.target.value = v.substring(0, 2) + '/' + v.substring(2, 4);
+        } else {
+            e.target.value = v;
+        }
+    }
+});
+
 function enviarPedidoWP(event) {
     if (event) event.preventDefault();
+
+    const metodoPago = document.getElementById("metodo-pago")?.value || "card";
+    
+    // Validaciones básicas de tarjeta (Demo)
+    if (metodoPago === 'card') {
+        const cn = document.getElementById("card-number");
+        const ce = document.getElementById("card-expiry");
+        const cv = document.getElementById("card-cvv");
+        let error = false;
+
+        [cn, ce, cv].forEach(el => el.classList.remove('error'));
+
+        if (cn.value.replace(/\s/g, '').length < 13) { cn.classList.add('error'); error = true; }
+        if (!ce.value.includes('/')) { ce.classList.add('error'); error = true; }
+        if (cv.value.length < 3) { cv.classList.add('error'); error = true; }
+
+        if (error) {
+            alert("Por favor completa los datos de la tarjeta correctamente (Modo Demostración)");
+            return;
+        }
+    }
 
     // Capturar datos del formulario si existen
     const nombre = document.getElementById("nombre-cliente")?.value.trim() || "";
@@ -802,20 +940,187 @@ function enviarPedidoWP(event) {
     }
     
     textoPedido += "------------------------\n";
-    textoPedido += `\n💰 *TOTAL:* *${formatoDinero(totalPrecio)}*\n`;
+    
+    // Feature 09: Propina Digital
+    const pctPropina = parseInt(document.getElementById("propina-seleccionada")?.value || "0");
+    let montoPropina = 0;
+    if (pctPropina > 0) {
+        montoPropina = totalPrecio * (pctPropina / 100);
+        textoPedido += `\n✨ *Propina sugerida (${pctPropina}%):* ${formatoDinero(montoPropina)}`;
+    }
+
+    const totalFinal = totalPrecio + montoPropina;
+    textoPedido += `\n💰 *TOTAL FINAL:* *${formatoDinero(totalFinal)}*`;
+    textoPedido += `\n💳 *Método de Pago:* ${metodoPago === 'card' ? 'Tarjeta (Demo)' : 'En Persona (Efectivo)'}\n`;
     
     if (nota !== "") textoPedido += `\n📝 *Nota:* ${nota}`;
 
-    // WhatsApp Redirect
-    const telefono = RESTAURANT_CONFIG.telefonoWP || "573112518913";
-    const link = `https://wa.me/${telefono}?text=${encodeURIComponent(textoPedido)}`;
+    // branching logic based on payment method
+    if (metodoPago === 'card') {
+        simularPagoCard();
+    } else {
+        // WhatsApp Redirect
+        const telefono = RESTAURANT_CONFIG.telefonoWP || "573112518913";
+        const link = `https://api.whatsapp.com/send?phone=${telefono}&text=${encodeURIComponent(textoPedido)}`;
+        window.open(link, '_blank');
+    }
+}
+
+function simularPagoCard() {
+    cerrarModalOrden();
+    const modalStatus = document.getElementById("modal-status");
+    const stepLoading = document.getElementById("status-loading");
+    const stepSuccess = document.getElementById("status-success");
+
+    if (!modalStatus) return;
+
+    modalStatus.classList.add("activo");
+    stepLoading.style.display = "flex";
+    stepSuccess.style.display = "none";
+    document.body.style.overflow = "hidden";
+
+    // Simular tiempo de procesamiento (2.5s)
+    setTimeout(() => {
+        stepLoading.style.display = "none";
+        stepSuccess.style.display = "flex";
+        
+        // Efecto visual extra: confeti o vibración
+        if (navigator.vibrate) navigator.vibrate([100, 30, 100]);
+    }, 2500);
+}
+
+function finalizarTodo() {
+    // Limpiar carrito
+    carrito = {};
+    actualizarUiCarrito();
+    localStorage.removeItem("oldwest_cart_v2");
+
+    // Cerrar modales
+    const modalStatus = document.getElementById("modal-status");
+    if (modalStatus) modalStatus.classList.remove("activo");
+    document.body.style.overflow = "";
+
+    // Opcional: Feedback visual de que se limpió
+    console.log("✅ Pedido finalizado y carrito limpio.");
+}
+
+async function descargarComprobante() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
     
-    window.open(link, '_blank');
+    const nombre = document.getElementById("nombre-cliente")?.value || "Cliente";
+    const direccion = document.getElementById("direccion-cliente")?.value || "No especificada";
+    const fecha = new Date().toLocaleString();
     
-    // Opcional: Limpiar carrito tras pedido (depende de la experiencia deseada)
-    // carrito = {};
-    // actualizarUiCarrito();
-    // cerrarModalOrden();
+    // Intentar cargar el logo
+    try {
+        const logoUrl = "../../" + (RESTAURANT_CONFIG.logo || "img/logo.png");
+        const logoImg = new Image();
+        logoImg.src = logoUrl;
+        
+        await new Promise((resolve) => {
+            logoImg.onload = resolve;
+            logoImg.onerror = resolve; // Continuar aunque falle el logo
+        });
+
+        if (logoImg.complete && logoImg.naturalWidth > 0) {
+            // Añadir logo (centrado, aprox 30x30)
+            doc.addImage(logoImg, 'PNG', 90, 10, 30, 30);
+        }
+    } catch (e) {
+        console.warn("No se pudo cargar el logo para el PDF", e);
+    }
+
+    // Estilo básico
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(22);
+    doc.text("Oldwest RÚSTICA", 105, 50, { align: "center" });
+    
+    doc.setFontSize(12);
+    doc.setFont("helvetica", "normal");
+    doc.text("COMPROBANTE DE PAGO ELECTRÓNICO", 105, 60, { align: "center" });
+    
+    doc.line(20, 65, 190, 65); // Separador
+    
+    // Datos Cliente
+    doc.setFont("helvetica", "bold");
+    doc.text("Fecha:", 20, 75);
+    doc.setFont("helvetica", "normal");
+    doc.text(fecha, 50, 75);
+    
+    doc.setFont("helvetica", "bold");
+    doc.text("Cliente:", 20, 82);
+    doc.setFont("helvetica", "normal");
+    doc.text(nombre, 50, 82);
+    
+    doc.setFont("helvetica", "bold");
+    doc.text("Dirección:", 20, 89);
+    doc.setFont("helvetica", "normal");
+    doc.text(direccion, 50, 89);
+    
+    doc.setFont("helvetica", "bold");
+    doc.text("Estado:", 20, 96);
+    doc.setFont("helvetica", "normal");
+    doc.text("PAGO COMPROBADO (TARJETA)", 50, 96);
+    
+    doc.line(20, 102, 190, 102);
+    
+    // Tabla de Productos
+    doc.setFont("helvetica", "bold");
+    doc.text("Producto", 20, 110);
+    doc.text("Cant.", 140, 110);
+    doc.text("Subtotal", 170, 110);
+    doc.setFont("helvetica", "normal");
+    
+    let y = 118;
+    let total = 0;
+    
+    for (const hash in carrito) {
+        const item = carrito[hash];
+        const prod = obtenerProducto(item.id);
+        const pUnit = calcularPrecioItem(item);
+        const sub = pUnit * item.cantidad;
+        total += sub;
+        
+        doc.text(prod.nombre.substring(0, 30), 20, y);
+        doc.text(item.cantidad.toString(), 145, y);
+        doc.text(formatoDinero(sub), 170, y);
+        y += 8;
+        
+        if (y > 270) { doc.addPage(); y = 20; }
+    }
+    
+    doc.line(20, y + 2, 190, y + 2);
+    y += 12;
+    
+    const propinaPct = parseInt(document.getElementById("propina-seleccionada")?.value || "0");
+    const montoPropina = total * (propinaPct / 100);
+    const totalFinal = total + montoPropina;
+    
+    doc.setFont("helvetica", "bold");
+    doc.text("SUBTOTAL:", 130, y);
+    doc.setFont("helvetica", "normal");
+    doc.text(formatoDinero(total), 170, y);
+    y += 8;
+    
+    doc.setFont("helvetica", "bold");
+    doc.text(`PROPINA (${propinaPct}%):`, 130, y);
+    doc.setFont("helvetica", "normal");
+    doc.text(formatoDinero(montoPropina), 170, y);
+    y += 8;
+    
+    doc.setFontSize(14);
+    doc.setFont("helvetica", "bold");
+    doc.text("TOTAL FINAL:", 130, y);
+    doc.text(formatoDinero(totalFinal), 170, y);
+    
+    y += 20;
+    doc.setFontSize(10);
+    doc.setFont("helvetica", "italic");
+    doc.text("Este es un comprobante de simulación para la demostración del sistema de pagos.", 105, y, { align: "center" });
+    doc.text("¡Gracias por preferir la experiencia artesanal de Oldwest!", 105, y + 5, { align: "center" });
+
+    doc.save(`Comprobante_Oldwest_${Date.now()}.pdf`);
 }
 
 // ==========================================
@@ -851,7 +1156,7 @@ async function cargarDatosDesdeSheet() {
             mods: cabecera.findIndex(h => h.includes("modificadores"))
         };
 
-        const RESTAURANT_ID = (window.RESTAURANT_CONFIG && RESTAURANT_CONFIG.id) ? RESTAURANT_CONFIG.id : "lanonna"; 
+        const RESTAURANT_ID = (window.RESTAURANT_CONFIG && RESTAURANT_CONFIG.id) ? RESTAURANT_CONFIG.id : "oldwest"; 
         const RID_BUSCADO = RESTAURANT_ID.toString().toLowerCase().trim();
 
         const limpiarPrecio = (val) => {
@@ -1076,18 +1381,37 @@ function cerrarModalProducto(event) {
 
 function abrirModalOrden() {
     const modal = document.getElementById("modal-orden");
-    if(modal) modal.classList.add("activo");
+    if(modal) {
+        modal.classList.add("activo");
+        document.body.style.overflow = "hidden";
+    }
 }
 
 function cerrarModalOrden() {
     const modal = document.getElementById("modal-orden");
     if(modal) modal.classList.remove("activo");
-    document.body.style.overflow = "";
+    
+    // Solo restaurar si no hay otros modales abiertos
+    const modProducto = document.getElementById("modal-producto");
+    const drawer = document.getElementById("mega-drawer");
+    if ((!modProducto || !modProducto.classList.contains("activo")) && 
+        (!drawer || !drawer.classList.contains("open"))) {
+        document.body.style.overflow = "";
+    }
 }
 
 // Add global listener to close modals
 document.addEventListener("DOMContentLoaded", () => {
-    const closeButtons = document.querySelectorAll('.cerrar-modal');
+    const closeButtons = document.querySelectorAll('.cerrar-modal, .premium-close-modal');
+    closeButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const mod1 = document.getElementById("modal-producto");
+            const mod2 = document.getElementById("modal-orden");
+            if (mod1) mod1.classList.remove("activo");
+            if (mod2) mod2.classList.remove("activo");
+            document.body.style.overflow = "";
+        });
+    });
     closeButtons.forEach(btn => {
         btn.onclick = () => {
             const modal = btn.closest('.modal');
@@ -1153,3 +1477,201 @@ document.addEventListener('DOMContentLoaded', () => {
         formPedido.addEventListener('submit', enviarPedidoWP);
     }
 });
+// Feature 09: Helper Propina
+function seleccionarPropina(valor, btn) {
+    const hiddenInput = document.getElementById("propina-seleccionada");
+    if (!hiddenInput) return;
+
+    hiddenInput.value = valor;
+
+    // Resetear chips (Soporta ambos estilos)
+    document.querySelectorAll(".propina-chip, .propina-premium-chip").forEach(chip => {
+        chip.classList.remove("activa");
+    });
+
+    // Activar el seleccionado
+    btn.classList.add("activa");
+}
+
+// Feature 17: Especial del Día
+function renderizarEspecialDia() {
+    const contenedor = document.getElementById("ui-especial-dia-container");
+    if (!contenedor) return;
+
+    // Lógica por día de la semana (0=Dom, 1=Lun...)
+    const dia = new Date().getDay();
+    const especiales = [
+        401, // Domingo: Picada Wild West
+        201, // Lunes: Tomahawk Angus Beef
+        101, // Martes: Smash Burger
+        102, // Miércoles: Dallas Burger
+        301, // Jueves: Texas Chicken
+        302, // Viernes: Grilled Chicken
+        202  // Sábado: New York Steak Beef
+    ];
+
+    // Intentamos buscar un producto que tenga "Especial" en la categoría o usar el mapa
+    const idBuscado = especiales[dia];
+    const prod = obtenerProducto(idBuscado);
+    
+    if (!prod || prod.nombre === "No encontrado") {
+        // Fallback si los IDs no coinciden: buscar la primera hamburguesa
+        const fallback = RESTAURANT_CONFIG.productos.find(p => p.categoria.includes("Hamburguesas"));
+        if (!fallback) return;
+        mostrarEspecialHtml(fallback, contenedor);
+    } else {
+        mostrarEspecialHtml(prod, contenedor);
+    }
+}
+
+function mostrarEspecialHtml(prod, contenedor) {
+    contenedor.innerHTML = `
+        <div class="chef-special-card ultra-reveal" 
+             style="cursor: pointer;"
+             onclick="const p = obtenerProducto('${prod.id}'); if(window.openProductSheet) { window.openProductSheet(p); } else { abrirModalProducto('${prod.id}'); }">
+            <div class="special-badge">CREACIÓN DEL DÍA</div>
+            <div class="special-content-split">
+                <div class="special-img-side">
+                    <img src="${transformarLinkImagen(prod.imagen)}" alt="${prod.nombre}">
+                </div>
+                <div class="special-text-side">
+                    <p class="special-overline">Recomendación del Chef</p>
+                    <h2 class="special-title">${prod.nombre}</h2>
+                    <p class="special-desc">${prod.descripcion}</p>
+                    <div class="special-price-row">
+                        <span class="special-price">${formatoDinero(prod.precio)}</span>
+                        <button class="btn-special-add">
+                            ¡Lo quiero! <i class="fas fa-magic"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    // Estilos inyectados para el especial (Premium Editorial)
+    if (!document.getElementById('special-styles')) {
+        const style = document.createElement('style');
+        style.id = 'special-styles';
+        style.textContent = `
+            .chef-special-card {
+                background: #131110;
+                border: 1px solid rgba(255,255,255,0.06);
+                border-radius: 16px;
+                margin-bottom: 1.5rem; 
+                width: 100%;
+                overflow: hidden;
+                position: relative;
+                box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+                transition: all 0.4s ease;
+            }
+            .chef-special-card:hover {
+                border-color: var(--c-brand);
+                transform: translateY(-3px);
+            }
+            .special-badge {
+                position: absolute;
+                top: 10px;
+                left: 10px;
+                background: var(--c-brand);
+                color: white;
+                padding: 3px 10px;
+                font-family: 'Outfit', sans-serif;
+                font-size: 0.55rem;
+                font-weight: 800;
+                letter-spacing: 1.5px;
+                border-radius: 4px;
+                z-index: 5;
+            }
+            .special-content-split {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+            }
+            .special-img-side {
+                width: 100%; 
+                height: 120px; /* Altura muy reducida */
+                overflow: hidden;
+            }
+            .special-img-side img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: transform 0.6s ease;
+            }
+            .chef-special-card:hover .special-img-side img {
+                transform: scale(1.1);
+            }
+            .special-text-side {
+                width: 100%;
+                padding: 1rem; /* Padding más ajustado */
+            }
+            .special-overline {
+                color: var(--c-brand);
+                font-family: 'Outfit', sans-serif;
+                text-transform: uppercase;
+                letter-spacing: 2px;
+                font-size: 0.6rem;
+                margin-bottom: 0.4rem;
+                font-weight: 700;
+            }
+            .special-title {
+                font-family: var(--f-title);
+                font-size: 1.1rem; /* Tamaño más compacto */
+                margin-bottom: 0.4rem;
+                line-height: 1.2;
+                color: white;
+            }
+            .special-desc {
+                color: rgba(255,255,255,0.4);
+                font-family: var(--f-italic);
+                font-style: italic;
+                font-size: 0.8rem;
+                margin-bottom: 1rem;
+                line-height: 1.3;
+                display: -webkit-box;
+                -webkit-line-clamp: 2; /* Limitar a 2 líneas para ahorrar espacio Y */
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+            .special-price-row {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 1rem;
+            }
+            .special-price {
+                font-family: var(--f-body);
+                font-size: 1.1rem;
+                font-weight: 700;
+                color: white;
+            }
+            .btn-special-add {
+                background: var(--c-brand);
+                color: white;
+                border: none;
+                padding: 0.6rem 1rem;
+                border-radius: 8px;
+                font-family: 'Outfit', sans-serif;
+                font-weight: 700;
+                cursor: pointer;
+                transition: all 0.3s;
+                display: flex;
+                align-items: center;
+                gap: 6px;
+                font-size: 0.75rem;
+            }
+            .btn-special-add:hover {
+                background: #e61929;
+                transform: scale(1.05);
+            }
+
+            @media (max-width: 768px) {
+                .special-img-side { height: 160px; }
+                .special-price-row { flex-direction: row; }
+                .btn-special-add { width: auto; }
+            }
+        `;
+        document.head.appendChild(style);
+    }
+}

@@ -1,5 +1,5 @@
 /* =========================================================
-   PREMIUM 10K UI UPGRADES - LA NONNA RÚSTICA
+   PREMIUM 10K UI UPGRADES - Oldwest RÚSTICA
    ========================================================= */
 
 /* --- NAVEGACIÓN GLOBAL --- */
@@ -9,12 +9,12 @@
     left: 0;
     width: 100%;
     z-index: 2000;
-    background: rgba(0, 48, 73, 0.95);
+    background: rgba(10, 9, 8, 0.95);
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
     box-shadow: 0 4px 30px rgba(0,0,0,0.2);
     border-bottom: 1px solid rgba(255,255,255,0.05);
-    transition: transform 0.4s ease;
+    transition: transform 0.4s ease, top 0.4s ease, background 0.4s ease;
 }
 
 .global-nav-container {
@@ -41,7 +41,7 @@
 .global-nav-logo img {
     height: 50px;
     border-radius: 50%;
-    border: 2px solid var(--color-dorado);
+    border: 2px solid var(--color-principal);
 }
 
 .global-nav-links {
@@ -63,7 +63,7 @@
 }
 
 .global-nav-links a:hover, .global-nav-links a.active {
-    color: var(--color-dorado);
+    color: var(--color-principal);
 }
 
 .global-nav-actions {
@@ -85,7 +85,7 @@
 .btn-nav-reserva:hover {
     background: #a31018;
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(193, 18, 31, 0.4);
+    box-shadow: 0 5px 15px rgba(217, 83, 79, 0.4);
 }
 
 /* Cart Badge on Nav */
@@ -149,7 +149,7 @@
     content: '';
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(0, 48, 73, 0.9) 100%);
+    background: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(10, 9, 8, 0.95) 100%);
 }
 
 .hero-10k-content {
@@ -201,7 +201,7 @@
 }
 
 .btn-reservar-hero {
-    background: rgba(0, 48, 73, 0.4);
+    background: rgba(43, 43, 43, 0.4);
     backdrop-filter: blur(10px);
     border: 2px solid white;
     color: white;
@@ -345,7 +345,7 @@
 .input-premium:focus {
     outline: none;
     border-color: var(--color-principal);
-    box-shadow: 0 0 0 4px rgba(193, 18, 31, 0.1);
+    box-shadow: 0 0 0 4px rgba(217, 83, 79, 0.1);
 }
 
 .btn-submit-premium {
@@ -501,7 +501,7 @@
 .feature-box {
     background: rgba(255,255,255,0.8);
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(0, 48, 73, 0.1);
+    border: 1px solid rgba(43, 43, 43, 0.1);
     padding: 3rem 2rem;
     border-radius: 24px;
     text-align: left;
@@ -739,7 +739,7 @@
 }
 .sticky-left .big-number {
     font-size: 8rem;
-    color: rgba(0, 48, 73, 0.05);
+    color: rgba(43, 43, 43, 0.05);
     position: absolute;
     top: -50px;
     left: -20px;
@@ -815,7 +815,7 @@
 /* --- DUAL TONE THEME SPLIT --- */
 /* --- ULTRA-PREMIUM PHILOSOPHY SECTION (15X IMPROVEMENT) --- */
 .philosophy-ultra-premium {
-    background: radial-gradient(circle at 10% 20%, rgba(0, 48, 73, 1) 0%, rgba(0, 20, 30, 1) 90%);
+    background: radial-gradient(circle at 10% 20%, rgba(43, 43, 43, 1) 0%, rgba(0, 20, 30, 1) 90%);
     color: white;
     padding: 10rem 2rem;
     position: relative;
@@ -828,7 +828,7 @@
     position: absolute;
     width: 600px;
     height: 600px;
-    background: radial-gradient(circle, rgba(193, 18, 31, 0.1) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(217, 83, 79, 0.1) 0%, transparent 70%);
     top: -200px;
     right: -100px;
     pointer-events: none;
@@ -1037,7 +1037,7 @@
 .carousel-overlay {
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
-    background: linear-gradient(rgba(0,0,0,0.2), rgba(0,48,73,0.9));
+    background: linear-gradient(rgba(0,0,0,0.2), rgba(43, 43, 43,0.9));
 }
 .carousel-content {
     position: relative;
@@ -1104,7 +1104,7 @@
 }
 .scrollspy-link:hover, .scrollspy-link.active {
     color: var(--color-secundario);
-    background: rgba(0,48,73,0.03);
+    background: rgba(43, 43, 43,0.03);
     border-left-color: var(--color-principal);
     font-weight: 700;
     transform: translateX(5px);
@@ -1120,7 +1120,7 @@
     color: var(--color-secundario);
     margin-bottom: 2rem;
     padding-top: 2rem; /* offset for anchor */
-    border-bottom: 2px solid rgba(0,48,73,0.1);
+    border-bottom: 2px solid rgba(43, 43, 43,0.1);
 }
 
 /* Asymmetric 3D Prod Cards */
@@ -1140,7 +1140,7 @@
 }
 .producto-card:hover {
     transform: translateY(-12px);
-    box-shadow: 0 25px 50px rgba(0,48,73,0.2) !important;
+    box-shadow: 0 25px 50px rgba(43, 43, 43,0.2) !important;
     z-index: 10;
 }
 .producto-img-container {
@@ -1157,7 +1157,7 @@
     top: 0; left: 0; width: 100vw; height: 100vh;
     background: rgba(0,0,0,0.6);
     backdrop-filter: blur(5px);
-    z-index: 2999;
+    z-index: 5000;
     opacity: 0;
     visibility: hidden;
     transition: all 0.4s ease;
@@ -1172,9 +1172,9 @@
     width: 450px;
     max-width: 100%;
     height: 100vh;
-    background: var(--color-secundario);
+    background: #0f0d0c;
     color: white;
-    z-index: 3000;
+    z-index: 5001;
     display: flex;
     flex-direction: column;
     box-shadow: -10px 0 30px rgba(0,0,0,0.5);
@@ -1490,12 +1490,12 @@
     font-size: 0.95rem;
     cursor: pointer;
     transition: all 0.3s;
-    box-shadow: 0 8px 20px rgba(193, 18, 31, 0.2);
+    box-shadow: 0 8px 20px rgba(217, 83, 79, 0.2);
 }
 
 .btn-agregar-modal:hover {
     transform: translateY(-3px);
-    box-shadow: 0 15px 35px rgba(193, 18, 31, 0.5);
+    box-shadow: 0 15px 35px rgba(217, 83, 79, 0.5);
 }
 
 .modal-producto-footer { 
@@ -1657,7 +1657,7 @@
 .btn-search-cat {
     display: none; /* Oculto en PC */
     background: white;
-    border: 2px solid rgba(0, 48, 73, 0.1);
+    border: 2px solid rgba(43, 43, 43, 0.1);
     width: 54px;
     height: 54px;
     border-radius: 50%;
@@ -1673,7 +1673,7 @@
 .btn-search-cat:hover {
     transform: scale(1.05);
     border-color: var(--color-principal);
-    box-shadow: 0 15px 30px rgba(193, 18, 31, 0.1);
+    box-shadow: 0 15px 30px rgba(217, 83, 79, 0.1);
 }
 
 .sidebar-sticky {
@@ -1687,7 +1687,7 @@
 #menu-search-input { 
     flex-grow: 1;
     padding: 1.2rem 1.2rem 1.2rem 60px;
-    border: 2px solid rgba(0, 48, 73, 0.1);
+    border: 2px solid rgba(43, 43, 43, 0.1);
     border-radius: 50px;
     font-size: 1.1rem;
     background: white !important;
@@ -1699,7 +1699,7 @@
 #menu-search-input:focus { 
     outline: none;
     border-color: var(--color-principal);
-    box-shadow: 0 15px 40px rgba(193, 18, 31, 0.15);
+    box-shadow: 0 15px 40px rgba(217, 83, 79, 0.15);
 }
 
 .mini-menu-cats {
@@ -1930,7 +1930,7 @@
     position: fixed;
     top: 0; left: 0;
     width: 100%; height: 100%;
-    background: rgba(0, 48, 73, 0.4);
+    background: rgba(43, 43, 43, 0.4);
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
     display: flex;
@@ -1982,7 +1982,7 @@
 #form-pedido input, #form-pedido textarea {
     width: 100%;
     padding: 1.2rem 1.5rem;
-    border: 2px solid rgba(0, 48, 73, 0.05);
+    border: 2px solid rgba(43, 43, 43, 0.05);
     background: #f8fafc;
     border-radius: 20px;
     font-size: 1rem;
@@ -2213,7 +2213,7 @@
     flex-shrink: 0;
     background: #fff;
     padding: 1.2rem 2rem;
-    border-top: 1px solid rgba(0, 48, 73, 0.05);
+    border-top: 1px solid rgba(43, 43, 43, 0.05);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -2267,12 +2267,12 @@
     gap: 15px;
     cursor: pointer;
     transition: all 0.3s;
-    box-shadow: 0 15px 35px rgba(193, 18, 31, 0.2);
+    box-shadow: 0 15px 35px rgba(217, 83, 79, 0.2);
 }
 
 .btn-confirmar-pedido:hover {
     transform: translateY(-3px);
-    box-shadow: 0 20px 40px rgba(193, 18, 31, 0.3);
+    box-shadow: 0 20px 40px rgba(217, 83, 79, 0.3);
 }
 
 /* Responsive Fixes Mobile Premium (SÓLO CELULARES - ESTILO TARJETA PREMIUM) */
@@ -2376,28 +2376,29 @@
 
 /* --- SUGERENCIAS CROSS-SELL PREMIUM --- */
 .cross-sell-zone {
-    margin: 1rem 0.8rem;
-    padding: 1rem 1.2rem;
-    background: rgba(15, 23, 42, 0.6);
-    border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    margin: 1rem 1.5rem;
+    padding: 1.2rem;
+    background: rgba(255, 255, 255, 0.03); /* Fondo oscuro coherente */
+    border-radius: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .cs-header {
     display: flex;
     align-items: center;
     gap: 8px;
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(245, 240, 232, 0.4); /* Color crema atenuado */
     font-size: 0.65rem;
     font-weight: 800;
-    letter-spacing: 1.2px;
-    margin-bottom: 0.8rem;
+    letter-spacing: 2px;
+    margin-bottom: 1rem;
     text-transform: uppercase;
+    font-family: 'Outfit', sans-serif;
 }
 
 .cs-header i {
-    color: var(--color-dorado, #ffd700);
+    color: #d9534f; /* Rojo Marca en lugar de Dorado */
 }
 
 .cross-sell-item {
@@ -2405,19 +2406,19 @@
     align-items: center;
     gap: 15px;
     cursor: pointer;
-    transition: transform 0.3s;
+    transition: all 0.3s ease;
 }
 
 .cross-sell-item:hover {
-    transform: scale(1.02);
+    transform: translateX(5px);
 }
 
 .cs-img {
-    width: 55px;
-    height: 55px;
+    width: 60px;
+    height: 60px;
     object-fit: cover;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
 }
 
 .cs-details {
@@ -2425,23 +2426,24 @@
 }
 
 .cs-name {
-    color: white;
+    color: #f5f0e8; /* Crema Editorial */
     font-weight: 700;
     font-size: 0.95rem;
     margin-bottom: 2px;
+    font-family: 'Outfit', sans-serif;
 }
 
 .cs-price {
-    color: var(--color-dorado, #f77f00);
-    font-size: 0.8rem;
-    font-weight: 600;
+    color: #d9534f; /* Rojo Marca */
+    font-size: 0.85rem;
+    font-weight: 700;
 }
 
 .cs-add-btn {
     width: 38px;
     height: 38px;
     flex-shrink: 0;
-    background: var(--color-principal, #c1121f);
+    background: var(--color-principal, #d9534f);
     border: none;
     border-radius: 50%;
     color: white;
@@ -2450,14 +2452,14 @@
     justify-content: center;
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    box-shadow: 0 4px 12px rgba(193, 18, 31, 0.3);
+    box-shadow: 0 4px 12px rgba(217, 83, 79, 0.3);
     animation: cs-pulse 2s infinite;
 }
 
 @keyframes cs-pulse {
-    0% { box-shadow: 0 0 0 0 rgba(193, 18, 31, 0.4); }
-    70% { box-shadow: 0 0 0 10px rgba(193, 18, 31, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(193, 18, 31, 0); }
+    0% { box-shadow: 0 0 0 0 rgba(217, 83, 79, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(217, 83, 79, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(217, 83, 79, 0); }
 }
 
 .cs-add-btn:hover {
@@ -2481,10 +2483,10 @@
     position: fixed;
     width: 32px;
     height: 32px;
-    background: var(--color-dorado, #f77f00);
+    background: #d9534f; /* Rojo Marca */
     border-radius: 50%;
     z-index: 9999;
-    box-shadow: 0 0 15px var(--color-dorado), 0 0 30px rgba(247, 127, 0, 0.4);
+    box-shadow: 0 0 15px #d9534f, 0 0 30px rgba(217, 83, 79, 0.4);
     pointer-events: none;
     transition: all 0.64s cubic-bezier(0.16, 1, 0.3, 1);
 }

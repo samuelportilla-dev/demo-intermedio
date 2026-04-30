@@ -3,241 +3,359 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>La Nonna Rústica - El Verdadero Sabor Italiano</title>
-    
+    <title>Oldwest Rústica — Parrilla y Hamburguesas</title>
+    <meta name="description" content="hamburguesa artesanal auténtica. Masa madre viva, ahumador a 450°C, ingredientes D.O.P. importados de Texas. Cúcuta, Colombia.">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;800&family=Outfit:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;800&family=Outfit:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/premium.css">
-    
-    <link rel="icon" type="image/png" href="img/logo.png">
-    <meta name="theme-color" content="#c1121f">
-</head>
-<body>
-    <!-- Preloader -->
-    <div id="ui-preloader" class="preloader">
-        <div class="preloader-content">
-            <img src="img/logo.png" alt="La Nonna Logo" class="logo-preloader">
-            <div class="preloader-bar"><div class="preloader-progress"></div></div>
-            <p class="preloader-text">Encendiendo el horno de leña...</p>
-        </div>
-    </div>
+    <link rel="stylesheet" href="css/fx-effects.css">
+    <link rel="stylesheet" href="css/fx-extras.css">
+    <link rel="stylesheet" href="css/index-ultra.css">
+    <link rel="stylesheet" href="css/cursor.css">
 
-    <!-- Navegación Global (Desktop) -->
+    <link rel="icon" type="image/png" href="img/logo.png">
+    <meta name="theme-color" content="#0a0908">
+</head>
+<body class="page-index-ultra">
+
+    <!-- Preloader Cinema (Injected via fx-transitions.js) -->
+
+    <!-- Navegación Global -->
     <nav class="global-nav">
         <div class="global-nav-container">
             <a href="index.html" class="global-nav-logo">
                 <img src="img/logo.png" alt="Logo">
-                LA NONNA RÚSTICA
+                Oldwest RÚSTICA
             </a>
             <div class="global-nav-links">
                 <a href="index.html" class="active">Inicio</a>
-                <a href="menu.html">Menú</a>
-                <a href="nosotros.html">Nuestra Historia</a>
-                <a href="contacto.html">Contacto</a>
+                <a href="pages/menu/">Menú</a>
+                <a href="pages/nosotros/">Nuestra Historia</a>
+                <a href="pages/contacto/">Contacto</a>
             </div>
             <div class="global-nav-actions">
-                <a href="menu.html" class="nav-cart-wrapper">
+                <a href="pages/menu/" class="nav-cart-wrapper">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle>
                         <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
                     </svg>
                     <div id="global-cart-badge" class="nav-cart-badge">0</div>
                 </a>
-                <a href="reservas.html" class="btn-nav-reserva">Reservar Mesa</a>
+                <a href="pages/reservas/" class="btn-nav-reserva">Reservar Mesa</a>
             </div>
         </div>
     </nav>
 
     <!-- Bottom Nav (Mobile) -->
     <nav class="mobile-bottom-nav">
-        <!-- Omitted for brevity in this brutal snippet, assume same as before -->
         <a href="index.html" class="bottom-nav-item active"><svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>Inicio</a>
-        <a href="menu.html" class="bottom-nav-item"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></svg>Menú</a>
-        <a href="reservas.html" class="bottom-nav-item"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>Reservas</a>
-        <a href="nosotros.html" class="bottom-nav-item"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>Nosotros</a>
+        <a href="pages/menu/" class="bottom-nav-item"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></svg>Menú</a>
+        <a href="pages/reservas/" class="bottom-nav-item"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>Reservas</a>
+        <a href="pages/nosotros/" class="bottom-nav-item"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>Nosotros</a>
     </nav>
 
-    <!-- Hero Section Brutal -->
-    <header class="hero-10k">
-        <div class="hero-10k-bg" style="background-image: url('https://images.unsplash.com/photo-1590947132387-155cc02f3212?q=80&w=1920&auto=format&fit=crop');"></div>
-        <div class="hero-10k-content reveal">
-            <h1>L'Arte della Pizza</h1>
-            <p class="hero-desc">Fermentación lenta de 72 horas. Ingredientes importados de Nápoles. Una experiencia magistral en cada bocado.</p>
-            <div class="hero-actions">
-                <a href="menu.html" class="hero-cta">Explorar Menú</a>
-                <a href="reservas.html" class="hero-cta btn-reservar-hero">Reservar</a>
+    <!-- ===================== HERO EDITORIAL ===================== -->
+    <header class="hero-ultra">
+        <div class="hero-ultra-left">
+            <p class="hero-ultra-eyebrow">Cúcuta · Colombia · Est. 1960</p>
+            <h1 class="hero-ultra-h1" id="hero-main-title">
+                L'Arte<br>
+                de la<br>
+                <em>hamburguesa</em>
+            </h1>
+            <p class="hero-ultra-tagline">
+                Pan artesanal y carne 100% Angus certificada. Una experiencia que no se improvisa.
+            </p>
+            <div class="hero-ultra-actions">
+                <a href="pages/menu/" class="btn-ultra-primary" data-cursor-label="Explorar">Explorar Menú</a>
+                <a href="pages/nosotros/" class="btn-ultra-ghost" data-cursor-label="Historia">Nuestra historia →</a>
             </div>
+        </div>
+        <div class="hero-ultra-right">
+            <img
+                src="https://images.unsplash.com/photo-1590947132387-155cc02f3212?q=90&w=1600&auto=format&fit=crop"
+                alt="hamburguesa artesanal Oldwest Rústica"
+                class="hero-ultra-img"
+                id="hero-parallax-img"
+            >
+        </div>
+        <div class="hero-scroll-hint">
+            <div class="scroll-line"></div>
+            Scroll
         </div>
     </header>
 
-    <!-- Marquee Infinito de Alto Impacto -->
-    <div class="marquee-container">
-        <div class="marquee-content">
-            <span class="filled">Masa Madre Viva</span> <span>•</span> <span>Horno a 450°C</span> <span>•</span> <span class="filled">Auténtica Napolitana</span> <span>•</span> <span>Tomate San Marzano</span> <span>•</span>
-            <span class="filled">Masa Madre Viva</span> <span>•</span> <span>Horno a 450°C</span> <span>•</span> <span class="filled">Auténtica Napolitana</span> <span>•</span> <span>Tomate San Marzano</span> <span>•</span>
+    <!-- ===================== NUMBERS STRIP ===================== -->
+    <section class="numbers-strip">
+        <div class="num-item ultra-reveal">
+            <span class="num-value" data-target="100">0</span>
+            <span class="num-label">% Carne Angus</span>
+        </div>
+        <div class="num-item ultra-reveal" style="transition-delay:0.1s">
+            <span class="num-value">450°</span>
+            <span class="num-label">Temperatura del ahumador</span>
+        </div>
+        <div class="num-item ultra-reveal" style="transition-delay:0.2s">
+            <span class="num-value">12h</span>
+            <span class="num-label">Ahumado lento</span>
+        </div>
+        <div class="num-item ultra-reveal" style="transition-delay:0.3s">
+            <span class="num-value">1</span>
+            <span class="num-label">Receta original desde 1960</span>
+        </div>
+    </section>
+
+    <!-- ===================== MARQUEE ULTRA ===================== -->
+    <div class="marquee-ultra">
+        <div class="marquee-ultra-track">
+            <span>Pan Artesanal</span><span class="hl">✦</span>
+            <span>ahumador</span><span class="hl">✦</span>
+            <span>Queso Cheddar Fundido</span><span class="hl">✦</span>
+            <span>Carne Angus Certificada</span><span class="hl">✦</span>
+            <span>Leña de Roble Envejecida</span><span class="hl">✦</span>
+            <span>Tocino Ahumado en Casa</span><span class="hl">✦</span>
+            <span>Pan Artesanal</span><span class="hl">✦</span>
+            <span>ahumador</span><span class="hl">✦</span>
+            <span>Queso Cheddar Fundido</span><span class="hl">✦</span>
+            <span>Carne Angus Certificada</span><span class="hl">✦</span>
+            <span>Leña de Roble Envejecida</span><span class="hl">✦</span>
+            <span>Tocino Ahumado en Casa</span><span class="hl">✦</span>
         </div>
     </div>
 
-    <!-- Overlapping Structure 1 -->
-    <section class="overlap-section reveal" style="margin-top: 5rem;">
-        <div class="overlap-img">
-            <img src="https://images.unsplash.com/photo-1594007654729-407eedc4be65?q=80&w=1000&auto=format&fit=crop" alt="Horno de leña rústico napolitano">
+    <!-- ===================== EDITORIAL SPLIT ===================== -->
+    <section class="editorial-split">
+        <div class="editorial-img-col ultra-reveal-left">
+            <img
+                src="https://images.unsplash.com/photo-1594007654729-407eedc4be65?q=90&w=1200&auto=format&fit=crop"
+                alt="El ahumador — Oldwest Rústica"
+            >
+            <div class="editorial-img-label">Il Mostro · ahumador</div>
         </div>
-        <div class="overlap-text">
-            <span class="subtitle">La Tradición de Fuego</span>
-            <h2>Nuestro Horno Pavesi</h2>
-            <p>Traído directamente de las laderas del Vesubio, nuestro horno de piedra volcánica es el corazón palpitante de La Nonna. Alcanza temperaturas superiores a los 450°C, sellando los ingredientes en apenas 90 segundos para garantizar una costra perfectamente inflada y tostada ('cornicione'), mientras su centro permanece peligrosamente suave.</p>
-            <p>No usamos gas. Utilizamos exclusivamente leña de roble envejecida, la cual aporta notas sutilmente ahumadas imposibles de replicar con métodos modernos.</p>
-            <a href="nosotros.html" style="color: var(--color-principal); font-weight: 800; text-decoration: none; font-size: 1.1rem; border-bottom: 2px solid;">Descubre nuestra historia &rarr;</a>
-        </div>
-    </section>
-
-    <!-- STICKY SCROLL: La Perfección Italiana -->
-    <section class="sticky-super-container">
-        <div class="sticky-left">
-            <span class="big-number">01</span>
-            <span class="subtitle" style="font-weight: 700; color: var(--color-principal); text-transform: uppercase; letter-spacing: 2px;">Nuestros Pilares</span>
-            <h2 class="reveal">El Arte en su <br>Estado Más Crudo</h2>
-            <p class="reveal" style="font-size: 1.2rem; color: var(--color-texto-claro); line-height: 1.8; margin-bottom: 2rem;">No fabricamos comida rápida. Cuidamos cada disco de masa como una obra individual. Observa el desarrollo de nuestros clásicos más aclamados a la derecha, esculpidos a fuego vivo.</p>
-            <a href="menu.html" class="btn-nav-reserva reveal" style="display: inline-block;">Ver menú completo</a>
-        </div>
-        <div class="sticky-right">
-            <div class="sticky-card reveal">
-                <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?q=80&w=800&auto=format&fit=crop" alt="Margherita">
-                <h3>La Margherita Intacta</h3>
-                <p>Nuestra obra insignia. Queso Fior di latte de la Campania derretido bajo el fuego abrazador, tocado con albahaca fresca del día.</p>
-            </div>
-            <div class="sticky-card reveal">
-                <img src="https://images.unsplash.com/photo-1604382355076-af4b0eb60143?q=80&w=800&auto=format&fit=crop" alt="Prosciutto">
-                <h3>Prosciutto y Rúcula</h3>
-                <p>Laminado de prosciutto di Parma D.O.P. traído desde Italia, posado sobre rúcula salvaje recién cosechada. Perfecto contraste salado y amargo.</p>
-            </div>
-            <div class="sticky-card reveal">
-                <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=800&auto=format&fit=crop" alt="Trufa">
-                <h3>Trufa Blanca y Setas</h3>
-                <p>Una experiencia de lujo puro. Aceite de trufa blanca importado sobre una selección de setas silvestres y queso ricotta suave.</p>
-            </div>
+        <div class="editorial-text-col">
+            <p class="editorial-overline ultra-reveal">La tradición de fuego</p>
+            <blockquote class="editorial-quote ultra-reveal" style="transition-delay:0.1s">
+                Un horno que no se apaga <span>desde 1960</span>.
+            </blockquote>
+            <p class="editorial-body ultra-reveal" style="transition-delay:0.2s">
+                Traído directamente de las llanuras de Texas, nuestro grill alcanza 450°C continuos. No usamos gas. Solo leña de roble envejecida — la única que aporta las notas ahumadas que hacen nuestra carne irreplicable.
+            </p>
+            <a href="pages/nosotros/" class="editorial-link ultra-reveal" style="transition-delay:0.3s" data-cursor-label="Leer">Conoce nuestra historia</a>
         </div>
     </section>
 
-    <!-- CLIP PATH REVEAL: Impresión Visual -->
-    <section class="clip-reveal-container reveal" id="clipSection">
-        <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=1920&auto=format&fit=crop" alt="Restaurante oscuro" class="clip-reveal-bg">
-        <div class="clip-content">
-            <h2>Siente el fuego</h2>
-            <p style="font-size: 1.5rem; text-shadow: 0 4px 10px rgba(0,0,0,0.8);">Ven a perderte en nuestro rincón de Nápoles.</p>
+    <!-- ===================== HORIZONTAL SHOWCASE ===================== -->
+    <section class="showcase-section">
+        <div class="showcase-header">
+            <div class="showcase-title">
+                <span>Nuestros Clásicos</span>
+                Obras de Fuego
+            </div>
+            <div class="showcase-drag-hint">
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                Arrastra para explorar
+            </div>
         </div>
-    </section>
-
-    <!-- THEME ULTRA-PREMIUM: Filosofía Inquebrantable -->
-    <section class="philosophy-ultra-premium">
-        <div class="philosophy-header">
-            <span class="subtitle">Sin atajos</span>
-            <h2 class="philosophy-title reveal">Filosofía <br>Inquebrantable</h2>
-        </div>
-        
-        <div class="philosophy-grid">
-            <!-- Card 1 -->
-            <div class="philosophy-card reveal">
-                <div class="philosophy-icon-wrapper">
-                    <img src="img/philo_dop.png" alt="D.O.P.">
+        <div class="showcase-track" id="showcase-track">
+            <div class="showcase-card">
+                <img class="showcase-card-img" src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=90&w=800&auto=format&fit=crop" alt="Smash Burger">
+                <div class="showcase-card-info">
+                    <span class="showcase-card-num">01 · Clásico</span>
+                    <div class="showcase-card-name">Smash<br>Burger</div>
+                    <p class="showcase-card-desc">Doble carne Angus · Queso cheddar · Pan brioche</p>
                 </div>
-                <h3>D.O.P. Garantizado</h3>
-                <p>No usamos sustitutos. Si dice Queso Parmigiano-Reggiano, tiene su sello de origen intacto tallado en la rueda de maduración.</p>
             </div>
-
-            <!-- Card 2 -->
-            <div class="philosophy-card reveal" style="transition-delay: 0.2s;">
-                <div class="philosophy-icon-wrapper">
-                    <img src="img/philo_paciencia.png" alt="Paciencia">
+            <div class="showcase-card">
+                <img class="showcase-card-img" src="https://images.unsplash.com/photo-1550547660-d9450f859349?q=90&w=800&auto=format&fit=crop" alt="Dallas Burger">
+                <div class="showcase-card-info">
+                    <span class="showcase-card-num">02 · Signatura</span>
+                    <div class="showcase-card-name">Dallas<br>Burger</div>
+                    <p class="showcase-card-desc">Tocino ahumado · Aros de cebolla · Salsa BBQ</p>
                 </div>
-                <h3>Paciencia Culinaria</h3>
-                <p>La levadura industrial te hincha y duele. Nuestra técnica a base de tiempo predigiere los azúcares y te entrega una nube crujiente.</p>
             </div>
-
-            <!-- Card 3 -->
-            <div class="philosophy-card reveal" style="transition-delay: 0.4s;">
-                <div class="philosophy-icon-wrapper">
-                    <img src="img/philo_fuego.png" alt="Fuego">
+            <div class="showcase-card">
+                <img class="showcase-card-img" src="https://images.unsplash.com/photo-1600891964092-4316c288032e?q=90&w=800&auto=format&fit=crop" alt="Tomahawk">
+                <div class="showcase-card-info">
+                    <span class="showcase-card-num">03 · De Lujo</span>
+                    <div class="showcase-card-name">Tomahawk<br>Angus</div>
+                    <p class="showcase-card-desc">Corte premium · Sal en escamas · Chimichurri texano</p>
                 </div>
-                <h3>Fuego, el único juez</h3>
-                <p>Un cocinero no es nadie ante el volcán. Nuestro Pavesi decide crujir las imperfecciones de la pizza en tan solo 90 vibrantes segundos.</p>
+            </div>
+            <div class="showcase-card">
+                <img class="showcase-card-img" src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?q=90&w=800&auto=format&fit=crop" alt="Texas Chicken">
+                <div class="showcase-card-info">
+                    <span class="showcase-card-num">04 · Especial</span>
+                    <div class="showcase-card-name">Texas<br>Chicken</div>
+                    <p class="showcase-card-desc">Pollo crispy · Ensalada coleslaw · Pan artesanal</p>
+                </div>
+            </div>
+            <div class="showcase-card" style="background:rgba(193,18,31,0.08); border: 1px solid rgba(193,18,31,0.2); display:flex; align-items:center; justify-content:center; flex-direction:column; gap:1.5rem; flex:0 0 280px;">
+                <div style="font-family:'Cinzel',serif; font-size:0.7rem; letter-spacing:4px; color:rgba(245,240,232,0.3); text-transform:uppercase;">Ver todo</div>
+                <a href="pages/menu/" style="background:#c1121f; color:white; text-decoration:none; padding:1rem 2rem; font-family:'Outfit',sans-serif; font-weight:700; font-size:0.8rem; letter-spacing:2px; text-transform:uppercase; transition:all 0.3s;">Menú Completo</a>
             </div>
         </div>
     </section>
 
-    <!-- Footer Premium Compartido -->
-    <footer class="footer-premium">
-        <!-- Manteniendo el mismo footer detallado -->
-        <div class="footer-content" style="max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; text-align: left;">
-            <div style="flex: 1; min-width: 300px; margin-bottom: 2rem;">
-                <img src="img/logo.png" alt="Logo" class="footer-logo-img" style="margin-left: 0;">
-                <p class="footer-slogan" style="font-family: var(--fuente-titulos); font-size: 1.8rem; margin-bottom: 1rem;">La verdadera esencia de la cocina rústica en tu mesa.</p>
-            </div>
-            
-            <div style="flex: 1; min-width: 250px; margin-bottom: 2rem;">
-                <h3 style="color: var(--color-dorado); margin-bottom: 1.5rem; font-family: var(--fuente-titulos);">Contacto Directo</h3>
-                <p style="margin-bottom: 0.5rem; font-size:1.1rem;">📍 Av. 0 #12-55, Barrio Caobos, Cúcuta</p>
-                <p style="margin-bottom: 0.5rem; font-size:1.1rem;">📞 Reservas: +57 311 251 8913</p>
-                <p style="margin-bottom: 0.5rem; font-size:1.1rem;">✉️ gerencia@lanonnarustica.com</p>
-            </div>
+    <!-- ===================== FULL-BLEED QUOTE ===================== -->
+    <section class="fullbleed-quote">
+        <div class="fullbleed-bg"></div>
+        <div class="fullbleed-content ultra-reveal">
+            <blockquote>
+                En Texas, la comida no es una necesidad. Es teatro, poesía y religión combinadas.
+            </blockquote>
+            <p class="fullbleed-attribution">La Filosofía de Oldwest Rústica</p>
+        </div>
+    </section>
 
-            <div style="flex: 1; min-width: 250px; margin-bottom: 2rem;">
-                <h3 style="color: var(--color-dorado); margin-bottom: 1.5rem; font-family: var(--fuente-titulos);">Horario de Fuego</h3>
-                <p style="margin-bottom: 0.5rem; font-size:1.1rem;">Lunes: <span style="opacity:0.6;">Cerrado por fermentación</span></p>
-                <p style="margin-bottom: 0.5rem; font-size:1.1rem;">Martes a Sábado: <span style="font-weight:700;">11:00am - 10:30pm</span></p>
-                <p style="margin-bottom: 0.5rem; font-size:1.1rem;">Domingos: <span style="font-weight:700;">12:00pm - 09:00pm</span></p>
+    <!-- ===================== PHILOSOPHY ULTRA ===================== -->
+    <section class="philosophy-ultra">
+        <div class="philosophy-ultra-header">
+            <h2 class="philosophy-ultra-title ultra-reveal">Tres principios.<br>Sin excepciones.</h2>
+            <p class="philosophy-ultra-sub ultra-reveal" style="transition-delay:0.1s">Lo que nos separa de cualquier otro restaurante.</p>
+        </div>
+        <div class="philosophy-ultra-grid">
+            <div class="philo-item ultra-reveal">
+                <span class="philo-num">01</span>
+                <h3 class="philo-title">Calidad Garantizada</h3>
+                <p class="philo-text">No usamos sustitutos. Nuestra carne Angus está certificada. Cada ingrediente es trazable hasta su fuente. No comprometemos el sabor.</p>
+            </div>
+            <div class="philo-item ultra-reveal" style="transition-delay:0.15s">
+                <span class="philo-num">02</span>
+                <h3 class="philo-title">Paciencia Culinaria</h3>
+                <p class="philo-text">Nuestra carne es ahumada lentamente hasta 12 horas. Nuestro pan brioche es horneado todos los días fresco. No se puede falsificar el tiempo.</p>
+            </div>
+            <div class="philo-item ultra-reveal" style="transition-delay:0.3s">
+                <span class="philo-num">03</span>
+                <h3 class="philo-title">Fuego, el Único Juez</h3>
+                <p class="philo-text">Nuestro ahumador a 450°C sella la carne a la perfección. No hay atajos. Solo leña de roble, calor y fuego vivo.</p>
             </div>
         </div>
-        <div style="margin-top: 4rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; color: rgba(255,255,255,0.4); text-align: center;">
-            <p>&copy; 2026 LA NONNA RÚSTICA ITALIANA.<br>Arquitectura Digital Premium por Samuel Andres Portilla Ardila.</p>
+    </section>
+
+    <!-- ===================== FOOTER ULTRA ===================== -->
+    <footer class="footer-ultra">
+        <div class="footer-ultra-top">
+            <div class="footer-ultra-brand">
+                <div class="footer-ultra-logo">
+                    <img src="img/logo.png" alt="Logo">
+                    Oldwest RÚSTICA
+                </div>
+                <p class="footer-ultra-tagline">La verdadera esencia de la cocina texana, traída a Cúcuta con la pasión de nuestro grill.</p>
+            </div>
+            <div class="footer-ultra-col">
+                <p class="footer-ultra-col-title">Contacto</p>
+                <p>
+                    Av. 1 Este #16 - 20, Los Caobos<br>
+                    Cúcuta, Colombia<br><br>
+                    +57 311 778 5015<br>
+                    contacto@oldwest.com
+                </p>
+            </div>
+            <div class="footer-ultra-col">
+                <p class="footer-ultra-col-title">Legalidad</p>
+                <p>
+                    <a href="pages/legal/terminos/" style="color: inherit; text-decoration: none;">Términos & Condiciones</a><br>
+                    <a href="pages/legal/privacidad/" style="color: inherit; text-decoration: none;">Privacidad de Datos</a><br>
+                    <a href="pages/legal/cookies/" style="color: inherit; text-decoration: none;">Política de Cookies</a>
+                </p>
+            </div>
+            <div class="footer-ultra-col">
+                <p class="footer-ultra-col-title">Horario</p>
+                <p>
+                    Lunes: Cerrado<br>
+                    Mar — Sáb: 11am – 10:30pm<br>
+                    Domingo: 12pm – 9pm
+                </p>
+            </div>
+        </div>
+        <div class="footer-ultra-bottom">
+            <span>© 2026 Oldwest Rústica texana. Todos los derechos reservados.</span>
+            <span>Arquitectura Digital por Samuel Andres Portilla Ardila</span>
         </div>
     </footer>
 
-    <!-- JS Core & Advanced Observer -->
+    <!-- Scripts -->
     <script src="data/menu.js?v=2.0"></script>
     <script src="js/app.js?v=2.0"></script>
+    <script src="js/fx-transitions.js"></script>
+    <script src="js/fx-cursor.js"></script>
+    <script src="js/fx-particles.js"></script>
+    <script src="js/fx-scramble.js"></script>
+    <script src="js/fx-tilt.js"></script>
+    <script src="js/fx-timer.js"></script>
+    <script src="js/fx-whatsapp.js"></script>
     <script>
-        // Navbar Scroll Effect
+        // Navbar scroll
         window.addEventListener('scroll', () => {
             const nav = document.querySelector('.global-nav');
-            if (window.scrollY > 50) {
-                nav.style.background = 'rgba(0, 48, 73, 0.98)';
-                nav.style.boxShadow = '0 10px 30px rgba(0,0,0,0.3)';
-            } else {
-                nav.style.background = 'rgba(0, 48, 73, 0.95)';
-                nav.style.boxShadow = '0 4px 30px rgba(0,0,0,0.2)';
-            }
+            nav.style.background = window.scrollY > 50
+                ? 'rgba(5,5,4,0.98)'
+                : 'rgba(10,9,8,0.7)';
+            nav.style.boxShadow = window.scrollY > 50 ? '0 1px 0 rgba(245,240,232,0.05)' : 'none';
         });
 
-        // Intersection Observer for Brutal animations
-        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
+        // Ultra reveal observer
+        const ultraObs = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) { e.target.classList.add('visible'); ultraObs.unobserve(e.target); }
+            });
+        }, { threshold: 0.15 });
+        document.querySelectorAll('.ultra-reveal, .ultra-reveal-left').forEach(el => ultraObs.observe(el));
+
+        // Animated counters
+        function animateCounter(el) {
+            const target = parseInt(el.dataset.target);
+            if (isNaN(target)) return;
+            let current = 0;
+            const step  = Math.ceil(target / 50);
+            const timer = setInterval(() => {
+                current = Math.min(current + step, target);
+                el.textContent = current;
+                if (current >= target) clearInterval(timer);
+            }, 30);
+        }
+        const counterObs = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.querySelectorAll('[data-target]').forEach(animateCounter);
+                    counterObs.unobserve(e.target);
                 }
             });
-        }, observerOptions);
+        }, { threshold: 0.5 });
+        const strip = document.querySelector('.numbers-strip');
+        if (strip) counterObs.observe(strip);
 
-        // Observe reveals
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        // Parallax hero image
+        const heroImg = document.getElementById('hero-parallax-img');
+        window.addEventListener('scroll', () => {
+            if (!heroImg) return;
+            const y = window.scrollY;
+            heroImg.style.transform = `scale(1.05) translateY(${y * 0.25}px)`;
+        }, { passive: true });
 
-        // Clip-path extreme reveal trick
-        const clipObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if(entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
+        // Showcase drag scroll
+        const track = document.getElementById('showcase-track');
+        if (track) {
+            let isDown = false, startX, scrollLeft;
+            track.addEventListener('mousedown', e => {
+                isDown = true; track.classList.add('active');
+                startX = e.pageX - track.offsetLeft;
+                scrollLeft = track.scrollLeft;
             });
-        }, { threshold: 0.4 });
-        
-        const clipContainer = document.getElementById('clipSection');
-        if(clipContainer) clipObserver.observe(clipContainer);
-
+            track.addEventListener('mouseleave', () => { isDown = false; });
+            track.addEventListener('mouseup', () => { isDown = false; });
+            track.addEventListener('mousemove', e => {
+                if (!isDown) return;
+                e.preventDefault();
+                const x    = e.pageX - track.offsetLeft;
+                const walk = (x - startX) * 1.5;
+                track.scrollLeft = scrollLeft - walk;
+            });
+        }
     </script>
 </body>
 </html>

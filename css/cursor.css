@@ -1,0 +1,110 @@
+/* 
+ * FX CURSOR — LIQUID AURA (PREMIUM UPGRADE)
+ * Oldwest Rústica — Digital Architecture
+ */
+
+:root {
+    --cursor-dot-size: 8px;
+    --cursor-aura-size: 35px;
+    --cursor-color: #ffffff;
+    --cursor-accent: #d9534f; /* Oldwest Red */
+    --cursor-hover-scale: 1.8;
+}
+
+/* Hide default cursor on desktop */
+@media (min-width: 769px) {
+    body, html, a, button, [role="button"], .interactive, .card-producto, .showcase-card {
+        cursor: none !important;
+    }
+}
+
+/* Cursor Dot - The Precision Center */
+.cursor-dot {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: var(--cursor-dot-size);
+    height: var(--cursor-dot-size);
+    background-color: var(--cursor-color);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 10000;
+    transform: translate3d(-50%, -50%, 0);
+    mix-blend-mode: difference;
+    transition: opacity 0.3s ease, transform 0.1s ease-out;
+}
+
+/* Cursor Aura - The Fluid Follower */
+.cursor-aura {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: var(--cursor-aura-size);
+    height: var(--cursor-aura-size);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate3d(-50%, -50%, 0);
+    mix-blend-mode: difference;
+    transition: 
+        width 0.4s cubic-bezier(0.23, 1, 0.32, 1), 
+        height 0.4s cubic-bezier(0.23, 1, 0.32, 1),
+        border-color 0.3s ease,
+        background-color 0.3s ease;
+}
+
+/* State: Hovering Interactive Elements */
+body.cursor-active .cursor-dot {
+    opacity: 0;
+}
+
+body.cursor-active .cursor-aura {
+    width: calc(var(--cursor-aura-size) * var(--cursor-hover-scale));
+    height: calc(var(--cursor-aura-size) * var(--cursor-hover-scale));
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.8);
+    border-width: 1.5px;
+}
+
+/* State: Text Selection */
+body.cursor-is-text .cursor-aura {
+    width: 2px;
+    height: 30px;
+    border-radius: 0;
+    background-color: var(--cursor-color);
+}
+
+/* State: Click/Active */
+body.cursor-clicking .cursor-aura {
+    transform: translate3d(-50%, -50%, 0) scale(0.85) !important;
+}
+
+/* Label inside Cursor */
+.cursor-aura::after {
+    content: attr(data-label);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Outfit', sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: white;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    white-space: nowrap;
+}
+
+body.has-cursor-label .cursor-aura::after {
+    opacity: 1;
+}
+
+/* Hide on mobile */
+@media (max-width: 768px) {
+    .cursor-dot, .cursor-aura {
+        display: none !important;
+    }
+}
