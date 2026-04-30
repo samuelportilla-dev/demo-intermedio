@@ -356,17 +356,32 @@ function renderizarProductos() {
             const tieneDescuento = prod.precioOriginal && prod.precioOriginal > prod.precio;
             const descuentoPct = tieneDescuento ? Math.round(((prod.precioOriginal - prod.precio) / prod.precioOriginal) * 100) : 0;
             
-            // Lógica de Badges Automáticos
+            // Lógica de Badges
             let badgeHtml = "";
-            const nombreLower = prod.nombre.toLowerCase();
-            const descLower = (prod.descripcion || "").toLowerCase();
+            if (prod.etiquetas && prod.etiquetas.length > 0) {
+                // If the product has explicit 'etiquetas', render them
+                badgeHtml = prod.etiquetas.map((et, idx) => {
+                    // Assign alternating colors based on index for variety
+                    const cls = idx % 2 === 0 ? "tag-hot" : "tag-favorito";
+                    return `<div class="badge-tag ${cls}" style="position:relative; top:0; left:0; margin-bottom:4px;">${et}</div>`;
+                }).join("");
+                // Wrap in a container if there are multiple, to handle flow
+                if (prod.etiquetas.length > 1) {
+                    badgeHtml = `<div style="display:flex; flex-direction:column; gap:4px; position:absolute; top:12px; left:12px; z-index:10;">${badgeHtml}</div>`;
+                } else {
+                    badgeHtml = `<div style="position:absolute; top:12px; left:12px; z-index:10;">${badgeHtml}</div>`;
+                }
+            } else {
+                const nombreLower = prod.nombre.toLowerCase();
+                const descLower = (prod.descripcion || "").toLowerCase();
 
-            if (nombreLower.includes("especial") || descLower.includes("casa") || descLower.includes("recomendado")) {
-                badgeHtml = `<div class="badge-tag tag-favorito">⭐ Favorito</div>`;
-            } else if (nombreLower.includes("veggie") || descLower.includes("vegan") || descLower.includes("vegetariana")) {
-                badgeHtml = `<div class="badge-tag tag-veggie">🌱 Veggie</div>`;
-            } else if (prod.precioOriginal > 50000 || descLower.includes("pedido")) {
-                badgeHtml = `<div class="badge-tag tag-hot">🔥 Más Pedido</div>`;
+                if (nombreLower.includes("especial") || descLower.includes("casa") || descLower.includes("recomendado")) {
+                    badgeHtml = `<div class="badge-tag tag-favorito">⭐ Favorito</div>`;
+                } else if (nombreLower.includes("veggie") || descLower.includes("vegan") || descLower.includes("vegetariana")) {
+                    badgeHtml = `<div class="badge-tag tag-veggie">🌱 Veggie</div>`;
+                } else if (prod.precioOriginal > 50000 || descLower.includes("pedido")) {
+                    badgeHtml = `<div class="badge-tag tag-hot">🔥 Más Pedido</div>`;
+                }
             }
 
             const card = document.createElement("article");
