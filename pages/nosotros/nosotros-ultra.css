@@ -1,10 +1,10 @@
 /* =========================================================
    NOSOTROS ULTRA — Editorial Oscuro Cinematográfico
-   Oldwest Rústica — $100K Visual Experience
+   Oldwest — $100K Visual Experience
    ========================================================= */
 
 body.page-nosotros {
-    background: #2b2b2b;
+    background: #0a0908;
     color: #f5f0e8;
     overflow-x: hidden;
 }
@@ -45,7 +45,7 @@ body.page-nosotros::before {
 .ns-hero-bg {
     position: absolute;
     inset: -5% -5%; /* Margen para el drift */
-    background-image: url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=90&w=1920&auto=format&fit=crop');
+    background-image: url('https://lh3.googleusercontent.com/gps-cs-s/APNQkAFGpYemCUEB7MjECXwMX42ICZqQbuJBdsi53INDuBqXhZ3dOVA_fCc0d18wmjF-FRHHD1_Ed8Va5vH65lwSINCdBx22ZxLiy9GBY_PFhVkmFfers2uBVGAcfrDj2L9cBOwMdWJ9=w1920');
     background-size: cover;
     background-position: center 30%;
     filter: brightness(0.35) contrast(1.1);
@@ -63,7 +63,7 @@ body.page-nosotros::before {
     position: absolute;
     inset: 0;
     background:
-        linear-gradient(to top, #2b2b2b 18%, rgba(10,9,8,0.6) 55%, rgba(10,9,8,0.1) 100%);
+        linear-gradient(to top, #0a0908 18%, rgba(10,9,8,0.6) 55%, rgba(10,9,8,0.1) 100%);
 }
 
 .ns-hero-content {
@@ -82,7 +82,7 @@ body.page-nosotros::before {
     font-weight: 700;
     letter-spacing: 5px;
     text-transform: uppercase;
-    color: #d9534f;
+    color: #c1121f;
     margin-bottom: 2rem;
 }
 .ns-hero-eyebrow::before {
@@ -90,7 +90,7 @@ body.page-nosotros::before {
     display: block;
     width: 40px;
     height: 1px;
-    background: #d9534f;
+    background: #c1121f;
     flex-shrink: 0;
 }
 
@@ -107,7 +107,7 @@ body.page-nosotros::before {
     font-family: 'Playfair Display', serif;
     font-style: italic;
     font-weight: 400;
-    color: rgba(245,240,232,0.45);
+    color: rgba(245,240,232,0.85);
     font-size: 0.7em;
     display: block;
     letter-spacing: 0;
@@ -118,10 +118,10 @@ body.page-nosotros::before {
     font-family: 'Playfair Display', serif;
     font-style: italic;
     font-size: clamp(1.1rem, 2vw, 1.5rem);
-    color: rgba(245,240,232,0.6);
+    color: rgba(245,240,232,0.9);
     max-width: 560px;
     line-height: 1.7;
-    border-left: 2px solid #d9534f;
+    border-left: 2px solid #c1121f;
     padding-left: 1.5rem;
 }
 
@@ -135,7 +135,7 @@ body.page-nosotros::before {
     flex-direction: column;
     align-items: center;
     gap: 0.8rem;
-    color: rgba(245,240,232,0.25);
+    color: rgba(245,240,232,0.7);
     font-family: 'Outfit', sans-serif;
     font-size: 0.62rem;
     letter-spacing: 3px;
@@ -156,7 +156,7 @@ body.page-nosotros::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background: #d9534f;
+    background: #c1121f;
     animation: nsScrollLine 2s ease-in-out infinite;
 }
 @keyframes nsScrollLine {
@@ -171,7 +171,7 @@ body.page-nosotros::before {
     grid-template-columns: 1fr 2fr;
     gap: 6rem;
     align-items: start;
-    background: #2b2b2b;
+    background: #0a0908;
     border-top: 1px solid rgba(245,240,232,0.04);
 }
 
@@ -181,7 +181,7 @@ body.page-nosotros::before {
     font-weight: 700;
     letter-spacing: 5px;
     text-transform: uppercase;
-    color: rgba(245,240,232,0.2);
+    color: rgba(245,240,232,0.7);
     padding-top: 0.5rem;
     position: sticky;
     top: 120px;
@@ -201,7 +201,7 @@ body.page-nosotros::before {
 .ns-intro-giant strong {
     font-style: normal;
     font-weight: 800;
-    color: #d9534f;
+    color: #c1121f;
     font-family: 'Cinzel', serif;
     font-size: 0.85em;
 }
@@ -209,7 +209,7 @@ body.page-nosotros::before {
 .ns-intro-text {
     font-size: 1.05rem;
     line-height: 2;
-    color: rgba(245,240,232,0.5);
+    color: rgba(245,240,232,0.85);
     columns: 2;
     column-gap: 3rem;
 }
@@ -243,7 +243,7 @@ body.page-nosotros::before {
     font-style: italic;
     font-weight: 400;
     font-size: 0.55em;
-    color: rgba(245,240,232,0.25);
+    color: rgba(245,240,232,0.75);
     letter-spacing: 2px;
     margin-bottom: 0.5rem;
     text-transform: none;
@@ -252,7 +252,7 @@ body.page-nosotros::before {
 .ns-timeline-sub {
     font-family: 'Playfair Display', serif;
     font-style: italic;
-    color: rgba(245,240,232,0.3);
+    color: rgba(245,240,232,0.8);
     font-size: 1rem;
     max-width: 280px;
     text-align: right;
@@ -335,7 +335,7 @@ body.page-nosotros::before {
     font-size: 0.7rem;
     font-weight: 700;
     letter-spacing: 5px;
-    color: #d9534f;
+    color: #c1121f;
     margin-bottom: 1.5rem;
     display: flex;
     align-items: center;
@@ -347,7 +347,7 @@ body.page-nosotros::before {
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background: #d9534f;
+    background: #c1121f;
     flex-shrink: 0;
 }
 
@@ -363,7 +363,7 @@ body.page-nosotros::before {
 .ns-tl-node-text {
     font-size: 1rem;
     line-height: 2;
-    color: rgba(245,240,232,0.5);
+    color: rgba(245,240,232,0.85);
     max-width: 480px;
 }
 .ns-tl-node-text em {
@@ -386,7 +386,7 @@ body.page-nosotros::before {
 
 /* ========== MASONRY GALLERY ========== */
 .ns-gallery {
-    background: #2b2b2b;
+    background: #0a0908;
     padding: 10rem 6rem;
     border-top: 1px solid rgba(245,240,232,0.04);
 }
@@ -404,7 +404,7 @@ body.page-nosotros::before {
 .ns-gallery-sub {
     font-family: 'Playfair Display', serif;
     font-style: italic;
-    color: rgba(245,240,232,0.3);
+    color: rgba(245,240,232,0.8);
     font-size: 1.1rem;
 }
 
@@ -486,7 +486,7 @@ body.page-nosotros::before {
 .ns-values-desc {
     font-size: 1rem;
     line-height: 1.9;
-    color: rgba(245,240,232,0.45);
+    color: rgba(245,240,232,0.85);
 }
 
 .ns-values-grid {
@@ -499,13 +499,13 @@ body.page-nosotros::before {
     padding-top: 2.5rem;
     transition: border-color 0.4s;
 }
-.ns-value-item:hover { border-color: #d9534f; }
+.ns-value-item:hover { border-color: #c1121f; }
 
 .ns-value-num {
     font-family: 'Cinzel', serif;
     font-size: 0.65rem;
     letter-spacing: 4px;
-    color: #d9534f;
+    color: #c1121f;
     margin-bottom: 1.5rem;
     display: block;
 }
@@ -520,7 +520,7 @@ body.page-nosotros::before {
 .ns-value-text {
     font-size: 0.9rem;
     line-height: 1.9;
-    color: rgba(245,240,232,0.4);
+    color: rgba(245,240,232,0.8);
 }
 
 /* ========== MANIFESTO FULL-BLEED ========== */
@@ -531,7 +531,7 @@ body.page-nosotros::before {
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    background: #2b2b2b;
+    background: #0a0908;
 }
 .ns-manifesto-bg {
     position: absolute;
@@ -558,14 +558,14 @@ body.page-nosotros::before {
     color: #f5f0e8;
     margin: 0 0 3rem;
 }
-.ns-manifesto-content blockquote::before { content: '"'; color: #d9534f; }
-.ns-manifesto-content blockquote::after  { content: '"'; color: #d9534f; }
+.ns-manifesto-content blockquote::before { content: '"'; color: #c1121f; }
+.ns-manifesto-content blockquote::after  { content: '"'; color: #c1121f; }
 
 .ns-manifesto-cta {
     display: inline-flex;
     align-items: center;
     gap: 1rem;
-    background: #d9534f;
+    background: #c1121f;
     color: white;
     text-decoration: none;
     padding: 1rem 2.5rem;
@@ -612,7 +612,7 @@ body.page-nosotros::before {
     font-family: 'Playfair Display', serif;
     font-style: italic;
     font-size: 1.1rem;
-    color: rgba(245,240,232,0.3);
+    color: rgba(245,240,232,0.75);
     line-height: 1.7;
 }
 .ns-footer-col-title {
@@ -621,12 +621,12 @@ body.page-nosotros::before {
     font-weight: 700;
     letter-spacing: 4px;
     text-transform: uppercase;
-    color: #d9534f;
+    color: #c1121f;
     margin-bottom: 2rem;
 }
 .ns-footer-col p {
     font-size: 0.9rem;
-    color: rgba(245,240,232,0.38);
+    color: rgba(245,240,232,0.85);
     line-height: 2.1;
     margin: 0;
 }

@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Oldwest Rústica — Parrilla y Hamburguesas</title>
-    <meta name="description" content="hamburguesa artesanal auténtica. Masa madre viva, ahumador a 450°C, ingredientes D.O.P. importados de Texas. Cúcuta, Colombia.">
+    <title>Oldwest — Parrilla y Hamburguesas</title>
+    <meta name="description" content="hamburguesa artesanal auténtica. Ahumado lento, ahumador a 450°C, ingredientes Angus Certificado importados de Texas. Cúcuta, Colombia.">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,19 +17,27 @@
     <link rel="stylesheet" href="css/index-ultra.css">
     <link rel="stylesheet" href="css/cursor.css">
 
-    <link rel="icon" type="image/png" href="img/logo.png">
+    <link rel="icon" type="image/png" href="img/logo.webp">
     <meta name="theme-color" content="#0a0908">
 </head>
 <body class="page-index-ultra">
-
-    <!-- Preloader Cinema (Injected via fx-transitions.js) -->
+    <!-- Preloader Cinema -->
+    <div id="pt-overlay">
+        <div class="pt-curtain-top"></div>
+        <div class="pt-curtain-bottom"></div>
+        <div class="pt-logo-wrap">
+            <img src="img/logo.webp" alt="Oldwest">
+            <span>Oldwest</span>
+        </div>
+    </div>
+    <script src="js/fx-transitions.js"></script>
 
     <!-- Navegación Global -->
     <nav class="global-nav">
         <div class="global-nav-container">
             <a href="index.html" class="global-nav-logo">
-                <img src="img/logo.png" alt="Logo">
-                Oldwest RÚSTICA
+                <img src="img/logo.webp" alt="Logo">
+                Oldwest
             </a>
             <div class="global-nav-links">
                 <a href="index.html" class="active">Inicio</a>
@@ -61,9 +69,9 @@
     <!-- ===================== HERO EDITORIAL ===================== -->
     <header class="hero-ultra">
         <div class="hero-ultra-left">
-            <p class="hero-ultra-eyebrow">Cúcuta · Colombia · Est. 1960</p>
+            <p class="hero-ultra-eyebrow">Cúcuta · Colombia · Est. 2017</p>
             <h1 class="hero-ultra-h1" id="hero-main-title">
-                L'Arte<br>
+                El Arte<br>
                 de la<br>
                 <em>hamburguesa</em>
             </h1>
@@ -77,8 +85,8 @@
         </div>
         <div class="hero-ultra-right">
             <img
-                src="https://images.unsplash.com/photo-1590947132387-155cc02f3212?q=90&w=1600&auto=format&fit=crop"
-                alt="hamburguesa artesanal Oldwest Rústica"
+                src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=90&w=1600&auto=format&fit=crop"
+                alt="hamburguesa artesanal Oldwest"
                 class="hero-ultra-img"
                 id="hero-parallax-img"
             >
@@ -105,7 +113,7 @@
         </div>
         <div class="num-item ultra-reveal" style="transition-delay:0.3s">
             <span class="num-value">1</span>
-            <span class="num-label">Receta original desde 1960</span>
+            <span class="num-label">Receta original desde su origen</span>
         </div>
     </section>
 
@@ -131,15 +139,15 @@
     <section class="editorial-split">
         <div class="editorial-img-col ultra-reveal-left">
             <img
-                src="https://images.unsplash.com/photo-1594007654729-407eedc4be65?q=90&w=1200&auto=format&fit=crop"
-                alt="El ahumador — Oldwest Rústica"
+                src="https://images.unsplash.com/photo-1520072959219-c595dc870360?q=90&w=1200&auto=format&fit=crop"
+                alt="El ahumador — Oldwest"
             >
             <div class="editorial-img-label">Il Mostro · ahumador</div>
         </div>
         <div class="editorial-text-col">
             <p class="editorial-overline ultra-reveal">La tradición de fuego</p>
             <blockquote class="editorial-quote ultra-reveal" style="transition-delay:0.1s">
-                Un horno que no se apaga <span>desde 1960</span>.
+                Un horno que no se apaga <span>desde nuestra apertura</span>.
             </blockquote>
             <p class="editorial-body ultra-reveal" style="transition-delay:0.2s">
                 Traído directamente de las llanuras de Texas, nuestro grill alcanza 450°C continuos. No usamos gas. Solo leña de roble envejecida — la única que aporta las notas ahumadas que hacen nuestra carne irreplicable.
@@ -207,7 +215,7 @@
             <blockquote>
                 En Texas, la comida no es una necesidad. Es teatro, poesía y religión combinadas.
             </blockquote>
-            <p class="fullbleed-attribution">La Filosofía de Oldwest Rústica</p>
+            <p class="fullbleed-attribution">La Filosofía de Oldwest</p>
         </div>
     </section>
 
@@ -241,8 +249,8 @@
         <div class="footer-ultra-top">
             <div class="footer-ultra-brand">
                 <div class="footer-ultra-logo">
-                    <img src="img/logo.png" alt="Logo">
-                    Oldwest RÚSTICA
+                    <img src="img/logo.webp" alt="Logo">
+                    Oldwest
                 </div>
                 <p class="footer-ultra-tagline">La verdadera esencia de la cocina texana, traída a Cúcuta con la pasión de nuestro grill.</p>
             </div>
@@ -273,15 +281,14 @@
             </div>
         </div>
         <div class="footer-ultra-bottom">
-            <span>© 2026 Oldwest Rústica texana. Todos los derechos reservados.</span>
+            <span>© 2026 Oldwest texana. Todos los derechos reservados.</span>
             <span>Arquitectura Digital por Samuel Andres Portilla Ardila</span>
         </div>
     </footer>
 
     <!-- Scripts -->
     <script src="data/menu.js?v=2.0"></script>
-    <script src="js/app.js?v=2.0"></script>
-    <script src="js/fx-transitions.js"></script>
+    <script src="js/app.js?v=2.4"></script>
     <script src="js/fx-cursor.js"></script>
     <script src="js/fx-particles.js"></script>
     <script src="js/fx-scramble.js"></script>

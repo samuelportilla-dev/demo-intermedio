@@ -1,56 +1,71 @@
 /**
  * FX TRANSITIONS — Cinematic Page Transitions
- * Oldwest Rústica — Fase 1 Premium
+ * Oldwest — Fase 1 Premium
  */
 (function () {
     'use strict';
 
-    const overlay = document.createElement('div');
-    overlay.id = 'pt-overlay';
-    const isSubPage = window.location.pathname.includes('/pages/');
-    const isLegal = window.location.pathname.includes('/legal/');
-    let logoPath = "img/logo.png";
-    if (isLegal) logoPath = "../../../img/logo.png";
-    else if (isSubPage) logoPath = "../../img/logo.png";
+    let initialized = false;
 
-    overlay.innerHTML = `
-        <div class="pt-curtain-top"></div>
-        <div class="pt-curtain-bottom"></div>
-        <div class="pt-logo-wrap">
-            <img src="${logoPath}" alt="Oldwest">
-            <span>Oldwest RÚSTICA</span>
-        </div>
-    `;
-    document.body.appendChild(overlay);
-
-    function pageIn() {
-        overlay.classList.add('pt-leaving');
-        setTimeout(() => overlay.classList.remove('pt-leaving'), 1900);
-    }
-
-    function pageOut(href) {
-        overlay.classList.add('pt-entering');
-        overlay.style.pointerEvents = 'all';
-        setTimeout(() => { window.location.href = href; }, 680);
+    function getOverlay() {
+        return document.getElementById('pt-overlay');
     }
 
     function bindLinks() {
-        document.querySelectorAll('a[href]').forEach(link => {
+        document.querySelectorAll('a[href]:not(.pt-bound)').forEach(link => {
             const href = link.getAttribute('href');
             if (!href || href.startsWith('#') || href.startsWith('tel:') ||
                 href.startsWith('mailto:') || href.startsWith('http') ||
                 link.target === '_blank') return;
+            
+            link.classList.add('pt-bound');
             link.addEventListener('click', function (e) {
                 e.preventDefault();
-                pageOut(href);
+                window.FxTransitions.pageOut(href);
             });
         });
     }
 
-    document.addEventListener('DOMContentLoaded', () => {
+    function init() {
+        if (initialized) return;
+        const overlay = document.getElementById('pt-overlay');
+        if (!overlay) return;
+
+        initialized = true;
+
+        const logoWrap = overlay.querySelector('.pt-logo-wrap');
+        if (logoWrap) logoWrap.style.opacity = "1";
+
         bindLinks();
-        requestAnimationFrame(() => requestAnimationFrame(pageIn));
+
+        // Wait exactly 0.5 seconds then open
+        setTimeout(() => {
+            overlay.classList.add('pt-leaving');
+        }, 500);
+    }
+
+    // Run as soon as possible
+    init();
+    
+    // Also bind links when DOM is fully ready
+    document.addEventListener('DOMContentLoaded', () => {
+        init();
+        bindLinks();
     });
 
-    window.FxTransitions = { pageIn, pageOut, bindLinks };
+    window.FxTransitions = { 
+        pageIn: init, 
+        pageOut: (href) => {
+            const ov = document.getElementById('pt-overlay');
+            if (ov) {
+                ov.classList.remove('pt-leaving');
+                ov.classList.add('pt-entering');
+                ov.style.pointerEvents = 'all';
+                setTimeout(() => { window.location.href = href; }, 600);
+            } else {
+                window.location.href = href;
+            }
+        }, 
+        bindLinks 
+    };
 })();

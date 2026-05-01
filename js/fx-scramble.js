@@ -1,6 +1,6 @@
 /**
  * FX SCRAMBLE — Text Scramble + Char Reveal
- * Oldwest Rústica — Fase 1 Premium
+ * Oldwest — Fase 1 Premium
  */
 
 class TextScramble {

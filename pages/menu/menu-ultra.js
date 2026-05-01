@@ -1,6 +1,6 @@
 /**
  * MENU ULTRA V3 — Mobile-First Logic
- * Oldwest Rústica — Digital Menu Interface
+ * Oldwest — Digital Menúu Interface
  */
 (function () {
     'use strict';
@@ -25,7 +25,7 @@
         }
         setupCartFeedback();
         setupSearch();
-        renderMiniMenuCats();
+        renderMiniMenúuCats();
         setupBottomSheet();
     });
 
@@ -173,7 +173,7 @@
         
         card.innerHTML = `
             <div class="mn-card-img-box">
-                <img src="${p.imagen}" alt="${p.nombre}" class="mn-card-img" loading="lazy">
+                <img src="${transformarLinkImagen(p.imagen)}" alt="${p.nombre}" class="mn-card-img" loading="lazy">
             </div>
             <div class="mn-card-content">
                 <div class="mn-card-top" style="flex-direction: column; align-items: flex-start; gap: 0.2rem;">
@@ -326,7 +326,7 @@
 
         sheet.innerHTML = `
             ${numGroups >= 2 ? `<button class="mn-modal-close-btn" onclick="closeSheet()">×</button>` : `<div class="mn-modal-grabber"></div>`}
-            <img src="${p.imagen}" alt="${p.nombre}" class="mn-modal-img">
+            <img src="${transformarLinkImagen(p.imagen)}" alt="${p.nombre}" class="mn-modal-img">
             <div class="mn-modal-body">
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem;">
                     <h2 class="mn-modal-title" style="margin:0">${p.nombre}</h2>
@@ -737,7 +737,7 @@
         }
     }
 
-    function renderMiniMenuCats() {
+    function renderMiniMenúuCats() {
         const container = document.getElementById('mini-menu-cats');
         if (!container) return;
 
@@ -747,9 +747,9 @@
         const catDescriptions = {
             "Todos": "Explora la experiencia completa de nuestra cocina tradicional.",
             "Entradas": "Pequeños bocados llenos de sabor rústico.",
-            "Pizzas Tradicionales": "Los clásicos que nunca pasan de moda.",
-            "Pizzas Especiales": "Recetas únicas con el sello de Oldwest.",
-            "Pizzas Premium": "Ingredientes selectos para paladares exigentes.",
+            "hamburguesas Tradicionales": "Los clásicos que nunca pasan de moda.",
+            "hamburguesas Especiales": "Recetas únicas con el sello de Oldwest.",
+            "hamburguesas Premium": "Ingredientes selectos para paladares exigentes.",
             "Pastas & Lasagnas": "El alma de Italia en cada bocado artesanal.",
             "Postres": "Dulcemente inolvidables.",
             "Bebidas": "Refrescantes jugos naturales y selección premium.",
@@ -782,7 +782,7 @@
             item.className = 'mn-sheet-cat-item';
             item.innerHTML = `
                 <div class="mn-sheet-cat-img-box">
-                    <img src="${catImg}" class="mn-sheet-cat-img" alt="${cat}" onerror="this.src='https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=200&auto=format&fit=crop'">
+                    <img src="${transformarLinkImagen(catImg)}" class="mn-sheet-cat-img" alt="${cat}" onerror="this.src='https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=200&auto=format&fit=crop'">
                 </div>
                 <div class="mn-sheet-cat-info">
                     <span class="mn-sheet-cat-name">${cat === "Todos" ? "Todo el Menú" : cat}</span>
@@ -840,7 +840,7 @@
                 <div class="mn-notif-card" id="notif-card">
                     <button class="mn-notif-close" onclick="this.parentElement.classList.remove('visible')">×</button>
                     <div class="mn-notif-img-box">
-                        <img src="${item.img}" class="mn-notif-img" alt="${item.label}">
+                        <img src="${transformarLinkImagen(item.img)}" class="mn-notif-img" alt="${item.label}">
                     </div>
                     <div class="mn-notif-body">
                         <div class="mn-notif-label">${item.label}</div>

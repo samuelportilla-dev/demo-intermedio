@@ -1,6 +1,6 @@
 /**
  * CONTACTO ULTRA — JS Dedicado
- * Oldwest Rústica — Interacciones Cinematográficas
+ * Oldwest — Interacciones Cinematográficas
  */
 (function () {
     'use strict';
@@ -60,7 +60,7 @@
             btn.style.pointerEvents = 'none';
 
             // WhatsApp Logic
-            let textoWP = `*Oldwest RÚSTICA — CONTACTO PREMIUM*\n\n`;
+            let textoWP = `*Oldwest — CONTACTO PREMIUM*\n\n`;
             textoWP += `*Nombre:* ${nombre}\n`;
             if (email) textoWP += `*Email:* ${email}\n`;
             textoWP += `*Mensaje:* ${mensaje}\n\n`;

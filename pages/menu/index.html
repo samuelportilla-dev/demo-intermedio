@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Menú — Oldwest Rústica</title>
-    <meta name="description" content="Descubre el menú móvil de Oldwest Rústica. La mejor hamburguesa artesanal de Cúcuta en la palma de tu mano.">
+    <title>Menú — Oldwest</title>
+    <meta name="description" content="Descubre el menú móvil de Oldwest. La mejor hamburguesa artesanal de Cúcuta en la palma de tu mano.">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -75,19 +75,29 @@
         }
     </style>
 
-    <link rel="icon" type="image/png" href="../../img/logo.png">
+    <link rel="icon" type="image/png" href="../../img/logo.webp">
     <meta name="theme-color" content="#0a0908">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 </head>
 <body class="page-menu-ultra">
+    <!-- Preloader Cinema -->
+    <div id="pt-overlay">
+        <div class="pt-curtain-top"></div>
+        <div class="pt-curtain-bottom"></div>
+        <div class="pt-logo-wrap">
+            <img src="../../img/logo.webp" alt="Oldwest">
+            <span>Oldwest</span>
+        </div>
+    </div>
+    <script src="../../js/fx-transitions.js"></script>
 
     <!-- Global Nav (Desktop) -->
     <nav class="global-nav">
         <div class="global-nav-container">
             <a href="../../index.html" class="global-nav-logo">
-                <img src="../../img/logo.png" alt="Logo">
-                Oldwest RÚSTICA
+                <img src="../../img/logo.webp" alt="Logo">
+                Oldwest
             </a>
             <div class="global-nav-links">
                 <a href="../../index.html">Inicio</a>
@@ -319,8 +329,7 @@
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="../../data/menu.js?v=2.2"></script>
-    <script src="../../js/app.js?v=2.2"></script>
-    <script src="../../js/fx-transitions.js"></script>
+    <script src="../../js/app.js?v=2.4"></script>
     <script src="../../js/fx-cursor.js"></script>
     <script src="../../js/fx-tilt.js"></script>
     <script src="../../js/fx-whatsapp.js"></script>

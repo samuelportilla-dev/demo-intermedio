@@ -1,6 +1,6 @@
 /**
  * FX PARTICLES — Ember Brasas en el Hero
- * Oldwest Rústica — Fase 1 Premium
+ * Oldwest — Fase 1 Premium
  */
 class EmberParticles {
     constructor(container) {

@@ -1,6 +1,6 @@
 /**
  * NOSOTROS ULTRA — JS Dedicado
- * Oldwest Rústica — Interacciones Cinematográficas
+ * Oldwest — Interacciones Cinematográficas
  *
  * Módulos:
  * 1. Timeline sticky con switch de imagen en scroll

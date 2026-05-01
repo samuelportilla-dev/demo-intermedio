@@ -1,5 +1,5 @@
 /**
- * Aplicación Principal - SmartMenu Orders
+ * Aplicación Principal - SmartMenúu Orders
  * Renderiza dinámicamente la UI basándose en RESTAURANT_CONFIG y maneja el carrito.
  */
 
@@ -13,6 +13,13 @@ function transformarLinkImagen(url) {
         if (match && match[1]) {
             return `https://drive.google.com/uc?export=view&id=${match[1]}`;
         }
+    }
+    // Resolucion relativa segura y simple para que nunca falle en subcarpetas
+    if (url.startsWith('img/')) {
+        if (window.location.pathname.includes('/pages/')) {
+            return '../../' + url;
+        }
+        return url;
     }
     return url;
 }
@@ -42,7 +49,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         inicializarObserverLiquid(); 
         inicializarScrollProgresivo(); 
         actualizarEstadoRestaurante(); 
-        renderizarMiniMenuCats(); 
+        renderizarMiniMenúuCats(); 
         inicializarObserverLiquid(); 
     } else {
         // If it's not the menu page, we just load sheet data silently for the cart logic mostly
@@ -92,13 +99,13 @@ function inicializarObserverLiquid() {
     cards.forEach(card => observer.observe(card));
 }
 
-function toggleMiniMenuCategorias(event) {
+function toggleMiniMenúuCategorias(event) {
     if (event) event.stopPropagation();
     const menu = document.getElementById("mini-menu-categorias");
     menu.classList.toggle("visible");
 }
 
-function renderizarMiniMenuCats() {
+function renderizarMiniMenúuCats() {
     const contenedor = document.getElementById("mini-menu-categorias");
     if (!contenedor) return;
 
@@ -134,7 +141,7 @@ function renderizarMiniMenuCats() {
     `;
 
     RESTAURANT_CONFIG.categorias.forEach(cat => {
-        const meta = metadataCategorias[cat] || { desc: "Nuestros mejores platillos.", icon: imgPrefix + "img/logo.png" };
+        const meta = metadataCategorias[cat] || { desc: "Nuestros mejores platillos.", icon: imgPrefix + "img/logo.webp" };
         html += `
             <button class="btn-mini-cat" onclick="seleccionarCategoriaMini('${cat}')">
                 <div class="cat-icon"><img src="${meta.icon}" alt="${cat}"></div>
@@ -590,7 +597,7 @@ function actualizarUiCarrito() {
         }
     }
 
-    // Soporte para Menu Ultra (mn-floating-cart)
+    // Soporte para Menúu Ultra (mn-floating-cart)
     const mnFloat = document.getElementById("mn-floating-cart");
     if (mnFloat) {
         if (cantidadTotal > 0) {
@@ -1029,7 +1036,7 @@ async function descargarComprobante() {
     
     // Intentar cargar el logo
     try {
-        const logoUrl = "../../" + (RESTAURANT_CONFIG.logo || "img/logo.png");
+        const logoUrl = "../../" + (RESTAURANT_CONFIG.logo || "img/logo.webp");
         const logoImg = new Image();
         logoImg.src = logoUrl;
         
@@ -1049,7 +1056,7 @@ async function descargarComprobante() {
     // Estilo básico
     doc.setFont("helvetica", "bold");
     doc.setFontSize(22);
-    doc.text("Oldwest RÚSTICA", 105, 50, { align: "center" });
+    doc.text("Oldwest", 105, 50, { align: "center" });
     
     doc.setFontSize(12);
     doc.setFont("helvetica", "normal");

@@ -1,10 +1,10 @@
 /* Reusing terminos-ultra.css base with cookies class */
 :root {
-    --bg-dark: #2b2b2b;
+    --bg-dark: #0a0908;
     --bg-accent: #0f0d0c;
-    --accent-red: #d9534f;
+    --accent-red: #c1121f;
     --cream: #f5f0e8;
-    --text-muted: rgba(245,240,232,0.5);
+    --text-muted: rgba(245,240,232,0.85);
     --font-heading: 'Cinzel', serif;
     --font-quote: 'Playfair Display', serif;
     --font-body: 'Outfit', sans-serif;
@@ -47,7 +47,7 @@ body.page-cookies-ultra .global-nav.scrolled {
 
 .hero-legal { height: 100dvh; position: relative; display: flex; align-items: flex-end; padding: 6rem 4rem; overflow: hidden; }
 .hero-bg-wrapper { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
-.hero-bg { width: 100%; height: 120%; background: url('https://images.unsplash.com/photo-1594007654729-407eedc4be65?q=90&w=1600&auto=format&fit=crop') center/cover no-repeat; animation: drift 25s infinite alternate ease-in-out; }
+.hero-bg { width: 100%; height: 120%; background: url('https://images.unsplash.com/photo-1520072959219-c595dc870360?q=90&w=1600&auto=format&fit=crop') center/cover no-repeat; animation: drift 25s infinite alternate ease-in-out; }
 @keyframes drift { from { transform: scale(1) translate(0, 0); } to { transform: scale(1.1) translate(-2%, -5%); } }
 .hero-legal::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, var(--bg-dark) 10%, transparent 80%); }
 .hero-content { position: relative; z-index: 2; max-width: 900px; }
@@ -73,7 +73,7 @@ body.page-cookies-ultra .global-nav.scrolled {
 .legal-section p { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 1.5rem; text-align: justify; }
 
 .quote-bleed { height: 60vh; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; text-align: center; padding: 0 4rem; }
-.quote-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?q=90&w=1600&auto=format&fit=crop') center/cover no-repeat; filter: grayscale(100%); opacity: 0.12; z-index: -1; background-attachment: fixed; }
+.quote-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('https://images.unsplash.com/photo-1600891964092-4316c288032e?q=90&w=1600&auto=format&fit=crop') center/cover no-repeat; filter: grayscale(100%); opacity: 0.12; z-index: -1; background-attachment: fixed; }
 .quote-content { max-width: 800px; }
 .quote-content blockquote { font-family: var(--font-quote); font-style: italic; font-size: clamp(2rem, 4vw, 3.5rem); line-height: 1.2; }
 .quote-content blockquote span { color: var(--accent-red); font-size: 5rem; line-height: 0; vertical-align: middle; }

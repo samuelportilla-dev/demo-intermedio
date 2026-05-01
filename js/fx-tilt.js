@@ -1,6 +1,6 @@
 /**
  * FX TILT — 3D Perspective Tilt on Cards
- * Oldwest Rústica — Fase 1 Premium
+ * Oldwest — Fase 1 Premium
  */
 class TiltCard {
     constructor(el, opts = {}) {

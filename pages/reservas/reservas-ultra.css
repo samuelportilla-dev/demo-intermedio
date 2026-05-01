@@ -1,14 +1,14 @@
 /* 
-   RESERVAS ULTRA - Oldwest RÚSTICA
+   RESERVAS ULTRA - Oldwest
    Editorial Design System
 */
 
 :root {
-    --bg-dark: #2b2b2b;
+    --bg-dark: #0a0908;
     --bg-accent: #0f0d0c;
-    --accent-red: #d9534f;
+    --accent-red: #c1121f;
     --cream: #f5f0e8;
-    --text-muted: rgba(245,240,232,0.5);
+    --text-muted: rgba(245,240,232,0.85);
     --font-heading: 'Cinzel', serif;
     --font-quote: 'Playfair Display', serif;
     --font-body: 'Outfit', sans-serif;
@@ -82,7 +82,7 @@ body.page-reservas-ultra .global-nav.scrolled {
 .hero-bg {
     width: 100%;
     height: 120%; /* For parallax */
-    background: url('https://images.unsplash.com/photo-1513104890138-7c749659a591?q=90&w=1600&auto=format&fit=crop') center/cover no-repeat;
+    background: url('https://images.unsplash.com/photo-1525059696034-4967a8e1dca2?q=90&w=1600&auto=format&fit=crop') center/cover no-repeat;
     animation: drift 25s infinite alternate ease-in-out;
 }
 
@@ -185,7 +185,7 @@ body.page-reservas-ultra .global-nav.scrolled {
     position: absolute;
     top: 0; left: 0;
     width: 100%; height: 100%;
-    background: url('https://images.unsplash.com/photo-1594007654729-407eedc4be65?q=90&w=1600&auto=format&fit=crop') center/cover no-repeat;
+    background: url('https://images.unsplash.com/photo-1520072959219-c595dc870360?q=90&w=1600&auto=format&fit=crop') center/cover no-repeat;
     opacity: 0.15;
     filter: grayscale(100%) contrast(1.5);
     mix-blend-mode: multiply;
@@ -240,7 +240,7 @@ body.page-reservas-ultra .global-nav.scrolled {
     letter-spacing: 0.4rem;
     font-weight: 800;
     color: var(--cream);
-    opacity: 0.6;
+    opacity: 0.85;
 }
 
 .ritual-item h2 {
@@ -507,8 +507,8 @@ body.page-reservas-ultra .global-nav.scrolled {
     top: 100%;
     left: 0;
     width: 100%;
-    background-color: #2b2b2b !important; 
-    background: #2b2b2b !important;
+    background-color: var(--color-texto) !important; 
+    background: #0a0908 !important;
     border: 1px solid rgba(245,240,232,0.3) !important;
     z-index: 2147483647 !important; 
     opacity: 0;
@@ -533,8 +533,8 @@ body.page-reservas-ultra .global-nav.scrolled {
     color: var(--cream);
     transition: all 0.3s ease;
     border-bottom: 1px solid rgba(245,240,232,0.1);
-    background-color: #2b2b2b !important;
-    background: #2b2b2b !important;
+    background-color: var(--color-texto) !important;
+    background: #0a0908 !important;
     opacity: 1 !important;
 }
 
@@ -589,7 +589,7 @@ body.page-reservas-ultra .global-nav.scrolled {
     position: absolute;
     top: 0; left: 0;
     width: 100%; height: 100%;
-    background: url('https://images.unsplash.com/photo-1594007654729-407eedc4be65?q=90&w=1400&auto=format&fit=crop') center/cover no-repeat;
+    background: url('https://images.unsplash.com/photo-1520072959219-c595dc870360?q=90&w=1400&auto=format&fit=crop') center/cover no-repeat;
     filter: grayscale(100%);
     opacity: 0.12;
     z-index: -1;
@@ -817,7 +817,7 @@ body.page-reservas-ultra .global-nav.scrolled {
 /* Sincronizar menú móvil con el resto del sitio (Tema Claro) */
 @media (max-width: 768px) {
     .mobile-bottom-nav {
-        background: rgba(255, 255, 255, 0.95) !important;
+        background: rgba(22, 21, 20, 0.95) !important;
         backdrop-filter: blur(20px) !important;
         border-top: 1px solid rgba(0, 0, 0, 0.05) !important;
         box-shadow: 0 -5px 20px rgba(0,0,0,0.08) !important;
@@ -842,7 +842,7 @@ body.page-reservas-ultra .global-nav.scrolled {
     }
 
     .bottom-nav-item.active {
-        color: #d9534f !important; /* Rojo marca */
+        color: #c1121f !important; /* Rojo marca */
     }
 
     .bottom-nav-item svg {

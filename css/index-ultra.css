@@ -1,11 +1,11 @@
 /* =========================================================
    INDEX ULTRA — Diseño Editorial Oscuro Cinematográfico
-   Oldwest Rústica — $100K Visual Experience
+   Oldwest — $100K Visual Experience
    ========================================================= */
 
 /* ---- ROOT OVERRIDE para esta página ---- */
 body.page-index-ultra {
-    background: #2b2b2b;
+    background: #0a0908;
     color: #f5f0e8;
     overflow-x: hidden;
 }
@@ -35,7 +35,7 @@ body.page-index-ultra::before {
     grid-template-columns: 1fr 1fr;
     position: relative;
     overflow: hidden;
-    background: #2b2b2b;
+    background: #0a0908;
 }
 
 .hero-ultra-left {
@@ -53,7 +53,7 @@ body.page-index-ultra::before {
     font-weight: 700;
     letter-spacing: 5px;
     text-transform: uppercase;
-    color: #d9534f;
+    color: #c1121f;
     margin-bottom: 2rem;
     display: flex;
     align-items: center;
@@ -65,7 +65,7 @@ body.page-index-ultra::before {
     display: block;
     width: 40px;
     height: 1px;
-    background: #d9534f;
+    background: #c1121f;
 }
 
 .hero-ultra-h1 {
@@ -80,7 +80,7 @@ body.page-index-ultra::before {
 
 .hero-ultra-h1 em {
     font-style: italic;
-    color: #d9534f;
+    color: #c1121f;
     font-family: 'Playfair Display', serif;
 }
 
@@ -88,10 +88,10 @@ body.page-index-ultra::before {
     font-family: 'Playfair Display', serif;
     font-size: 1.1rem;
     font-style: italic;
-    color: rgba(245, 240, 232, 0.5);
+    color: rgba(245, 240, 232, 0.85);
     line-height: 1.7;
     max-width: 380px;
-    border-left: 2px solid #d9534f;
+    border-left: 2px solid #c1121f;
     padding-left: 1.5rem;
     margin-bottom: 3rem;
 }
@@ -103,7 +103,7 @@ body.page-index-ultra::before {
 }
 
 .btn-ultra-primary {
-    background: #d9534f;
+    background: #c1121f;
     color: white;
     text-decoration: none;
     padding: 1rem 2.5rem;
@@ -121,7 +121,7 @@ body.page-index-ultra::before {
     content: '';
     position: absolute;
     inset: 0;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(22, 21, 20, 0.1);
     transform: translateX(-101%);
     transition: transform 0.4s ease;
 }
@@ -162,7 +162,7 @@ body.page-index-ultra::before {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(to right, #2b2b2b 0%, transparent 30%);
+    background: linear-gradient(to right, #0a0908 0%, transparent 30%);
     z-index: 1;
 }
 
@@ -197,7 +197,7 @@ body.page-index-ultra::before {
     font-size: 0.7rem;
     letter-spacing: 3px;
     text-transform: uppercase;
-    color: rgba(245, 240, 232, 0.3);
+    color: rgba(245, 240, 232, 0.7);
     z-index: 3;
 }
 
@@ -216,7 +216,7 @@ body.page-index-ultra::before {
     top: 0;
     width: 100%;
     height: 100%;
-    background: #d9534f;
+    background: #c1121f;
     animation: scrollLineMove 2s ease-in-out infinite;
 }
 
@@ -232,7 +232,7 @@ body.page-index-ultra::before {
 
 /* ========== NUMBERS STRIP ========== */
 .numbers-strip {
-    background: #d9534f;
+    background: #c1121f;
     padding: 2.5rem 6rem;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -245,7 +245,7 @@ body.page-index-ultra::before {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, transparent 100%);
+    background: linear-gradient(135deg, rgba(22, 21, 20, 0.04) 0%, transparent 100%);
 }
 
 .num-item {
@@ -261,7 +261,7 @@ body.page-index-ultra::before {
     top: 10%;
     height: 80%;
     width: 1px;
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(22, 21, 20, 0.2);
 }
 
 .num-value {
@@ -280,7 +280,7 @@ body.page-index-ultra::before {
     font-weight: 600;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.65);
+    color: rgba(22, 21, 20, 0.65);
 }
 
 /* ========== EDITORIAL SPLIT SECTION ========== */
@@ -288,7 +288,7 @@ body.page-index-ultra::before {
     display: grid;
     grid-template-columns: 55% 45%;
     min-height: 90vh;
-    background: #2b2b2b;
+    background: #0a0908;
 }
 
 .editorial-img-col {
@@ -313,7 +313,7 @@ body.page-index-ultra::before {
     position: absolute;
     bottom: 3rem;
     right: -1px;
-    background: #d9534f;
+    background: #c1121f;
     color: white;
     padding: 0.8rem 2rem;
     font-family: 'Cinzel', serif;
@@ -351,13 +351,13 @@ body.page-index-ultra::before {
 }
 
 .editorial-quote span {
-    color: #d9534f;
+    color: #c1121f;
 }
 
 .editorial-body {
     font-size: 1rem;
     line-height: 1.9;
-    color: rgba(245, 240, 232, 0.55);
+    color: rgba(245, 240, 232, 0.9);
     margin-bottom: 3rem;
     max-width: 420px;
 }
@@ -392,7 +392,7 @@ body.page-index-ultra::before {
 
 /* ========== HORIZONTAL SHOWCASE ========== */
 .showcase-section {
-    background: #2b2b2b;
+    background: #0a0908;
     padding: 8rem 0 4rem 6rem;
     overflow: hidden;
 }
@@ -499,7 +499,7 @@ body.page-index-ultra::before {
     font-family: 'Cinzel', serif;
     font-size: 0.65rem;
     letter-spacing: 4px;
-    color: #d9534f;
+    color: #c1121f;
     margin-bottom: 0.5rem;
     display: block;
 }
@@ -527,7 +527,7 @@ body.page-index-ultra::before {
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    background: #2b2b2b;
+    background: #0a0908;
 }
 
 .fullbleed-bg {
@@ -562,7 +562,7 @@ body.page-index-ultra::before {
 .fullbleed-content blockquote::before,
 .fullbleed-content blockquote::after {
     content: '"';
-    color: #d9534f;
+    color: #c1121f;
     font-size: 1.5em;
     line-height: 0;
     vertical-align: -0.4em;
@@ -633,7 +633,7 @@ body.page-index-ultra::before {
     font-family: 'Cinzel', serif;
     font-size: 0.65rem;
     letter-spacing: 4px;
-    color: #d9534f;
+    color: #c1121f;
     margin-bottom: 1.5rem;
     display: block;
 }
@@ -650,7 +650,7 @@ body.page-index-ultra::before {
 .philo-text {
     font-size: 0.92rem;
     line-height: 1.85;
-    color: rgba(245, 240, 232, 0.45);
+    color: rgba(245, 240, 232, 0.85);
 }
 
 /* ========== MARQUEE (rediseñado) ========== */
@@ -676,7 +676,7 @@ body.page-index-ultra::before {
 }
 
 .marquee-ultra-track span.hl {
-    color: #d9534f;
+    color: #c1121f;
 }
 
 @keyframes marqueeScroll {
@@ -729,7 +729,7 @@ body.page-index-ultra::before {
     font-family: 'Playfair Display', serif;
     font-style: italic;
     font-size: 1.2rem;
-    color: rgba(245, 240, 232, 0.35);
+    color: rgba(245, 240, 232, 0.8);
     line-height: 1.7;
     max-width: 380px;
 }
@@ -740,13 +740,13 @@ body.page-index-ultra::before {
     font-weight: 700;
     letter-spacing: 4px;
     text-transform: uppercase;
-    color: #d9534f;
+    color: #c1121f;
     margin-bottom: 2rem;
 }
 
 .footer-ultra-col p {
     font-size: 0.92rem;
-    color: rgba(245, 240, 232, 0.4);
+    color: rgba(245, 240, 232, 0.85);
     line-height: 2.1;
     margin: 0;
 }
@@ -797,7 +797,7 @@ body.page-index-ultra::before {
     }
 
     .hero-ultra-right::before {
-        background: linear-gradient(to top, #2b2b2b 35%, rgba(10, 9, 8, 0.75) 100%);
+        background: linear-gradient(to top, #0a0908 35%, rgba(10, 9, 8, 0.75) 100%);
     }
 
     .hero-ultra-left {
@@ -958,11 +958,11 @@ body.page-index-ultra::before {
 
     .num-item {
         padding: 1.5rem 1rem;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        border-bottom: 1px solid rgba(22, 21, 20, 0.1);
     }
 
     .num-item:nth-child(odd) {
-        border-right: 1px solid rgba(255, 255, 255, 0.1);
+        border-right: 1px solid rgba(22, 21, 20, 0.1);
     }
 
     .num-item:nth-child(3),

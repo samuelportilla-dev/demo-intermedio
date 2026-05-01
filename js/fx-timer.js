@@ -1,6 +1,6 @@
 /**
  * FX TIMER — Countdown de Oferta del Día (Versión Ultra)
- * Oldwest Rústica — Módulo Premium
+ * Oldwest — Módulo Premium
  * Inyecta un banner de cuenta regresiva al inicio de la página.
  */
 (function () {

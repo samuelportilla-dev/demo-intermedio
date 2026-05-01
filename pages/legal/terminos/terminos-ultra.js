@@ -1,5 +1,5 @@
 /**
- * TERMINOS ULTRA - Oldwest RÚSTICA
+ * TERMINOS ULTRA - Oldwest
  * Professional Editorial Logic
  */
 

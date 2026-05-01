@@ -1,6 +1,6 @@
 /**
  * FX CURSOR — LIQUID AURA (PREMIUM UPGRADE)
- * Oldwest Rústica — Digital Architecture
+ * Oldwest — Digital Architecture
  */
 
 (function () {

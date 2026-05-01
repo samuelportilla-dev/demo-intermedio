@@ -1,15 +1,15 @@
 /* =========================================================
    MENU ULTRA V3 — Mobile-First Digital Experience
-   Oldwest Rústica — High-End App Aesthetic
+   Oldwest — High-End App Aesthetic
    ========================================================= */
 
 :root {
-    --c-bg: #2b2b2b;
-    --c-surface: #131110;
-    --c-brand: #d9534f;
+    --c-bg: #0a0908;
+    --c-surface: #161412;
+    --c-brand: #c1121f;
     --c-brand-alt: #780001;
     --c-text: #f5f0e8;
-    --c-text-dim: rgba(245, 240, 232, 0.45);
+    --c-text-dim: rgba(245, 240, 232, 0.7);
     --f-title: 'Cinzel', serif;
     --f-body: 'Outfit', sans-serif;
     --f-italic: 'Playfair Display', serif;
@@ -22,6 +22,18 @@ body.page-menu-ultra {
     color: var(--c-text);
     font-family: var(--f-body);
     -webkit-tap-highlight-color: transparent;
+    position: relative;
+}
+
+/* Grain texture for premium depth */
+body.page-menu-ultra::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+    opacity: 0.035;
+    pointer-events: none;
+    z-index: 9999;
 }
 
 /* ========== SMART SEARCH BAR (STICKY) ========== */
@@ -45,8 +57,8 @@ body.page-menu-ultra {
 
 .mn-search-wrapper {
     position: relative;
-    background: rgba(255, 255, 255, 0.04) !important;
-    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
     border-radius: 18px;
     display: flex;
     align-items: center;
@@ -56,7 +68,7 @@ body.page-menu-ultra {
 }
 
 .mn-search-wrapper:focus-within {
-    background: rgba(255, 255, 255, 0.08) !important;
+    background: rgba(22, 21, 20, 0.08) !important;
     border-color: var(--c-brand) !important;
     box-shadow: 0 0 20px rgba(217, 83, 79, 0.2);
 }
@@ -85,7 +97,7 @@ body.page-menu-ultra {
 }
 
 #mn-search-clear {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(22, 21, 20, 0.1);
     border: none;
     color: white;
     width: 28px;
@@ -149,7 +161,7 @@ body.page-menu-ultra {
         border-radius: 12px;
         text-align: left;
         padding: 1rem 1.5rem;
-        background: rgba(255,255,255,0.03);
+        background: rgba(22,21,20,0.03);
     }
     
     .mn-main {
@@ -166,7 +178,7 @@ body.page-menu-ultra {
     background: rgba(10, 9, 8, 0.95);
     backdrop-filter: blur(25px);
     padding: 1rem 0;
-    border-bottom: 1px solid rgba(255,255,255,0.03);
+    border-bottom: 1px solid rgba(22,21,20,0.03);
 }
 
 @media (max-width: 768px) {
@@ -193,11 +205,11 @@ body.page-menu-ultra {
 
 .mn-cat-pill {
     padding: 0.6rem 1.2rem;
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(255,255,255,0.05);
+    background: rgba(22,21,20,0.03);
+    border: 1px solid rgba(22,21,20,0.05);
     border-radius: 50px;
-    color: var(--c-text-dim);
-    font-size: 0.7rem;
+    color: rgba(245, 240, 232, 0.7);
+    font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 1px;
     text-transform: uppercase;
@@ -335,10 +347,10 @@ body.page-menu-ultra {
 
 .mn-promo-badge {
     display: inline-block;
-    background: transparent;
+    background: var(--c-brand);
     border: 1px solid var(--c-brand);
-    color: var(--c-brand);
-    padding: 0.5rem 1.5rem;
+    color: white;
+    padding: 0.5rem 1.2rem;
     border-radius: 0;
     font-size: 0.75rem;
     font-weight: 800;
@@ -359,10 +371,10 @@ body.page-menu-ultra {
 .mn-promo-desc {
     font-family: var(--f-italic);
     font-style: italic;
-    font-size: 1.4rem;
-    color: rgba(255,255,255,0.6);
+    color: rgba(245, 240, 232, 0.8);
     line-height: 1.5;
     max-width: 500px;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
 }
 
 /* Timer Cinematográfico */
@@ -387,7 +399,8 @@ body.page-menu-ultra {
     font-size: 0.6rem;
     text-transform: uppercase;
     letter-spacing: 2px;
-    opacity: 0.5;
+    opacity: 0.8;
+    color: white;
 }
 
 /* Slider Pagination Minimalista */
@@ -402,7 +415,7 @@ body.page-menu-ultra {
 .mn-nav-dot {
     width: 40px;
     height: 2px;
-    background: rgba(255,255,255,0.2);
+    background: rgba(22,21,20,0.2);
     cursor: pointer;
     position: relative;
     overflow: hidden;
@@ -443,41 +456,44 @@ body.page-menu-ultra {
 .mn-section-title {
     font-family: var(--f-title);
     font-size: 1.8rem;
-    margin: 0 1.5rem 2rem;
+    margin: 0 1.5rem 2.5rem;
     color: var(--c-text);
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
 }
 .mn-section-title::after {
     content: '';
     height: 1px;
     flex: 1;
-    background: linear-gradient(to right, rgba(255,255,255,0.1), transparent);
+    background: linear-gradient(to right, rgba(245, 240, 232, 0.15), transparent);
 }
 
 .mn-grid {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 2.2rem;
     padding: 0 1.5rem;
 }
 
 /* The Ultra-Card */
 .mn-card {
     background: var(--c-surface);
-    border-radius: 16px;
+    border-radius: 20px; /* Mas redondeado */
     overflow: hidden;
     display: flex;
-    min-height: 160px; /* Cambiado de 140px para dar espacio */
+    min-height: 165px;
     height: auto;
-    border: 1px solid rgba(255,255,255,0.03);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    transition: transform 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    box-shadow: 0 20px 45px rgba(0,0,0,0.5);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.4s ease;
 }
 
 .mn-card:active {
-    transform: scale(0.98);
+    transform: scale(0.97);
+    border-color: var(--c-brand);
 }
 
 .mn-card-img-box {
@@ -503,7 +519,7 @@ body.page-menu-ultra {
     align-items: center;
     gap: 0.3rem;
     z-index: 2;
-    border: 1px solid rgba(255,255,255,0.1);
+    border: 1px solid rgba(22,21,20,0.1);
 }
 .mn-card-pop::before {
     content: '';
@@ -544,11 +560,12 @@ body.page-menu-ultra {
 
 .mn-card-title {
     font-family: var(--f-title);
-    font-size: 1.1rem; /* Un poco más grande */
-    font-weight: 700;
-    line-height: 1.4; /* Respiro para que no se corte */
+    font-size: 1.15rem;
+    font-weight: 800;
+    line-height: 1.3;
     margin: 0;
-    color: white;
+    color: #ffffff;
+    letter-spacing: 0.5px;
 }
 
 .mn-card-price {
@@ -560,7 +577,8 @@ body.page-menu-ultra {
 .mn-card-price-old {
     font-size: 0.85rem;
     text-decoration: line-through;
-    color: rgba(255,255,255,0.3);
+    color: var(--c-text);
+    opacity: 0.6;
     font-weight: 400;
     margin-right: 0.5rem;
 }
@@ -587,14 +605,14 @@ body.page-menu-ultra {
 }
 
 .mn-card-desc {
-    font-size: 0.75rem;
-    color: var(--c-text-dim);
-    line-height: 1.4;
+    font-size: 0.8rem;
+    color: rgba(245, 240, 232, 0.85);
+    line-height: 1.5;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
-    margin: 0;
+    margin: 0.5rem 0;
 }
 
 /* Tags de Contexto */
@@ -605,15 +623,15 @@ body.page-menu-ultra {
     margin-top: 0.6rem;
 }
 .mn-tag {
-    background: rgba(255,255,255,0.05);
-    padding: 0.2rem 0.5rem;
-    border-radius: 4px;
-    font-size: 0.55rem;
-    font-weight: 700;
-    color: rgba(255,255,255,0.4);
+    background: rgba(255,255,255,0.08);
+    padding: 0.3rem 0.7rem;
+    border-radius: 6px;
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: rgba(245, 240, 232, 0.9);
     text-transform: uppercase;
-    letter-spacing: 0.5px;
-    border: 1px solid rgba(255,255,255,0.03);
+    letter-spacing: 1px;
+    border: 1px solid rgba(255,255,255,0.1);
 }
 
 /* Feature Item (Alternate style for big impacts) */
@@ -696,7 +714,7 @@ body.page-menu-ultra {
     height: 44px;
     background: rgba(10, 9, 8, 0.6);
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(22, 21, 20, 0.15);
     border-radius: 50%;
     color: white;
     font-size: 28px;
@@ -714,7 +732,7 @@ body.page-menu-ultra {
 .mn-modal-grabber {
     width: 40px;
     height: 5px;
-    background: rgba(255,255,255,0.1);
+    background: rgba(22,21,20,0.1);
     border-radius: 10px;
     margin: 1.2rem auto;
 }
@@ -739,17 +757,17 @@ body.page-menu-ultra {
 .mn-modal-desc {
     font-size: 0.95rem;
     line-height: 1.6;
-    color: var(--c-text-dim);
+    color: rgba(245, 240, 232, 0.85);
     margin-bottom: 2.5rem;
 }
 
 /* Accordion Modifiers */
 .mn-accordion {
     margin-bottom: 1.5rem;
-    border: 1px solid rgba(255,255,255,0.05);
+    border: 1px solid rgba(22,21,20,0.05);
     border-radius: 16px;
     overflow: hidden;
-    background: rgba(255,255,255,0.01);
+    background: rgba(22,21,20,0.01);
 }
 
 .mn-acc-header {
@@ -758,10 +776,10 @@ body.page-menu-ultra {
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
-    background: rgba(255,255,255,0.02);
+    background: rgba(22,21,20,0.02);
     transition: all 0.3s ease;
 }
-.mn-acc-header:hover { background: rgba(255,255,255,0.05); }
+.mn-acc-header:hover { background: rgba(22,21,20,0.05); }
 
 .mn-acc-title {
     font-family: var(--f-body);
@@ -801,7 +819,7 @@ body.page-menu-ultra {
 .mn-mod-check {
     width: 22px;
     height: 22px;
-    border: 2px solid rgba(255,255,255,0.1);
+    border: 2px solid rgba(22,21,20,0.1);
     border-radius: 6px;
     position: relative;
 }
@@ -815,7 +833,7 @@ body.page-menu-ultra {
     bottom: 0;
     background: var(--c-surface);
     padding: 1.5rem;
-    border-top: 1px solid rgba(255,255,255,0.05);
+    border-top: 1px solid rgba(22,21,20,0.05);
     display: flex;
     gap: 1rem;
     align-items: center;
@@ -856,7 +874,7 @@ body.page-menu-ultra {
 .mn-floating-cart.visible { transform: translateY(0); }
 
 .mn-cart-badge {
-    background: white;
+    background: var(--color-surface);
     color: var(--c-brand);
     width: 28px;
     height: 28px;
@@ -919,7 +937,7 @@ body.page-menu-ultra {
         border: none;
         padding: 1.2rem 1.5rem;
         border-radius: 0;
-        border-left: 2px solid rgba(255,255,255,0.05);
+        border-left: 2px solid rgba(22,21,20,0.05);
         color: var(--c-text-dim);
         font-size: 0.95rem;
         font-weight: 800;
@@ -929,7 +947,7 @@ body.page-menu-ultra {
     .mn-cat-pill:hover {
         color: var(--c-text);
         padding-left: 2.2rem;
-        border-left-color: rgba(255,255,255,0.2);
+        border-left-color: rgba(22,21,20,0.2);
     }
     .mn-cat-pill.active {
         background: transparent;
@@ -954,7 +972,7 @@ body.page-menu-ultra {
         flex-direction: row;
         height: auto;
         gap: 2rem;
-        border-bottom: 1px solid rgba(255,255,255,0.03);
+        border-bottom: 1px solid rgba(22,21,20,0.03);
         padding-bottom: 3rem;
         border-radius: 0;
         align-items: center;
@@ -973,7 +991,7 @@ body.page-menu-ultra {
         flex-shrink: 0;
         border-radius: 50%; 
         overflow: hidden;
-        border: 1px solid rgba(255,255,255,0.1);
+        border: 1px solid rgba(22,21,20,0.1);
         box-shadow: 0 15px 35px rgba(0,0,0,0.4);
     }
     .mn-card-img {
@@ -1043,7 +1061,7 @@ body.page-menu-ultra {
         padding: 2rem 4rem;
         background: rgba(10,9,8,0.95);
         backdrop-filter: blur(10px);
-        border-top: 1px solid rgba(255,255,255,0.05);
+        border-top: 1px solid rgba(22,21,20,0.05);
     }
     
     /* Floating Cart PC */
@@ -1097,7 +1115,7 @@ body.page-menu-ultra {
     background: #0f0d0c;
     width: 100%;
     max-width: 500px;
-    border: 1px solid rgba(255,255,255,0.08);
+    border: 1px solid rgba(22,21,20,0.08);
     border-radius: 32px;
     padding: 3rem 2.5rem;
     position: relative;
@@ -1133,8 +1151,8 @@ body.page-menu-ultra {
 
 .premium-input {
     width: 100%;
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(255,255,255,0.05);
+    background: rgba(22,21,20,0.03);
+    border: 1px solid rgba(22,21,20,0.05);
     border-radius: 16px;
     padding: 1.2rem 1.5rem;
     color: white;
@@ -1145,7 +1163,7 @@ body.page-menu-ultra {
 }
 
 .premium-input:focus {
-    background: rgba(255,255,255,0.06);
+    background: rgba(22,21,20,0.06);
     border-color: var(--c-brand);
     box-shadow: 0 0 0 4px rgba(217, 83, 79,0.1);
 }
@@ -1173,8 +1191,8 @@ body.page-menu-ultra {
 }
 
 .propina-premium-chip {
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(255,255,255,0.05);
+    background: rgba(22,21,20,0.03);
+    border: 1px solid rgba(22,21,20,0.05);
     padding: 1rem;
     border-radius: 14px;
     color: white;
@@ -1186,7 +1204,7 @@ body.page-menu-ultra {
 }
 
 .propina-premium-chip:hover {
-    background: rgba(255,255,255,0.08);
+    background: rgba(22,21,20,0.08);
 }
 
 .propina-premium-chip.activa {
@@ -1227,7 +1245,7 @@ body.page-menu-ultra {
     right: 1.5rem;
     width: 40px;
     height: 40px;
-    background: rgba(255,255,255,0.05);
+    background: rgba(22,21,20,0.05);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -1239,7 +1257,7 @@ body.page-menu-ultra {
 }
 
 .premium-close-modal:hover {
-    background: rgba(255,255,255,0.1);
+    background: rgba(22,21,20,0.1);
     transform: rotate(90deg);
 }
 
@@ -1284,8 +1302,8 @@ body.is-searching .mn-main {
 /* ========== CATEGORY BUTTON IN SEARCH BAR (MOBILE) ========== */
 .cat-search-btn {
     display: none; /* Oculto por defecto en desktop */
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(22,21,20,0.05);
+    border: 1px solid rgba(22,21,20,0.1);
     color: white;
     width: 38px;
     height: 38px;
@@ -1341,7 +1359,7 @@ body.is-searching .mn-main {
     left: 0;
     width: 100%;
     background: #0f0d0c; /* Volvemos al Deep Dark del restaurante */
-    border-top: 1px solid rgba(255,255,255,0.08);
+    border-top: 1px solid rgba(22,21,20,0.08);
     border-radius: 32px 32px 0 0;
     padding: 1.5rem;
     transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
@@ -1357,7 +1375,7 @@ body.is-searching .mn-main {
 .mn-sheet-handle {
     width: 40px;
     height: 4px;
-    background: rgba(255,255,255,0.2);
+    background: rgba(22,21,20,0.2);
     border-radius: 10px;
     margin: 0 auto 1.5rem;
 }
@@ -1394,13 +1412,13 @@ body.is-searching .mn-main {
     align-items: center;
     padding: 1.2rem 0.5rem;
     gap: 1.2rem;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(22,21,20,0.05);
     cursor: pointer;
     transition: all 0.3s;
 }
 
 .mn-sheet-cat-item:active {
-    background: rgba(255,255,255,0.03);
+    background: rgba(22,21,20,0.03);
     transform: translateX(5px);
 }
 
@@ -1414,8 +1432,8 @@ body.is-searching .mn-main {
     border-radius: 22px;
     overflow: hidden;
     flex-shrink: 0;
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(255,255,255,0.05);
+    background: rgba(22,21,20,0.03);
+    border: 1px solid rgba(22,21,20,0.05);
 }
 
 .mn-sheet-cat-img {
@@ -1463,7 +1481,7 @@ body.is-searching .mn-main {
     right: 1.5rem;
     width: 60px;
     height: 60px;
-    background: white;
+    background: var(--color-surface);
     color: var(--c-brand);
     border: none;
     border-radius: 50%;
@@ -1521,7 +1539,7 @@ body.is-searching .mn-main {
     left: 0;
     width: 100%;
     background: #0f0d0c;
-    border-top: 1px solid rgba(255,255,255,0.1);
+    border-top: 1px solid rgba(22,21,20,0.1);
     border-radius: 30px 30px 0 0;
     padding: 1.5rem;
     transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
@@ -1536,7 +1554,7 @@ body.is-searching .mn-main {
 .mn-sheet-handle {
     width: 40px;
     height: 5px;
-    background: rgba(255,255,255,0.2);
+    background: rgba(22,21,20,0.2);
     border-radius: 10px;
     margin: 0 auto 1.5rem;
 }
@@ -1566,8 +1584,8 @@ body.is-searching .mn-main {
 }
 
 .mn-sheet-cat-btn {
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(255,255,255,0.05);
+    background: rgba(22,21,20,0.03);
+    border: 1px solid rgba(22,21,20,0.05);
     border-radius: 20px;
     padding: 1.5rem 1rem;
     text-align: left;
@@ -1576,7 +1594,7 @@ body.is-searching .mn-main {
 }
 
 .mn-sheet-cat-btn:active {
-    background: rgba(255,255,255,0.1);
+    background: rgba(22,21,20,0.1);
     border-color: var(--c-brand);
 }
 
@@ -1636,11 +1654,11 @@ body.is-searching .mn-main {
     background: rgba(10, 9, 8, 0.85);
     backdrop-filter: blur(30px) saturate(180%);
     -webkit-backdrop-filter: blur(30px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(22, 21, 20, 0.12);
     border-radius: 20px;
     padding: 0;
     width: 420px;
-    box-shadow: 0 40px 100px rgba(0,0,0,0.7), inset 0 0 20px rgba(255,255,255,0.02);
+    box-shadow: 0 40px 100px rgba(0,0,0,0.7), inset 0 0 20px rgba(22,21,20,0.02);
     display: flex;
     align-items: stretch;
     transform: translateX(120%) rotateY(-25deg); /* Sale desde la derecha */
@@ -1688,7 +1706,7 @@ body.is-searching .mn-main {
     font-size: 0.6rem;
     text-transform: uppercase;
     letter-spacing: 4px;
-    color: var(--c-brand, #d9534f);
+    color: var(--c-brand, #c1121f);
     margin-bottom: 0.5rem;
     font-weight: 800;
 }
@@ -1707,8 +1725,8 @@ body.is-searching .mn-main {
     position: absolute;
     top: 12px;
     right: 12px;
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(22,21,20,0.05);
+    border: 1px solid rgba(22,21,20,0.1);
     color: white;
     width: 24px;
     height: 24px;
@@ -1723,21 +1741,21 @@ body.is-searching .mn-main {
 }
 
 .mn-notif-close:hover { 
-    background: var(--c-brand, #d9534f);
-    border-color: var(--c-brand, #d9534f);
+    background: var(--c-brand, #c1121f);
+    border-color: var(--c-brand, #c1121f);
 }
 
 .mn-notif-progress {
     position: absolute;
     bottom: 0; left: 0; right: 0;
     height: 2px;
-    background: rgba(255,255,255,0.05);
+    background: rgba(22,21,20,0.05);
 }
 
 .mn-notif-progress-bar {
     height: 100%;
     width: 100%;
-    background: linear-gradient(to right, transparent, var(--c-brand, #d9534f));
+    background: linear-gradient(to right, transparent, var(--c-brand, #c1121f));
     transform-origin: left;
 }
 
@@ -1749,7 +1767,7 @@ body.is-searching .mn-main {
 .payment-section {
     margin-top: 2rem;
     padding-top: 2rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-top: 1px solid rgba(22, 21, 20, 0.08);
     position: relative;
     z-index: 5;
 }
@@ -1763,8 +1781,8 @@ body.is-searching .mn-main {
 }
 
 .payment-method-card {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(22, 21, 20, 0.03);
+    border: 1px solid rgba(22, 21, 20, 0.08);
     border-radius: 16px;
     padding: 1.5rem 1rem; /* Aumentado click area */
     display: flex;
@@ -1773,7 +1791,7 @@ body.is-searching .mn-main {
     gap: 0.8rem;
     cursor: pointer;
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(22, 21, 20, 0.5);
     position: relative;
     z-index: 50; /* Muy alto para asegurar click */
     user-select: none;
@@ -1815,7 +1833,7 @@ body.is-searching .mn-main {
     border-radius: 18px;
     padding: 1.5rem;
     margin-bottom: 1.5rem;
-    border: 1px solid rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(22, 21, 20, 0.04);
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -1941,14 +1959,14 @@ body.is-searching .mn-main {
 }
 
 .premium-submit-btn.btn-secondary {
-    background: rgba(255, 255, 255, 0.05) !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    background: rgba(22, 21, 20, 0.05) !important;
+    border: 1px solid rgba(22, 21, 20, 0.1) !important;
     color: white !important;
 }
 
 .premium-submit-btn.btn-secondary:hover {
-    background: rgba(255, 255, 255, 0.1) !important;
-    border-color: rgba(255, 255, 255, 0.2) !important;
+    background: rgba(22, 21, 20, 0.1) !important;
+    border-color: rgba(22, 21, 20, 0.2) !important;
 }
 
 @media (min-width: 600px) {

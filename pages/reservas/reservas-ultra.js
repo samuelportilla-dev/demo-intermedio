@@ -1,5 +1,5 @@
 /**
- * RESERVAS ULTRA - Oldwest RÚSTICA
+ * RESERVAS ULTRA - Oldwest
  * Professional Editorial Logic
  */
 
@@ -168,7 +168,7 @@
             message += `*Ocasión:* ${occasion}\n`;
             if (notes) message += `*Notas:* ${notes}\n`;
             message += `--------------------------------\n`;
-            message += `_Solicitado desde el portal Ultra de Oldwest Rústica_`;
+            message += `_Solicitado desde el portal Ultra de Oldwest_`;
 
             const phone = "573112518913"; // Config value
             const wpUrl = `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(message)}`;

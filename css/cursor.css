@@ -1,13 +1,13 @@
 /* 
  * FX CURSOR — LIQUID AURA (PREMIUM UPGRADE)
- * Oldwest Rústica — Digital Architecture
+ * Oldwest — Digital Architecture
  */
 
 :root {
     --cursor-dot-size: 8px;
     --cursor-aura-size: 35px;
     --cursor-color: #ffffff;
-    --cursor-accent: #d9534f; /* Oldwest Red */
+    --cursor-accent: #c1121f; /* Oldwest Red */
     --cursor-hover-scale: 1.8;
 }
 
@@ -41,7 +41,7 @@
     left: 0;
     width: var(--cursor-aura-size);
     height: var(--cursor-aura-size);
-    border: 1px solid rgba(255, 255, 255, 0.4);
+    border: 1px solid rgba(22, 21, 20, 0.4);
     border-radius: 50%;
     pointer-events: none;
     z-index: 9999;
@@ -62,8 +62,8 @@ body.cursor-active .cursor-dot {
 body.cursor-active .cursor-aura {
     width: calc(var(--cursor-aura-size) * var(--cursor-hover-scale));
     height: calc(var(--cursor-aura-size) * var(--cursor-hover-scale));
-    background-color: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(22, 21, 20, 0.1);
+    border-color: rgba(22, 21, 20, 0.8);
     border-width: 1.5px;
 }
 

@@ -1,6 +1,6 @@
 /**
  * FX LIGHTBOX — Galería Cinematográfica con Zoom y Swipe
- * Oldwest Rústica — Módulo Premium
+ * Oldwest — Módulo Premium
  * Auto-inicializa en nosotros.html sobre todas las imágenes
  * con clase .gallery-lb-item o dentro de .mson-item / .history-img-wrapper
  */

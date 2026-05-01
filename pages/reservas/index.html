@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Reservas Ultra | Oldwest Rústica - Editorial Excellence</title>
+    <title>Reservas Ultra | Oldwest - Editorial Excellence</title>
     
     <!-- Meta SEO -->
-    <meta name="description" content="Reserva una experiencia gastronómica sin precedentes en Oldwest Rústica. El sabor de Texas elevado al nivel editorial.">
-    <meta name="keywords" content="reservas, restaurante texano, hamburguesa artesanal, Oldwest rústica, gourmet">
+    <meta name="description" content="Reserva una experiencia gastronómica sin precedentes en Oldwest. El sabor de Texas elevado al nivel editorial.">
+    <meta name="keywords" content="reservas, restaurante texano, hamburguesa artesanal, Oldwest, gourmet">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,13 +23,23 @@
 </head>
 
 <body class="page-reservas-ultra">
+    <!-- Preloader Cinema -->
+    <div id="pt-overlay">
+        <div class="pt-curtain-top"></div>
+        <div class="pt-curtain-bottom"></div>
+        <div class="pt-logo-wrap">
+            <img src="../../img/logo.webp" alt="Oldwest">
+            <span>Oldwest</span>
+        </div>
+    </div>
+    <script src="../../js/fx-transitions.js"></script>
 
     <!-- Global Nav -->
     <nav class="global-nav">
         <div class="global-nav-container">
             <a href="../../index.html" class="global-nav-logo">
-                <img src="../../img/logo.png" alt="Logo">
-                Oldwest RÚSTICA
+                <img src="../../img/logo.webp" alt="Logo">
+                Oldwest
             </a>
             <div class="global-nav-links">
                 <a href="../../index.html">Inicio</a>
@@ -65,8 +75,8 @@
         </div>
         <div class="hero-content page-reveal">
             <span class="hero-eyebrow">Experiencia Exclusiva</span>
-            <h1 id="hero-title">L'Arte della <br>Ospitalità</h1>
-            <p class="hero-p">"No vendemos mesas, curamos momentos suspendidos en el tiempo bajo el aroma del horno de leña."</p>
+            <h1 id="hero-title">El Arte del <br>Buen Humo</h1>
+            <p class="hero-p">"No vendemos mesas, curamos momentos suspendidos en el tiempo bajo el aroma de las brasas texanas."</p>
         </div>
         <div class="hero-scroll-hint">
             <div class="scroll-line"></div>
@@ -78,19 +88,19 @@
     <section class="ritual-strip page-reveal">
         <div class="ritual-grid">
             <div class="ritual-item">
-                <span class="ritual-tag">Il Calore</span>
+                <span class="ritual-tag">El Calor</span>
                 <h2>El Fuego</h2>
-                <p class="ritual-desc">Leña de encina seleccionada ardiendo a 450°C para una costra sublime.</p>
+                <p class="ritual-desc">Brasas al rojo vivo a 450°C para una costra ahumada sublime.</p>
             </div>
             <div class="ritual-item">
-                <span class="ritual-tag">La Pazienza</span>
+                <span class="ritual-tag">La Paciencia</span>
                 <h2>El Tiempo</h2>
-                <p class="ritual-desc">72 horas de maduración lenta para una masa que respira y emociona.</p>
+                <p class="ritual-desc">72 horas de maduración lenta para una carne que se deshace en tu boca.</p>
             </div>
             <div class="ritual-item">
-                <span class="ritual-tag">L'Anima</span>
+                <span class="ritual-tag">El Alma</span>
                 <h2>El Ritual</h2>
-                <p class="ritual-desc">Un pacto silencioso entre el horno, el artesano y su mesa.</p>
+                <p class="ritual-desc">Un pacto silencioso entre el ahumador, el maestro y su mesa.</p>
             </div>
         </div>
     </section>
@@ -99,13 +109,13 @@
     <section class="editorial-section">
         <div class="editorial-img-col page-reveal">
             <div class="editorial-img-wrapper">
-                <img src="https://images.unsplash.com/photo-1590947132387-155cc02f3212?q=90&w=1200&auto=format&fit=crop" alt="Auténtica hamburguesa artesanal">
+                <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=90&w=1200&auto=format&fit=crop" alt="Auténtica hamburguesa artesanal">
             </div>
         </div>
         <div class="editorial-text-col page-reveal">
             <blockquote>"La simplicidad es la máxima sofisticación."</blockquote>
-            <p>En el corazón de nuestra cocina reside un respeto sagrado por el ingrediente. Cada reserva es tratada como una gala privada, donde la harina D.O.P y los tomates Cheddar Premium dictan el ritmo de la noche.</p>
-            <p>Invitamos a nuestros comensales a desconectarse del mundo exterior y sumergirse en una atmósfera de penumbra cálida, vino robusto y el crujir de la leña.</p>
+            <p>En el corazón de nuestra cocina reside un respeto sagrado por el ingrediente. Cada reserva es tratada como una gala privada, donde los cortes Prime y la salsa BBQ dictan el ritmo de la noche.</p>
+            <p>Invitamos a nuestros comensales a desconectarse del mundo exterior y sumergirse en una atmósfera de penumbra cálida, cervezas frías y el crujir de las brasas.</p>
         </div>
     </section>
 
@@ -121,7 +131,7 @@
                 <form id="formReservaUltra" class="ultra-form">
                     <div class="form-group-full">
                         <label for="ultraName">Nombre del Anfitrión</label>
-                        <input type="text" id="ultraName" placeholder="Pietro Lombardi" required>
+                        <input type="text" id="ultraName" placeholder="John Wayne" required>
                     </div>
                     <div class="form-group">
                         <label for="ultraDate">Fecha de Gala</label>
@@ -167,7 +177,7 @@
                         <label for="ultraNotes">Notas Especiales (Alergias, Preferencias)</label>
                         <textarea id="ultraNotes" rows="1" placeholder="Escriba aquí sus requerimientos..."></textarea>
                     </div>
-                    <button type="submit" class="submit-btn" data-cursor-label="Reservar">Confirmar Prenotazione</button>
+                    <button type="submit" class="submit-btn" data-cursor-label="Reservar">Confirmar Reserva</button>
                 </form>
             </div>
         </div>
@@ -181,20 +191,20 @@
         </div>
         <div class="showcase-slider">
             <div class="showcase-card">
-                <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?q=90&w=800&auto=format&fit=crop" alt="Showcase 1">
-                <div class="card-overlay"><span class="card-title">Il Forno</span></div>
+                <img src="https://images.unsplash.com/photo-1594212214646-601e35928dcb?q=90&w=800&auto=format&fit=crop" alt="Showcase 1">
+                <div class="card-overlay"><span class="card-title">El Ahumador</span></div>
             </div>
             <div class="showcase-card">
-                <img src="https://images.unsplash.com/photo-1594007654729-407eedc4be65?q=90&w=800&auto=format&fit=crop" alt="Showcase 2">
-                <div class="card-overlay"><span class="card-title">Legna Vera</span></div>
+                <img src="https://images.unsplash.com/photo-1520072959219-c595dc870360?q=90&w=800&auto=format&fit=crop" alt="Showcase 2">
+                <div class="card-overlay"><span class="card-title">Humo Puro</span></div>
             </div>
             <div class="showcase-card">
-                <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=90&w=800&auto=format&fit=crop" alt="Showcase 3">
-                <div class="card-overlay"><span class="card-title">L'Ambiente</span></div>
+                <img src="https://images.unsplash.com/photo-1525059696034-4967a8e1dca2?q=90&w=800&auto=format&fit=crop" alt="Showcase 3">
+                <div class="card-overlay"><span class="card-title">El Refugio</span></div>
             </div>
             <div class="showcase-card">
-                <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?q=90&w=800&auto=format&fit=crop" alt="Showcase 4">
-                <div class="card-overlay"><span class="card-title">Sapori Puri</span></div>
+                <img src="https://images.unsplash.com/photo-1600891964092-4316c288032e?q=90&w=800&auto=format&fit=crop" alt="Showcase 4">
+                <div class="card-overlay"><span class="card-title">Cortes Prime</span></div>
             </div>
         </div>
     </section>
@@ -202,25 +212,25 @@
     <!-- Full Bleed Quote -->
     <section class="quote-bleed page-reveal">
         <div class="quote-bg"></div>
-        <blockquote>"Mangia bene, ridi spesso, <span>ama molto.</span>"</blockquote>
+        <blockquote>"Come bien, ríe fuerte, <span>vive intensamente.</span>"</blockquote>
     </section>
 
     <!-- Principles Section -->
     <section class="principles-section">
         <div class="principle-item page-reveal">
             <span class="principle-num">01</span>
-            <h4 class="principle-title">Dignità</h4>
+            <h4 class="principle-title">Dignidad</h4>
             <p class="principle-text">Tratamos cada ingrediente con la dignidad que merece su origen. Sin atajos, sin compromisos.</p>
         </div>
         <div class="principle-item page-reveal">
             <span class="principle-num">02</span>
-            <h4 class="principle-title">Silenzio</h4>
-            <p class="principle-text">El ruido se queda en la calle. Adentro, solo el diálogo del fuego y la música del buen vino.</p>
+            <h4 class="principle-title">Silencio</h4>
+            <p class="principle-text">El ruido se queda en la calle. Adentro, solo el diálogo del fuego y la música del buen ambiente.</p>
         </div>
         <div class="principle-item page-reveal">
             <span class="principle-num">03</span>
-            <h4 class="principle-title">Tempo</h4>
-            <p class="principle-text">Respetamos el tiempo de la masa, el tiempo del comensal y el tiempo de la historia.</p>
+            <h4 class="principle-title">Tiempo</h4>
+            <p class="principle-text">Respetamos el tiempo del ahumador, el tiempo del comensal y el tiempo de la historia.</p>
         </div>
     </section>
 
@@ -228,25 +238,25 @@
     <footer class="footer-ultra">
         <div class="footer-grid">
             <div class="footer-brand">
-                <h2>Oldwest Rústica</h2>
-                <span class="footer-tagline">Tradizione Elevata</span>
+                <h2>Oldwest</h2>
+                <span class="footer-tagline">Tradición Texana</span>
                 <p>Digital Excellence Crafted by Samuel Portilla.</p>
             </div>
             <div class="footer-col">
-                <h4>Legale</h4>
+                <h4>Legal</h4>
                 <a href="../legal/privacidad/">Privacidad</a>
                 <a href="../legal/terminos/">Términos</a>
                 <a href="../legal/cookies/">Cookies</a>
             </div>
             <div class="footer-col">
-                <h4>Sociale</h4>
+                <h4>Social</h4>
                 <a href="#">Instagram</a>
                 <a href="#">Facebook</a>
                 <a href="#">Pinterest</a>
             </div>
         </div>
         <div class="footer-bottom">
-            <span>&copy; 2026 Oldwest Rústica. All rights reserved.</span>
+            <span>&copy; 2026 Oldwest. All rights reserved.</span>
             <span>Samuel Portilla Design Agency</span>
         </div>
     </footer>
@@ -254,7 +264,6 @@
     <!-- Scripts Stack -->
     <script src="../../data/menu.js"></script>
     <script src="../../js/app.js"></script>
-    <script src="../../js/fx-transitions.js"></script>
     <script src="../../js/fx-cursor.js"></script>
     <script src="../../js/fx-tilt.js"></script>
     <script src="../../js/fx-whatsapp.js"></script>
