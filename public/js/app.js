@@ -28,7 +28,12 @@ function formatoDinero(valor) {
     return RESTAURANT_CONFIG.moneda + parseFloat(valor).toLocaleString('es-CO');
 }
 
+<<<<<<< HEAD:js/app.js
 document.addEventListener("DOMContentLoaded", async () => {
+=======
+window.initSmartMenu = async () => {
+    // El Preloader.jsx ya maneja su propia animación.
+>>>>>>> e178297 (🚀 Premium Migration: Restore legacy base styles, fix character encoding, and refine modal UI spacing):public/js/app.js
     inicializarTema();
     
     // Feature 08: Recuperador de Carrito
@@ -37,18 +42,27 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Only run menu-specific rendering if the menu container exists
     const menuContainer = document.getElementById("menu-container") || document.getElementById("ui-contenedor-menu") || document.getElementById("mn-main");
     if (menuContainer) {
+        console.log("Iniciando Renderizado de Menú...");
         renderizarHeader();
         mostrarSkeletons(); 
         
+<<<<<<< HEAD:js/app.js
         // await cargarDatosDesdeSheet(); 
         
         renderizarPromociones();
         renderizarCategorias();
         renderizarEspecialDia(); // Feature 17
+=======
+        await cargarDatosDesdeSheet(); 
+        
+        renderizarCategorias();
+        renderizarCarouselPromociones();
+>>>>>>> e178297 (🚀 Premium Migration: Restore legacy base styles, fix character encoding, and refine modal UI spacing):public/js/app.js
         renderizarProductos(); 
         inicializarObserverLiquid(); 
         inicializarScrollProgresivo(); 
         actualizarEstadoRestaurante(); 
+<<<<<<< HEAD:js/app.js
         renderizarMiniMenúuCats(); 
         inicializarObserverLiquid(); 
     } else {
@@ -59,6 +73,26 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // Common global initializations
     actualizarUiCarrito(); // Ensure dynamic cart badge works globally
+=======
+        renderizarMiniMenuCats(); 
+        inicializarEventosCarrito();
+    } else {
+        await cargarDatosDesdeSheet();
+        inicializarEventosCarrito();
+    }
+
+    actualizarUiCarrito(); 
+
+    // Delay de gracia
+    setTimeout(() => {
+        const preloader = document.getElementById("ui-preloader");
+        if (preloader) preloader.classList.add("preloader-hidden");
+    }, 300);
+};
+
+document.addEventListener("DOMContentLoaded", () => {
+    window.initSmartMenu();
+>>>>>>> e178297 (🚀 Premium Migration: Restore legacy base styles, fix character encoding, and refine modal UI spacing):public/js/app.js
 });
 
 // Feature 08: Recuperador de Carrito Logic
@@ -88,15 +122,20 @@ function inicializarObserverLiquid() {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add("revelado");
+                // Una vez revelado, dejamos de observar para ahorrar recursos
+                observer.unobserve(entry.target);
             }
         });
     }, { 
-        threshold: 0.1,
-        rootMargin: "0px 0px -50px 0px" // Se activa un poco antes de estar totalmente visible
+        threshold: 0.01, // Se activa con cualquier asomo de visibilidad
+        rootMargin: "0px 0px -20px 0px" 
     });
 
-    const cards = document.querySelectorAll(".card-producto");
-    cards.forEach(card => observer.observe(card));
+    // Pequeño delay para asegurar que el navegador ha procesado el nuevo DOM
+    setTimeout(() => {
+        const cards = document.querySelectorAll(".card-producto:not(.revelado)");
+        cards.forEach(card => observer.observe(card));
+    }, 100);
 }
 
 function toggleMiniMenúuCategorias(event) {
@@ -131,7 +170,7 @@ function renderizarMiniMenúuCats() {
             <p>Selecciona una sección para navegar</p>
         </div>
         <div class="bottom-sheet-grid">
-            <button class="btn-mini-cat" onclick="seleccionarCategoriaMini('Todos')">
+            <button class="btn-mini-cat ${categoriaActual === 'Todos' ? 'activa' : ''}" onclick="seleccionarCategoriaMini('Todos')">
                 <div class="cat-icon"><img src="${metadataCategorias['Todos'].icon}" alt="Icon"></div>
                 <div class="cat-info">
                     <span class="cat-name">Todo el Menú</span>
@@ -143,7 +182,7 @@ function renderizarMiniMenúuCats() {
     RESTAURANT_CONFIG.categorias.forEach(cat => {
         const meta = metadataCategorias[cat] || { desc: "Nuestros mejores platillos.", icon: imgPrefix + "img/logo.webp" };
         html += `
-            <button class="btn-mini-cat" onclick="seleccionarCategoriaMini('${cat}')">
+            <button class="btn-mini-cat ${categoriaActual === cat ? 'activa' : ''}" onclick="seleccionarCategoriaMini('${cat}')">
                 <div class="cat-icon"><img src="${meta.icon}" alt="${cat}"></div>
                 <div class="cat-info">
                     <span class="cat-name">${cat}</span>
@@ -167,6 +206,7 @@ function renderizarMiniMenúuCats() {
 }
 
 function seleccionarCategoriaMini(cat) {
+<<<<<<< HEAD:js/app.js
     categoriaActual = cat;
     
     // Resaltar en el mini menú si fuera necesario, pero lo más importante es renderizar
@@ -181,12 +221,86 @@ function seleccionarCategoriaMini(cat) {
         const rect = catálogo.getBoundingClientRect();
         const pos = rect.top + window.scrollY - 100;
         window.scrollTo({ top: pos, behavior: 'smooth' });
+=======
+    if (categoriaActual === cat) {
+        document.getElementById("mini-menu-categorias").classList.remove("visible");
+        return;
+>>>>>>> e178297 (🚀 Premium Migration: Restore legacy base styles, fix character encoding, and refine modal UI spacing):public/js/app.js
     }
+    
+    categoriaActual = cat;
+    const contenedor = document.getElementById("menu-container") || document.getElementById("ui-contenedor-menu");
+    const miniMenu = document.getElementById("mini-menu-categorias");
+    
+    // Actualizar clase activa en los botones del mini-menú para feedback instantáneo
+    const miniButtons = document.querySelectorAll(".btn-mini-cat");
+    miniButtons.forEach(btn => {
+        // Buscamos el nombre de la categoría dentro del span .cat-name
+        const nameSpan = btn.querySelector(".cat-name");
+        if (nameSpan) {
+            const name = nameSpan.textContent === "Todo el Menú" ? "Todos" : nameSpan.textContent;
+            if (name === cat) btn.classList.add("activa");
+            else btn.classList.remove("activa");
+        }
+    });
+
+    if (miniMenu) {
+        // Pequeño delay para que el usuario vea la selección antes de cerrar
+        setTimeout(() => miniMenu.classList.remove("visible"), 200);
+    }
+
+    if (contenedor && window.gsap) {
+        // Fase 1: Salida Elegante
+        gsap.to(contenedor, {
+            opacity: 0,
+            y: -40,
+            duration: 0.3,
+            ease: "power2.in",
+            onComplete: () => {
+                renderizarProductos();
+                
+                // Fase 2: Entrada Cinematográfica
+                gsap.fromTo(contenedor, 
+                    { opacity: 0, y: 60 },
+                    { opacity: 1, y: 0, duration: 0.6, ease: "power4.out" }
+                );
+
+                // Efecto Cascada en las Cards
+                const cards = contenedor.querySelectorAll('.card-producto');
+                if (cards.length > 0) {
+                    gsap.fromTo(cards,
+                        { opacity: 0, scale: 0.9, y: 40 },
+                        { 
+                            opacity: 1, 
+                            scale: 1, 
+                            y: 0, 
+                            duration: 0.5, 
+                            stagger: 0.04, 
+                            ease: "back.out(1.2)" 
+                        }
+                    );
+                }
+            }
+        });
+    } else {
+        renderizarProductos();
+    }
+    
+    // Scroll suave inteligente
+    setTimeout(() => {
+        const target = document.getElementById("menu-container") || document.getElementById("ui-contenedor-menu");
+        if (target) {
+            const rect = target.getBoundingClientRect();
+            const offset = window.innerWidth < 1024 ? 150 : 100;
+            const pos = rect.top + window.scrollY - offset;
+            window.scrollTo({ top: pos, behavior: 'smooth' });
+        }
+    }, 400);
 }
 
 function actualizarEstadoRestaurante() {
-    const contenedor = document.getElementById("ui-estado-restaurante");
-    if (!contenedor) return;
+    const contenedores = document.querySelectorAll("#ui-estado-restaurante, .ui-estado-restaurante-carousel, #ui-estado-restaurante-fallback");
+    if (contenedores.length === 0) return;
 
     const ahora = new Date();
     const horaActual = ahora.getHours();
@@ -201,13 +315,15 @@ function actualizarEstadoRestaurante() {
 
     const estaAbierto = minutosActuales >= minutosApertura && minutosActuales < minutosCierre;
 
-    if (estaAbierto) {
-        contenedor.className = "estado-pill estado-abierto";
-        contenedor.innerHTML = `<span class="punto-luz"></span> Abierto Ahora`;
-    } else {
-        contenedor.className = "estado-pill estado-cerrado";
-        contenedor.innerHTML = `<span class="punto-luz"></span> Cerrado (Abre ${RESTAURANT_CONFIG.horarios?.apertura || "11:00"} PM)`;
-    }
+    contenedores.forEach(contenedor => {
+        if (estaAbierto) {
+            contenedor.className = "estado-pill estado-abierto";
+            contenedor.innerHTML = `<span class="punto-luz"></span> Abierto Ahora`;
+        } else {
+            contenedor.className = "estado-pill estado-cerrado";
+            contenedor.innerHTML = `<span class="punto-luz"></span> Cerrado (Abre ${RESTAURANT_CONFIG.horarios?.apertura || "11:00"} PM)`;
+        }
+    });
 }
 
 function mostrarSkeletons() {
@@ -248,32 +364,57 @@ function renderizarHeader() {
     }
 }
 
-function renderizarPromociones() {
-    const contenedor = document.getElementById("ui-promociones");
-    if (!contenedor || !RESTAURANT_CONFIG.promociones || RESTAURANT_CONFIG.promociones.length === 0) return;
+function renderizarCarouselPromociones() {
+    const container = document.getElementById("ui-hero-carousel");
+    if (!container) return;
 
-    contenedor.innerHTML = "";
-    RESTAURANT_CONFIG.promociones.forEach(promo => {
-        const card = document.createElement("div");
-        card.className = "promo-card";
-        // Si el fondo parece ser una URL de imagen, lo pone con overlay
-        if (promo.fondo.startsWith('http')) {
-            card.style.backgroundImage = `url('${promo.fondo}')`;
-            card.style.backgroundSize = "cover";
-            card.style.backgroundPosition = "center";
-        } else {
-            card.style.background = promo.fondo;
-        }
-        card.innerHTML = `
-            <div class="overlay-promo"></div>
-            <div class="promo-content">
-                <h4>${promo.titulo}</h4>
-                <p>${promo.descripcion}</p>
+    const promos = RESTAURANT_CONFIG.promociones || [];
+    if (promos.length === 0) {
+        // Fallback si no hay promos
+        container.innerHTML = `
+            <div class="carousel-slide active" style="background-image: url('https://images.unsplash.com/photo-1590947132387-155cc02f3212?q=80&w=1920&auto=format&fit=crop')">
+                <div class="carousel-overlay"></div>
+                <div class="carousel-content">
+                    <span class="tag">Obra Maestra</span>
+                    <h2>La Margherita Auténtica</h2>
+                    <p>Nuestra creación insignia horneada a 450°C exactamente durante 90 segundos.</p>
+                    <div id="ui-estado-restaurante-fallback"></div>
+                </div>
             </div>
         `;
-        contenedor.appendChild(card);
+        return;
+    }
+
+    container.innerHTML = "";
+    promos.forEach((promo, index) => {
+        const slide = document.createElement("div");
+        slide.className = `carousel-slide ${index === 0 ? 'active' : ''}`;
+        slide.style.backgroundImage = `url('${promo.fondo}')`;
+        slide.innerHTML = `
+            <div class="carousel-overlay"></div>
+            <div class="carousel-content">
+                <span class="tag">Promoción Especial</span>
+                <h2>${promo.titulo}</h2>
+                <p>${promo.descripcion}</p>
+                <div class="ui-estado-restaurante-carousel"></div>
+            </div>
+        `;
+        container.appendChild(slide);
     });
+
+    // Iniciar rotación
+    let currentSlide = 0;
+    const slides = container.querySelectorAll('.carousel-slide');
+    if (slides.length > 1) {
+        setInterval(() => {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }, 6000); // 6 segundos por promo
+    }
 }
+
+
 
 function renderizarCategorias() {
     const contenedor = document.getElementById("ui-nav-categorias");
@@ -290,6 +431,7 @@ function renderizarCategorias() {
         const btn = document.createElement("button");
         btn.className = "btn-categoria";
         btn.textContent = cat;
+        btn.setAttribute('data-categoria', cat);
         btn.onclick = () => filtrarPorCategoria(cat, btn);
         contenedor.appendChild(btn);
     });
@@ -299,8 +441,45 @@ function filtrarPorCategoria(categoria, botonHtml) {
     categoriaActual = categoria;
     const botones = document.querySelectorAll(".btn-categoria");
     botones.forEach(btn => btn.classList.remove("activa"));
-    botonHtml.classList.add("activa");
-    renderizarProductos();
+    if (botonHtml) botonHtml.classList.add("activa");
+    
+    const contenedor = document.getElementById("menu-container") || document.getElementById("ui-contenedor-menu");
+    if (contenedor && window.gsap) {
+        // Fase 1: Desvanecimiento Premium (Out)
+        gsap.to(contenedor, {
+            opacity: 0,
+            y: -40,
+            duration: 0.3,
+            ease: "power2.in",
+            onComplete: () => {
+                renderizarProductos();
+                
+                // Fase 2: Entrada Cinematográfica (In)
+                gsap.fromTo(contenedor, 
+                    { opacity: 0, y: 60 },
+                    { opacity: 1, y: 0, duration: 0.6, ease: "power4.out" }
+                );
+
+                // Stagger de las tarjetas individuales para efecto 'Cascada'
+                const cards = contenedor.querySelectorAll('.card-producto');
+                if (cards.length > 0) {
+                    gsap.fromTo(cards,
+                        { opacity: 0, scale: 0.9, y: 40 },
+                        { 
+                            opacity: 1, 
+                            scale: 1, 
+                            y: 0, 
+                            duration: 0.5, 
+                            stagger: 0.05, 
+                            ease: "back.out(1.2)" 
+                        }
+                    );
+                }
+            }
+        });
+    } else {
+        renderizarProductos();
+    }
 }
 
 let terminoBusqueda = "";
@@ -327,7 +506,7 @@ function renderizarProductos() {
 
     let algunResultado = false;
 
-    categoriasAMostrar.forEach(cat => {
+    categoriasAMostrar.forEach((cat, index) => {
         // Filtrar por categoría y disponibilidad
         let productosCat = RESTAURANT_CONFIG.productos.filter(p => p.categoria === cat && p.disponible !== false);
         
@@ -347,7 +526,7 @@ function renderizarProductos() {
         const seccion = document.createElement("section");
         seccion.className = "seccion-categoria revelado"; // Forzamos revelado ya que se inyecta dinámicamente
         const realIndex = RESTAURANT_CONFIG.categorias.indexOf(cat);
-        seccion.id = `cat-${realIndex > -1 ? realIndex : cat.replace(/\s+/g, '')}`; 
+        seccion.id = `cat-${cat}`; 
         
         // Mostrar título siempre que haya productos
         const h3 = document.createElement("h3");
@@ -392,7 +571,9 @@ function renderizarProductos() {
             }
 
             const card = document.createElement("article");
-            card.className = "card-producto producto-card";
+            // Si es la primera sección (index 0), mostramos los primeros productos inmediatamente
+            const isInitial = (index === 0 && productosCat.indexOf(prod) < 4);
+            card.className = `card-producto producto-card ${isInitial ? 'revelado' : ''}`;
             card.onclick = () => abrirModalProducto(prod.id);
             card.innerHTML = `
                 <div class="card-img-wrapper producto-img-container">
@@ -463,20 +644,10 @@ function agregarAlCarrito(id, modsSeleccionados = [], elementoOrigen = null) {
         };
     }
     
+    // Solo activamos la animación de vuelo, sin mover el carrito
     if (elementoOrigen) {
         animarVueloAlCarrito(elementoOrigen);
     }
-    
-    // Feedback visual en iconos de carrito (Desktop & Mobile)
-    const btnDesktop = document.getElementById("open-drawer-btn");
-    const btnMobile = document.getElementById("mobile-open-drawer");
-    
-    [btnDesktop, btnMobile].forEach(btn => {
-        if (btn) {
-            btn.classList.add("pop-carrito");
-            setTimeout(() => btn.classList.remove("pop-carrito"), 300);
-        }
-    });
 
     actualizarUiCarrito();
 }
@@ -538,6 +709,7 @@ function actualizarUiCarrito() {
         }
     }
 
+<<<<<<< HEAD:js/app.js
     // Calcular 2x1: Ordenamos de mayor a menor para cobrar las caras y regalar las baratas
     itemsPara2x1.sort((a, b) => b - a);
     let total2x1 = 0;
@@ -557,6 +729,9 @@ function actualizarUiCarrito() {
     }));
 
     const flotante = document.getElementById("btn-flotante-carrito");
+=======
+    // const flotante = document.getElementById("btn-flotante-carrito");
+>>>>>>> e178297 (🚀 Premium Migration: Restore legacy base styles, fix character encoding, and refine modal UI spacing):public/js/app.js
     const labelCant = document.getElementById("ui-cantidad-flotante");
     const labelTotal = document.getElementById("ui-total-flotante");
     const labelTotalInterior = document.getElementById("ui-total-carrito");
@@ -585,10 +760,11 @@ function actualizarUiCarrito() {
          mobileBadge.style.display = cantidadTotal > 0 ? "flex" : "none";
     }
     
-    if(labelCant) labelCant.textContent = cantidadTotal;
-    if(labelTotal) labelTotal.textContent = formatoDinero(precioTotal);
-    if(labelTotalInterior) labelTotalInterior.textContent = formatoDinero(precioTotal);
+    if (typeof labelCant !== 'undefined' && labelCant) labelCant.textContent = cantidadTotal;
+    if (typeof labelTotal !== 'undefined' && labelTotal) labelTotal.textContent = formatoDinero(precioTotal);
+    if (labelTotalInterior) labelTotalInterior.textContent = formatoDinero(precioTotal);
 
+    /*
     if (flotante) {
         if (cantidadTotal > 0) flotante.classList.remove("oculto");
         else {
@@ -596,6 +772,18 @@ function actualizarUiCarrito() {
             cerrarCarrito(); 
         }
     }
+<<<<<<< HEAD:js/app.js
+=======
+    */
+    
+    // Update global nav badge if exists
+    const navBadge = document.getElementById("global-cart-badge");
+    if (navBadge) {
+        navBadge.textContent = cantidadTotal;
+        if(cantidadTotal > 0) navBadge.style.display = 'flex';
+        else navBadge.style.display = 'none';
+    }
+>>>>>>> e178297 (🚀 Premium Migration: Restore legacy base styles, fix character encoding, and refine modal UI spacing):public/js/app.js
 
     // Soporte para Menúu Ultra (mn-floating-cart)
     const mnFloat = document.getElementById("mn-floating-cart");
@@ -977,6 +1165,7 @@ function enviarPedidoWP(event) {
     
     if (nota !== "") textoPedido += `\n📝 *Nota:* ${nota}`;
 
+<<<<<<< HEAD:js/app.js
     // branching logic based on payment method
     if (metodoPago === 'card') {
         simularPagoCard();
@@ -1029,6 +1218,11 @@ function finalizarTodo() {
 async function descargarComprobante() {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
+=======
+    // WhatsApp Redirect
+    const telefono = RESTAURANT_CONFIG.telefonoWP || "573112518913";
+    const link = `https://api.whatsapp.com/send?phone=${telefono}&text=${encodeURIComponent(textoPedido)}`;
+>>>>>>> e178297 (🚀 Premium Migration: Restore legacy base styles, fix character encoding, and refine modal UI spacing):public/js/app.js
     
     const nombre = document.getElementById("nombre-cliente")?.value || "Cliente";
     const direccion = document.getElementById("direccion-cliente")?.value || "No especificada";
@@ -1157,10 +1351,25 @@ async function cargarDatosDesdeSheet() {
     try {
         const urlFinal = RESTAURANT_CONFIG.googleSheetUrl + "&t=" + Date.now();
         const response = await fetch(urlFinal);
+        
+        if (!response.ok) {
+            console.warn("La respuesta de Google Sheets no fue exitosa. Usando datos locales.");
+            return;
+        }
+
         const csvText = await response.text();
         
+        // Si el CSV parece HTML (error de Google), lo ignoramos
+        if (csvText.trim().startsWith("<!DOCTYPE") || csvText.trim().startsWith("<html")) {
+            console.warn("Se recibió HTML en lugar de CSV de Google Sheets. Usando datos locales.");
+            return;
+        }
+
         const filas = csvText.split(/\r?\n/).filter(f => f.trim() !== "");
-        if (filas.length <= 1) return;
+        if (filas.length <= 1) {
+            console.log("El documento de Sheets está vacío o solo tiene cabecera. Manteniendo datos locales.");
+            return;
+        }
 
         const cabeceraRaw = filas.shift();
         const cabecera = cabeceraRaw.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(h => h.trim().toLowerCase().replace(/^"|"$/g, ''));
@@ -1460,30 +1669,51 @@ function inicializarScrollProgresivo() {
     };
 
     const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const id = entry.target.id;
-                navLinks.forEach(link => {
-                    link.classList.remove('scrolled-active');
-                    // Comparamos el texto del botón con el ID de la sección (o similar lógica)
-                    // En tu caso el ID es "cat-N", pero el texto es el nombre de la categoría
-                    if (link.getAttribute('onclick').includes(id.split('-')[1])) {
-                        link.classList.add('scrolled-active');
-                    }
-                });
+        // Encontrar la sección más prominente en el viewport
+        const intersectingEntry = entries.find(e => e.isIntersecting);
+        if (!intersectingEntry) return;
+
+        const id = intersectingEntry.target.id;
+        const sectionName = id.replace('cat-', '');
+
+        navLinks.forEach(link => {
+            const catAttr = link.getAttribute('data-categoria');
+            // Si estamos muy arriba, no resaltamos ninguna categoría específica (mantenemos el foco en "Todos")
+            if (window.scrollY < 300) {
+                link.classList.remove('scrolled-active');
+                return;
+            }
+
+            if (catAttr === sectionName) {
+                link.classList.add('scrolled-active');
+            } else {
+                link.classList.remove('scrolled-active');
             }
         });
     }, observerOptions);
 
+    // Listener adicional para limpiar cuando vuelven arriba del todo
+    window.addEventListener('scroll', () => {
+        if (window.scrollY < 300) {
+            navLinks.forEach(link => link.classList.remove('scrolled-active'));
+        }
+    });
+
     sections.forEach(section => observer.observe(section));
 }
 
-// Ensure the drawer checkout button and form are wired correctly
-document.addEventListener('DOMContentLoaded', () => {
+function inicializarEventosCarrito() {
+    console.log("Inicializando Eventos de Carrito y Orden...");
+    
     // 1. Botón del Mega Drawer que abre el modal de datos
     const drawerBtnOrdenar = document.getElementById('drawer-btn-ordenar');
     if (drawerBtnOrdenar) {
-        drawerBtnOrdenar.addEventListener('click', () => {
+        // Eliminar listeners previos para evitar duplicados si se llama varias veces
+        const newBtn = drawerBtnOrdenar.cloneNode(true);
+        drawerBtnOrdenar.parentNode.replaceChild(newBtn, drawerBtnOrdenar);
+        
+        newBtn.addEventListener('click', () => {
+            console.log("Clic en Ordenar Detectado");
             if(Object.keys(carrito).length > 0){
                 cerrarCarrito();
                 abrirModalOrden();
@@ -1496,8 +1726,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // 2. Manejo del envío del formulario final
     const formPedido = document.getElementById('form-pedido');
     if (formPedido) {
-        formPedido.addEventListener('submit', enviarPedidoWP);
+        formPedido.onsubmit = enviarPedidoWP;
     }
+<<<<<<< HEAD:js/app.js
 });
 // Feature 09: Helper Propina
 function seleccionarPropina(valor, btn) {
@@ -1696,4 +1927,25 @@ function mostrarEspecialHtml(prod, contenedor) {
         `;
         document.head.appendChild(style);
     }
+=======
+
+    // 3. Botones de cerrar modal (delegación para mayor seguridad)
+    document.addEventListener('click', (e) => {
+        if (e.target.closest('.close-drawer') || e.target.closest('#close-drawer-btn')) {
+            cerrarCarrito();
+        }
+        if (e.target.closest('.cerrar-modal') || e.target.closest('#cerrar-orden')) {
+            cerrarModalOrden();
+            const modalProd = document.getElementById('modal-producto');
+            if (modalProd) modalProd.classList.remove('activo');
+        }
+    });
+}
+
+// Inicialización inmediata y por evento
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', inicializarEventosCarrito);
+} else {
+    inicializarEventosCarrito();
+>>>>>>> e178297 (🚀 Premium Migration: Restore legacy base styles, fix character encoding, and refine modal UI spacing):public/js/app.js
 }

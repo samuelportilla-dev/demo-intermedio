@@ -1,0 +1,184 @@
+/* =========================================================
+   GLOBAL NAV — Compartido en todas las páginas
+   ========================================================= */
+.global-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 2000;
+    background: rgba(0, 48, 73, 0.95);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    box-shadow: 0 4px 30px rgba(0,0,0,0.2);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    transition: transform 0.4s ease;
+}
+
+.global-nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.global-nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    color: white;
+    text-decoration: none;
+    font-family: 'Cinzel', serif;
+    font-size: 1.6rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.global-nav-logo img {
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid var(--color-dorado);
+}
+
+.global-nav-links {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.global-nav-links a {
+    color: rgba(255,255,255,0.9);
+    text-decoration: none;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: var(--animacion-suave);
+    padding: 0.5rem 0;
+}
+
+.global-nav-links a:hover,
+.global-nav-links a.active {
+    color: var(--color-dorado);
+}
+
+.global-nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.btn-nav-reserva {
+    background: var(--color-principal);
+    color: white;
+    padding: 0.6rem 1.5rem;
+    border-radius: 100px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: var(--animacion-suave);
+}
+
+.btn-nav-reserva:hover {
+    background: #a31018;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(193, 18, 31, 0.4);
+}
+
+/* Cart Badge */
+.nav-cart-wrapper {
+    position: relative;
+    cursor: pointer;
+    color: white;
+}
+
+.nav-cart-badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: var(--color-principal);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 800;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Mobile Bottom Nav */
+.mobile-bottom-nav {
+    display: none;
+}
+
+/* Reveal animations (usadas en varias páginas) */
+.reveal, .reveal-up {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 1s ease;
+}
+
+.reveal.active, .reveal-up.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* =========================================================
+   RESPONSIVE NAV — Mobile breakpoints
+   ========================================================= */
+@media (max-width: 1024px) {
+    .global-nav-links { display: none; }
+}
+
+@media (max-width: 1024px) {
+    .global-nav-actions .btn-nav-reserva { display: none; }
+
+    body { padding-bottom: 70px; }
+
+    .mobile-bottom-nav {
+        display: flex;
+        position: fixed;
+        bottom: 0; left: 0; width: 100%;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(20px);
+        box-shadow: 0 -5px 20px rgba(0,0,0,0.08);
+        z-index: 3000;
+        justify-content: space-around;
+        padding: 0.8rem 0;
+        border-top: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .bottom-nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.3rem;
+        color: var(--color-texto-claro);
+        text-decoration: none;
+        font-size: 0.7rem;
+        font-weight: 600;
+    }
+
+    .bottom-nav-item.active {
+        color: var(--color-principal);
+    }
+
+    .nav-cart-badge {
+        width: 18px;
+        height: 18px;
+        font-size: 0.65rem;
+        background: var(--color-principal);
+        color: white;
+        border-radius: 50%;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        font-weight: 800;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        line-height: 1;
+    }
+}

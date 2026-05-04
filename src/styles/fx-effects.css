@@ -1,0 +1,118 @@
+/* =========================================================
+   FX EFFECTS — FASE 1 PREMIUM — LA NONNA RÚSTICA
+   Cursor · Partículas · Scramble · Tilt · Transitions
+   ========================================================= */
+
+
+/* --- CURSOR REMOVED --- */
+
+/* --- EMBER PARTICLES CANVAS --- */
+#ember-canvas {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 3;
+}
+
+/* --- TEXT SCRAMBLE --- */
+.scramble-char {
+    color: var(--color-dorado);
+    opacity: 0.7;
+}
+
+/* Char-by-char reveal */
+.char-reveal-wrapper {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: bottom;
+}
+.char-reveal-inner {
+    display: inline-block;
+    animation: charSlideIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes charSlideIn {
+    from { transform: translateY(110%); opacity: 0; }
+    to   { transform: translateY(0);    opacity: 1; }
+}
+
+/* Word reveal for paragraphs */
+.word-reveal .word { display: inline-block; overflow: hidden; vertical-align: bottom; }
+.word-reveal .word-inner {
+    display: inline-block;
+    transform: translateY(100%);
+    opacity: 0;
+    transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.65s ease;
+}
+.word-reveal.active .word-inner { transform: translateY(0); opacity: 1; }
+
+/* --- 3D TILT --- */
+.tilt-ready { transform-style: preserve-3d; will-change: transform; }
+.tilt-glare {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: 10;
+    transition: background 0.15s ease;
+}
+
+/* --- PAGE TRANSITIONS --- */
+#pt-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 999999;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pt-curtain-top,
+.pt-curtain-bottom {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background: #001f30;
+    transform: scaleY(0);
+    will-change: transform;
+}
+.pt-curtain-top    { top: 0;    transform-origin: top;    background: linear-gradient(to bottom, #001624, #003049); }
+.pt-curtain-bottom { bottom: 0; transform-origin: bottom; background: linear-gradient(to top,   #001624, #003049); }
+
+.pt-logo-wrap {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+    opacity: 0;
+}
+.pt-logo-wrap img  { width: 70px; height: 70px; border-radius: 50%; border: 2px solid var(--color-dorado); }
+.pt-logo-wrap span { font-family: 'Cinzel', serif; color: white; font-size: 1rem; letter-spacing: 4px; }
+
+/* State: entering (curtains close) */
+#pt-overlay.pt-entering { pointer-events: all; }
+#pt-overlay.pt-entering .pt-curtain-top,
+#pt-overlay.pt-entering .pt-curtain-bottom { animation: curtainClose 0.55s cubic-bezier(0.76, 0, 0.24, 1) forwards; }
+#pt-overlay.pt-entering .pt-logo-wrap     { animation: logoIn 0.35s ease 0.3s forwards; }
+
+/* State: leaving (curtains open) */
+#pt-overlay.pt-leaving .pt-curtain-top,
+#pt-overlay.pt-leaving .pt-curtain-bottom { animation: curtainOpen 0.65s cubic-bezier(0.76, 0, 0.24, 1) 0.05s forwards; transform: scaleY(1); }
+#pt-overlay.pt-leaving .pt-logo-wrap      { animation: logoOut 0.25s ease forwards; opacity: 1; }
+
+@keyframes curtainClose { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+@keyframes curtainOpen  { from { transform: scaleY(1); } to { transform: scaleY(0); } }
+@keyframes logoIn  { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
+@keyframes logoOut { from { opacity: 1; } to { opacity: 0; } }
+
+
+/* --- MOBILE OPTIMIZATION --- */
+@media (max-width: 768px) {
+    /* General mobile adjustments */
+}
